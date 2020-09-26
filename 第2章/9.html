@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 运算符与流程控制</title>
+</head>
+<body>
+  <script>
+    function message(age){
+      let msg = "";
+      switch(true){
+        case age >60:
+          msg="老年"
+          break;
+        case age >40:
+          msg="中年"
+          break;
+        case age >20:
+          msg="青年"
+          break;
+      }
+      return msg;
+    }
+
+    console.log(message(40));
+    // let name='视线下';
+    // switch(name){
+    //     case '产品':
+    //       console.log('hdcms.com');
+    //       break;
+    //     case '视频':
+    //       console.log("houdunren.com");
+    //       break;
+    //     default:
+    //       console.log("houdunwang.com");
+    // }
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 运算符与流程控制</title>
+</head>
+<body>
+  <script>
+    // >=0 - <1
+    // console.log(Math.random());
+    //获取0-5  0-0.9  *5  0   4.5
+
+    //Math.floor(Math.random()*(Max+1))
+    // console.log(Math.floor(Math.random()*(6)));
+
+    // 2- 5 
+    //min+Math.floor(Math.random()*(Max-min+1))
+    // console.log(2+Math.floor(Math.random()*(5-2+1)));
+
+    const students = ["李四","赵云","张三","王五","马六"];
+    // console.log(students.length);
+    // console.log(students[4]);
+    //0 -
+    // const index = Math.floor(Math.random()*students.length);
+    // console.log(students[index]);
+
+    //2-5
+    // const index = 2+Math.floor(Math.random()*(students.length-2));
+    // console.log(students[index]);
+
+
+    //2~3
+    //  const index = 2+Math.floor(Math.random()*(4-2));
+    //  console.log(students[index]);`
+
+    function arrayRandomValue(array,start=1,end){
+      end = end?end:array.length
+      const index = start+Math.floor(Math.random()*(end-start))
+      return array[index]
+    }
+    console.log(arrayRandomValue(students));
+  </script>
+</body>
+</html>

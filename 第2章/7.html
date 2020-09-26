@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 运算符与流程控制</title>
+</head>
+<body>
+  <input type="password" name="password" />
+  <span id="msg"></span>
+  <script>
+    document.querySelector("[name='password']").addEventListener('keyup',function(){
+      let span = document.querySelector("#msg")
+      let length = this.value.length
+      if(length>10){
+        msg = "密码无敌安全"
+      }else if(length>6){
+        msg = "密码待加强"
+      }else{
+        msg = "密码太弱"
+      }
+      span.innerHTML = msg 
+    })
+  </script>
+</body>
+</html>

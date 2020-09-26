@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神奇的标签模板实例操作</title>
+</head>
+<body>
+  <script>
+    // let name = "后盾人";
+    // let name1 = "后盾人1"
+    // let web = 'houdunren.com';
+    // // console.log(tag`在线教程${name},网址是${web}。`);
+
+    // function tag(strings,aa,...vars){
+    //   console.log(strings);
+    //   console.log(aa);
+    //   console.log(vars);
+    //   console.log(typeof strings);
+    //   console.log(typeof vars);
+    // }
+    
+    // tag(name,name1,web)
+
+    let lessons = [
+      {title: "后盾人媒体查询响应式布局",author:"后盾人向军"},
+      {title: "FLEX 弹性盒模型",author:"后盾人"},
+      {title: "GRID 栅格系统后盾人模型",author:"古老师"}
+    ];
+
+    function template(){
+      return `<ul>
+         ${lessons.map(item => links`<li>作者:${item.author},课程:${item.title}</li>`).join("")} 
+        </ul>`
+    }
+    function links(strings,...vars){
+      return strings
+        .map((str,key)=>{
+          return (
+            // str + (vars[key] ? vars[key].replace("后盾人",`<a href="https://www.houdunren.com>后盾人</a>`): "")
+            str + (vars[key]?vars[key].replace("后盾人",`<a href="https://www.houdunren.com>后盾人</a>`): "")
+          );
+        })
+        .join("");
+    }
+    document.body.innerHTML += template(); 
+  </script>
+</body>
+</html>

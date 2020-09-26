@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串替换标题关键词</title>
+</head>
+<body>
+  <script>
+    const word = ["php" , "css"];
+    const string = "我喜欢在后盾人学习php与css知识";
+    const replaceString = word.reduce((pre,word)=>{
+      return pre.replace(word,`<a href="?w=${word}">${word}</a>`)
+    },string)
+    console.log(replaceString);
+    document.body.innerHTML=replaceString
+  </script>
+</body>
+</html>

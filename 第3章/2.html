@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模板字符串的使用</title>
+</head>
+<body>
+  <script>
+    //模板字符串的使用
+
+    // let hd = new String("houdunren.com")
+    // console.log(hd.toString());
+    // let hd = "houdu\t\tnren.com";
+    // console.log(hd);
+    // document.write(hd)
+
+    let year = "2010";
+    let site = "后盾人";
+    let hd = `${site}成立${year}`
+    document.write(hd)
+    console.log(site + "成立于" + year);
+    console.log(`${site}成立于${year}.`);
+  </script>
+</body>
+</html>

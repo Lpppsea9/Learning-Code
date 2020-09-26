@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 运算符与流程控制</title>
+</head>
+<body>
+  <script>
+    let hd =[
+      {title:"第一章 走进JAVASCRIPT黑洞",lesson:3},
+      {title:"ubuntu19.10 配置好用的编程工作站",lesson:5},
+      {title:"媒体查询响应式布局",lesson:8}
+    ];
+    document.write(`
+      <table border="1" width="100%">
+      <thead><tr><th>标题</th><th>课程数量</th></tr></thead>
+    `)
+      
+    for(i in hd){
+      document.write(`<tr><td>${hd[i].title}</td><td>${hd[i].lesson}</td></tr>`)
+    }
+    // document.write(`
+    //   </table>
+    // `)
+
+    document.write("</table>")
+
+    // let houdunren = ['hdcms','houdunren.com']
+    // for(let key in houdunren){
+    //   console.log(houdunren[key]);
+    // }
+
+    // for(let key in window){
+    //   console.log(window[key]);
+    // }
+    for(const iterator of object){
+      
+    }
+  </script>
+</body>
+</html>
