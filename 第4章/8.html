@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    //length和push方法
+
+    // let array = ["hdcms","houdunren"];
+    // let hd = ["shop","ll","cms"];
+    // let length = array.push("live",...hd);
+    // console.log(length);
+    // console.log(array);
+
+
+    // array.push("shop","php","js","node,js");
+    // let hd = ["shop","cms"];
+    // array = [...array,...hd]
+    // console.log(array);
+
+    // array[array.length] = "cms"; //追加
+    // array[array.length] = "shop";
+    // console.log(array[1]);
+
+    function rangeArray(begin,end){
+      const array =[];
+      for(let i=begin;i <= end;i++) array.push(i);
+      
+      return array;
+    }
+    console.log(rangeArray(11,15));
+  </script>
+</body>
+</html>

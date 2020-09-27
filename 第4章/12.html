@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    let hd = [1,2,3,4,5];
+    let arr = hd;
+    arr[1] = 3;
+    console.log(arr);
+    console.log(hd);
+
+    let hd2 = [1,2,3,4,5];
+    let arr2 = hd2;
+    arr2 = [];
+    console.log(arr2);
+    console.log(hd2);
+
+    // hd = []; //arr不为空
+    // hd.length = 0; //arr也是空
+    // hd.splice(0,hd.length);
+    // while(hd.pop()){};
+    // console.log(hd);
+  </script>
+</body>
+</html>

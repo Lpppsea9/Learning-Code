@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    let arr = [1,2,3,4,3,"9"];
+    console.log(arr.indexOf(3,2)); //第二个参数是从哪里开始查找
+    console.log(arr.lastIndexOf(3,-4));
+
+    // console.log(arr.indexOf(-4)); //不存在则返回-1,从左侧进行查找
+    // console.log(arr.lastIndexOf(3)); //从右边开始查找第一个
+
+    // if(arr.indexOf(2) !==-1){
+    //   console.log("找到了");
+    // }
+
+    // console.log(arr.includes(2));  //返回true，方便
+  </script>
+</body>
+</html>

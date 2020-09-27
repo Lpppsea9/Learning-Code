@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    let arr = [1,2,3,4,5];
+    // arr.splice(1,1,"后盾人") //删除并替换
+    // arr.splice(1,0,"后盾人","hdcms") //添加
+    arr.splice(arr.length,0,"后盾人"); //往后面增加，往前面增加就第一个参数设0
+    
+    // let hd = arr.splice(0,3,'hdcms','houdunren');
+
+    // console.log(hd);
+    // console.log(arr);
+
+
+    // let hd = arr.slice() //没有参数，截取全部
+    // console.log(arr.slice(1,2)); //原数组没有改变
+    // console.table(arr);
+  </script>
+</body>
+</html>

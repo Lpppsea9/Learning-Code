@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+  <body>
+    <div>houdunren</div>
+    <div>hdcms.com</div>
+  </body>
+  <style>
+    .hide {
+      display: none;
+    }
+  </style>
+  <script>
+    const div = document.querySelectorAll("div");
+    console.log(div);
+    //dom上没有map方法，要将div转换成类数组
+    // Array.from(div).map(function(item){ 
+    //   console.log(item);
+    // })
+  
+    // 原型链上的方法
+    // Array.prototype.map.call(div,function(item){
+    //   console.log(item);
+    // })
+
+    console.log([...div]); //转换成数组
+    [...div].map(function(item){
+      item.addEventListener('click',function(){
+        this.classList.toggle('hide');
+      })
+    })
+  </script>
+
+</html>

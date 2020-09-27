@@ -7,7 +7,20 @@
 </head>
 <body>
   <script>
-    
+    let arr = ['hdcms','houdunren'];
+    let hd = ['js','css']
+    function sum(... args){
+      // console.log(args);
+      return args.reduce((s,v)=>{
+        return (s +=v)
+      })
+    }
+    console.log(sum(1,2));
+
+    // for (const value of hd) { 
+    //   arr.push(value);
+    // }
+    // console.log(arr);
   </script>
 </body>
 </html>
