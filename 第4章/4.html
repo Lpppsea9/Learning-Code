@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <div>hdcms</div>
+  <div>houdunren</div>
+  <script>
+    let divs = document.querySelectorAll("div");
+    // console.log(divs);
+    console.log(Array.from(divs,function(item){
+      console.log(item.innerHTML);
+      item.style.backgroundColor = "powderblue"
+      // return item
+    }));
+
+    
+    // console.log(Array.isArray([]));
+    let hd = [1,2,3].toString(); //转换成字符串1
+    let hd1 = String([1,2,3]) //转换成字符串2 字符串可以方便传递
+    let hd2 = [1,2,3].join("|") //join是数组的方法
+
+
+    console.log(typeof hd);
+    console.log(hd);
+    console.log(location.href + "?id=" + hd2);
+
+
+
+    let str = "hdcms,houdunren";
+    console.log(str.split(",")); //split 是字符串方法,转换成数组
+
+    //有length属性，都可以转换成数组
+    console.log(str.length);
+    console.log(Array.from(str));
+    let obj = {
+      0:"hdcms",
+      1:"houdunren",
+      // length:2
+    };
+    console.log(obj.length); //undefined
+    console.log(Array.from(obj)); //显示[],添加length可转
+  </script>
+</body>
+</html>
