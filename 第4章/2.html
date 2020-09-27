@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    // new Array
+    let array = [["hdcms"],["houdunren","cms"]];
+    let lessons = [{name:'php',click:33},{name:"js",click:55}]
+    console.log(array[1][1]);
+    console.log(lessons[1].name);
+
+
+    const name = 3;
+    // name = 5; //报错,重新开辟新的空间
+    const arr =[1,2];
+    arr[1] = 99;
+    console.log(arr); //修改了内存地址指向
+  </script>
+</body>
+</html>

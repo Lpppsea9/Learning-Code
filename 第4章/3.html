@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    let array = [1,3,4];
+    console.log(array.length);
+
+    let hd = ["hdcms"];
+    hd[3]="houdunren";
+    console.log(hd.length); //没有设置的值会输出undefined
+    console.log(hd);
+
+    let cms = new Array(6);
+    console.log(cms.length); //6
+    console.table(cms); //空
+    console.log(cms[2]); //undefined
+
+    let arr = Array.of(6) //6 和上面的区别
+    console.log(arr.length); //1
+    console.table(arr); //index | Value
+                        //0     |6
+  </script>
+</body>
+</html>
