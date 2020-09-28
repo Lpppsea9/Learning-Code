@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    let arr = [1,5,3,9,7];
+    arr.sort(function(a,b){
+      // 复数 从小到大    正数 从大到小
+      return a-b;
+    });
+    console.table(arr);
+
+    let goods= [
+      {name:"iphone",price:12000},
+      {name:"imac",price:18000},
+      {name:"ipad",price:2000},
+    ]
+
+    goods = goods.sort((a,b)=>{
+      return a.price-b.price
+    })
+    console.table(goods);
+  </script>
+</body>
+</html>
