@@ -8,8 +8,25 @@
 <body>
   <script>
     let lessons = [
-      {title:"媒体查询响应式布局"}
-    ] 
+      {title:"媒体查询响应式布局",category:"css"},
+      {title:"FLEX 弹性盒模型",category:"css"},
+      {title:"MYSQL多表查询随意操作",category:"mysql"},
+    ] ;
+
+    // for(let i=0;i<lessons.length;i++){
+    //   lessons[i].title = `后盾人${lessons[i].title}`
+    // }
+    // console.table(lessons);
+
+    // for(let value of lessons){  //值类型传递不能改变
+    //   value.title = `后盾人${value.title}`
+    // }
+    // console.table(lessons);
+
+    for (const key in lessons){
+      lessons[key].title = `后盾人${lessons[key].title}`
+    }
+    console.table(lessons);
   </script>
 </body>
 </html>
