@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<style>
+  .display{
+    color:rgb(106, 123, 123);
+  }
+</style>
+<body>
+  <ul>
+    <li>Lpppp</li>
+    <li>Lppp2</li>
+  </ul>
+  <script>
+    let lis = document.querySelectorAll("ul li");
+    lis.forEach(function(el){
+      el.addEventListener("click",function(){
+        this.classList.toggle('display')
+      })
+    })
+
+
+
+    let lessons = [
+    {title:"媒体查询响应式布局",category:"css"},
+    {title:"FLEX 弹性盒模型",category:"css"},
+    {title:"MYSQL多表查询随意操作",category:"mysql"},
+    ];
+    lessons.forEach(function(item){
+      item.title = item.title.substr(0,2)
+      console.table(item.title);
+    })
+  </script>
+</body>
+</html>

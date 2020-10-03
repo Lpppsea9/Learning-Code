@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    let arr = ["hdcms","houdunren"];
+    let entries = arr.entries();
+    console.log(entries);
+    let {done,value} = entries.next();
+    console.log(done,value);
+    // console.log(entries.next());
+
+
+
+    // let values = arr.values();
+    // for (const value of arr.values()) {
+    //   console.log(value);
+    // }
+
+
+    // while(({value,done} = values.next()) && done === false){
+    //   console.log(value);
+    // }
+
+    // let keys = arr.keys();
+    // let {value,done} = keys.next()
+    // console.log(value,done);
+    // console.log(keys.next());
+    // console.log(keys.next());
+    // console.log(keys.next());
+  </script>
+</body>
+</html>
