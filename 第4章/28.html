@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript 数组挖掘</title>
+</head>
+<body>
+  <script>
+    // reduce
+    let cart = [
+      {name:"iphone",price:12000},
+      {name:"imac",price:25000},
+      {name:"ipad",price:3600}
+    ];
+    // function maxPrice(goods){
+    //   return cart.reduce(function(pre,cur){
+    //     return pre.price>cur.price?pre:cur;
+    //   })
+    // }
+    // console.log(maxPrice(cart));
+
+    function sum(goods){
+      return goods.reduce(function(total,cur){
+        return (total += cur.price);
+      },0)
+    }
+    console.log(sum(cart));
+  </script>
+</body>
+</html>
