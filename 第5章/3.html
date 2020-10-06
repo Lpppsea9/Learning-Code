@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript symbol</title>
+</head>
+<body>
+  <script>
+    //
+    class Cache{
+      static data = {};
+      static set(name,value){
+        return (this.data[name] = value);
+      }
+      static get(name){
+        return this.data[name];
+      }
+    }
+    // Cache.set("hdcms","houdunren.com");
+    // console.log(Cache.get("hdcms"));
+    let user = {
+      name:"li",
+      desc:"姓氏",
+      key:Symbol("姓氏数据")
+    };
+    let cart = {
+      name:"li",
+      desc: "黄梨",
+      key:Symbol("食物数据")
+    };
+    Cache.set(user.key,user);
+    Cache.set(cart.key,cart);
+    console.log(Cache.get(user.key));
+    console.log(Cache.get(cart.key));
+  </script>
+</body>
+</html>

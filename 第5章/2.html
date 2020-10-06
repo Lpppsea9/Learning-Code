@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript symbol</title>
+</head>
+<body>
+  <script>
+    //解决字符串耦合问题
+    let user1 = {
+      name:"李四",
+      key: Symbol()
+    };
+    let user2 = {
+      name:"李四",
+      key:Symbol()
+    };
+    let grade = {
+      [user1.key] : {js:99,css:99},
+      [user2.key] : {js:59,css:59}
+    }
+    console.log(grade[user2.key]);
+  </script>
+</body>
+</html>

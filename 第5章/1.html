@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript symbol</title>
+</head>
+<body>
+  <script>
+    // let hd = Symbol('后盾人1');
+    // let edu = Symbol("网址")
+    // let edu = Symbol();
+    // console.log(hd == edu);
+    // hd.name = "后盾人";
+    // console.log(hd.name);
+
+    // console.log(hd.description);
+
+    let cms = Symbol.for("hdcms");
+    // let edu = Symbol.for("hdcms")
+    // console.log(cms == edu);
+    let houdunren = Symbol('houdunren');
+    let houdunren1 = Symbol('houdunren');
+    let houdunren2 = Symbol('houdunren');
+    console.log(Symbol.keyFor(houdunren));
+  </script>
+</body>
+</html>
