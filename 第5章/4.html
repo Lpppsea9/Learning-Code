@@ -8,7 +8,15 @@
 <body>
   <script>
     //扩展特性与对象属性保护
-    let symbol = Symbol("这是一个Sy")
+    let symbol = Symbol("这是一个Symbol类型");
+    let hd = {
+      name:"后盾人",
+      [symbol]:"houdunren.com"
+    };
+    for(const key in hd){
+      console.log(key);
+    }
+    for (const iterator of object)
   </script>
 </body>
 </html>
