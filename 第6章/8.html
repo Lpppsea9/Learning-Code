@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set与WeakSet类型在JavaScript中的使用</title>
+</head>
+<body>
+  <script>
+    //引用类型的垃圾回收原理
+    let hd = {name:'后盾人'};
+    let edu = hd; //引用两次
+    let arr = [hd]
+    hd = null;
+    edu = null;
+    arr[0] = null;
+    console.log(arr); //要全部删除才会null，不然还是存在引用
+  </script>
+</body>
+</html>

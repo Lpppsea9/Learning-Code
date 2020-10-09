@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set与WeakSet类型在JavaScript中的使用</title>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <script>
+    //Weakset语法介绍
+    //大部分情况下和set类型差不多，主要保存的是引用类型
+    let nodes = new WeakSet();
+    let divs = document.querySelectorAll("div");
+    divs.forEach(function(item){
+      nodes.add(item);
+    });
+    nodes.delete(divs[1]);
+    console.log(nodes.has(divs[0])); 
+    console.log(nodes);
+  </script>
+</body>
+</html>
