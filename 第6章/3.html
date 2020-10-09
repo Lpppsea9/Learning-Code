@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set与WeakSet类型在JavaScript中的使用</title>
+</head>
+<body>
+  <script>
+    // //
+    // let set = new Set(['hdcms','houdunren']);
+    // console.log(set);
+    // console.log(Array.from(set));
+    // console.log([...set]);
+
+    // let hd = new Set("123456789");
+    // console.log(hd);
+    // let arr = new Set([...hd].filter(item => item < 5));
+    // console.log(arr);
+
+    let array = [1,2,3,4,5,2,3,1];
+    console.log(new Set(array));  //set里面是不允许重复的,所以自动去除重复的
+    array = [...new Set(array)];
+    console.log(array)
+  </script>
+</body>
+</html>

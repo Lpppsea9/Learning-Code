@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set与WeakSet类型在JavaScript中的使用</title>
+</head>
+<body>
+  <script>
+    //
+    // let set = new Set('hdcms','houdunren');
+    // console.log(set.size); //查看数量，5
+
+    let set = new Set(["hdcms","houndunren"]);
+    // console.log(set.size);
+    // console.log(set.has("hdcms")); // 判断元素是否存在
+    console.log(set.delete("hdcms"));
+    console.log(set.size);
+    console.log(set.values());
+    console.log(set.clear());
+  </script>
+</body>
+</html>

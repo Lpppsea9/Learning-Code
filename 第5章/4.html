@@ -8,15 +8,44 @@
 <body>
   <script>
     //扩展特性与对象属性保护
+    
     let symbol = Symbol("这是一个Symbol类型");
     let hd = {
       name:"后盾人",
-      [symbol]:"houdunren.com"
+      [symbol]:"houdunren.com" //私有属性，受保护
     };
-    for(const key in hd){
-      console.log(key);
+    // for(const key in hd){
+    //   console.log(key);
+    // }
+
+    // for (const key of Object.keys(hd)){ //遍历不到symbol属性
+    //   console.log(key);
+    // }
+
+    // for (const key of Object.getOwnPropertySymbols(hd)){
+    //   console.log(key);  //只能遍历到symbol属性，普通属性不行
+    // }
+
+    // for (const key of Reflect.ownKeys(hd)){
+    //   console.log(key); //遍历所有属性
+    // }
+
+    let site = Symbol('这是一个Symbol');
+    class User{
+      constructor(name){
+        this.name = name;
+        this[site] = "后盾人";
+      }
+      getName(){
+        return `${this[site]} ${this.name}`;
+      }
     }
     
+    let lisi = new User("李四");
+    // console.log(lisi.getName());
+    for (const key in lisi) {
+      console.log(key);
+    }
   </script>
 </body>
 </html>
