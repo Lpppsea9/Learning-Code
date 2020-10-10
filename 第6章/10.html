@@ -43,6 +43,15 @@
       align-items: center;
       margin-right: 5px;
     };
+    .remove {
+      border:none;
+      opacity: 0.8;
+      color:#eee;
+    }
+    .remove a {
+      background: #eee;
+      border: none;
+    }
   </style>
 </head>
 <body>
@@ -54,6 +63,33 @@
 </body>
   <script>
     //TODO列表中使用WeakSet
-
+    class Todos {
+    constructor() {}
+    run() {
+      this.items = document.querySelectorAll("ul>li");
+      this.lists = new WeakSet();
+      this.record();
+      this.addEvent();
+    }
+    addEvent() {
+      this.items.forEach(item => {
+        item.querySelector("a").addEventListener("click", event => {
+          //检测WakeSet中是否存在Li元素
+          const parentElement = event.target.parentElement;
+          if (!this.lists.has(parentElement)) {
+            alert("已经删除此TODO");
+          } else {
+            //删除后从记录的WakeSet中移除
+            parentElement.classList.add("remove");
+            this.lists.delete(parentElement);
+          }
+        });
+      });
+    }
+    record() {
+      this.items.forEach(item => this.lists.add(item));
+    }
+  }
+  new Todos().run();
   </script>
 </html>
