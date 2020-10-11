@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map和WeakMap类型在JavaScript中的使用</title>
+</head>
+<body>
+  <div name="后盾人">houdunren.com</div>
+  <div name="开源管理">hdcms.com</div>
+  <script>
+    //Map类型管理DOM节点
+    let map = new Map();
+    document.querySelectorAll('div').forEach((item) => {
+      map.set(item,{  //用key来保存原有的DOM对象
+        content: item.getAttribute("name")  //用value来保存附加的数据
+      })
+    });
+    map.forEach((config,elem) => {
+      elem.addEventListener("click",() => {
+        alert(config.content)
+      })
+    })
+    console.log(map);
+
+  </script>
+</body>
+</html>

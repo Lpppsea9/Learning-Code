@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map和WeakMap类型在JavaScript中的使用</title>
+</head>
+<body>
+  <script>
+    //Map类型特点与创建方法
+
+    //在对象中，键值对，键只能是字符串
+    let obj = {
+      "1":"lll"
+    }
+    let hd = {
+      [obj]:"第二次"
+    }
+    console.log(hd["[object Object]"]);  //取到值
+    console.log(hd[obj.toString()]);
+    console.log(obj);
+    
+    let  map = new Map();
+    map.set("1","kkkk")
+    map.set(1,"kkk");
+    map.set({},"lppp")
+    map.set(function(){},"lll")
+    
+    console.log(map);
+
+    let map1 = new Map([["hdcms","开源"],["houdunren","小马"]])
+    map1.set("lll","pppp")
+    map1.set("iiii","pppp")
+    console.log(map1);
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map和WeakMap类型在JavaScript中的使用</title>
+</head>
+<body>
+  <script>
+    //Map类型转换操作
+    let hd = new Map([["houdunren","后盾人"],["hdcms","开源系统"]]);
+
+    console.log(hd);
+    console.log([...hd]);
+    console.log([...hd.entries()]);
+    console.log([...hd.values()]);
+    console.log(...hd.values());
+    console.log([...hd.keys()]);
+
+    let newArr = [...hd];
+    console.log(newArr);
+    let Arr2 = newArr.filter((item) => {
+      return item[1].includes("后盾人");
+    })
+    console.log(Arr2);
+
+    let Arr3 = new Map(Arr2)
+    console.log(Arr3);
+  </script>
+</body>
+</html>

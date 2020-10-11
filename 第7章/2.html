@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map和WeakMap类型在JavaScript中的使用</title>
+</head>
+<body>
+  <script>
+    //Map类型增删改查
+    let obj = {
+      name:"后盾人"
+    }
+    let map = new Map();
+    map.set(obj,"houdunren")
+    map.set("llll","ppp")
+    map.delete("llll")
+    // map.clear();
+    
+    console.log(map);
+    console.log(map.get(obj));
+    console.log(map.has(obj));
+  </script>
+</body>
+</html>
