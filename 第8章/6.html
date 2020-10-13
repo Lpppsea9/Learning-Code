@@ -1,0 +1,32 @@
+,<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map和WeakMap类型在JavaScript中的使用</title>
+</head>
+<body></body>
+  <script>
+    //默认参数的使用技巧
+    // function avg(total,year = 1){
+    //   // year = year || 1;
+    //   console.log(year);
+    //   return Math.round(total/year)
+    // }
+    // console.log(avg(2000,4));
+
+    function sortArray(array,type="asc"){
+      return array.sort(function(a,b){
+        return type == "asc" ? a - b : b - a; //双等
+      })
+    }
+    console.log(sortArray([4,5,8,3,7],'desc'));
+
+
+
+    function sum(toatl,discount=0,dis=0){ //打折
+      return toatl*(1-discount)*(1-dis);
+    }
+    console.log(sum(1000,0.1,0.2));
+  </script>
+</html>,,,
