@@ -7,6 +7,25 @@
 </head>
 <body></body>
   <script>
-    //
+    //通过常量改变this指针
+    let lesson = {
+      site:"后盾人",
+      lists:["js","css","msql"],
+      show: function(){
+        // console.log(this.lists);
+        // const self = this;  //下面的往上找到self
+        return this.lists.map(function(value){
+          // console.log(this);
+          // console.log(self);//向上找，this不向上找，有点特殊
+          // console.log(self.site);  //this是window
+          
+          console.log(this); //this是lesson
+          // return `${self.site}-${value}`
+
+          return `${this.site}-${value}`
+        },this);  //map第二个参数可以改变this指向，就不用定义一个self
+      }
+    };
+    console.log(lesson.show());
   </script>
 </html>

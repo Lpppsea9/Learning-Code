@@ -5,8 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Js的函数秘密</title>
 </head>
-<body></body>
+<body>
+  <button>后盾人</button>
+</body>
   <script>
-    //
+    let Dom = {
+      site: "后盾人",
+      bind: function() {
+        const button = document.querySelector("button");
+        button.addEventListener
+      })
+    }
+    //箭头函数带来的this变化实例
+
+    //在箭头函数中的this指的就是上下文，或者是父级作用域中的this
+
+    // let lesson = {
+    //   site:"后盾人",
+    //   lists:["js","css","mysql"],
+    //   show: function(){
+    //     return this.lists.map(title => `${this.site}-${this.lists}`)
+    //   }
+    // };
+    // console.log(lesson.show());
   </script>
 </html>

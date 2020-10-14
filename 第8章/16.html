@@ -10,11 +10,28 @@
     //this关键字
 
     let hd = {
-      name:'后盾人',
+      site:'后盾人',
       show:function(){
-        return this.name;
+        console.log(this);  //打印出当前对象，因为它是对象属性或者类方法
+        function render(){
+          console.log(this.site);
+        }
+        render();  //打印出window，因为他是一个普通函数 
       }
     };
     console.log(hd.show());
+
+    console.log(this == window); //最外部this
+    console.log(this == hd); //false
+
+
+    function User() { //如果不传name，则里面没有name属性，向外面查找
+      this.name = name;
+      this.show = function() {
+        return this.name;
+      };
+    }
+    let lisi = new User("李四");
+    console.log(lisi.show());
   </script>
 </html>
