@@ -3,11 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Map和WeakMap类型在JavaScript中的使用</title>
+  <title>Js的函数秘密</title>
 </head>
 <body></body>
   <script>
-    //
-  </script>
+    //递归附加参数使用技巧
+    let lessons = [
+      {
+        title:"LLL",
+        click:2
+      },
+      {
+        title:"PPP",
+        click:56
+      },
+      {
+        title:"OOO",
+        click:88
+      }
+    ];
+    function change(lessons,num=100,i=0){
+      if(i == lessons.length){
+        return lessons
+      };
+      lessons[i].click += num;
+      return change(lessons,num,++i)
+    }
+    console.table(change(lessons));
   </script>
 </html>

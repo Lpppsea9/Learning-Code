@@ -7,6 +7,14 @@
 </head>
 <body></body>
   <script>
-    //
+    //this关键字
+
+    let hd = {
+      name:'后盾人',
+      show:function(){
+        return this.name;
+      }
+    };
+    console.log(hd.show());
   </script>
 </html>

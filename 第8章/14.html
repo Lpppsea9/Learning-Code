@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Map和WeakMap类型在JavaScript中的使用</title>
+  <title>Js的函数秘密</title>
 </head>
 <body></body>
   <script>
-    //
+    //展开语法（点语法）正确使用方式
+    // let hd = [1,2,3];
+    // let [a,b,c] = [...hd]; //右边释放
+    // console.log(a);
+
+    let [a,...edu] = [1,2,3,4];
+    console.log(edu); //左边收
+
+    function sum(...args){
+      console.log(args);
+      return args.reduce((a,b) => a+b);
+    }
+    console.log(sum(1,2,3,4,6,7,77,88,78));
   </script>
-  </script>
+
+
 </html>

@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Map和WeakMap类型在JavaScript中的使用</title>
+  <title>Js的函数秘密</title>
 </head>
-<body></body>
+<body>
+  <button id="bt">后盾人</button>
+</body>
   <script>
-    //
-  </script>
+    //什么是回调函数
+    // document.getElementById("bt").addEventListener("click",function(){
+    //   alert(this.innerHTML)
+    // })
+
+    let hd = [1,2,3,4];
+    hd.map(function(value,index,array){
+      array[index] += 10;
+      return value;
+    })
+    console.log(hd);
   </script>
 </html>
