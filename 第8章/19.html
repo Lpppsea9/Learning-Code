@@ -5,8 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Js的函数秘密</title>
 </head>
-<body></body>
+<body>
+  <button>hdcms</button>
+  <button>houdunren</button>
+</body>
   <script>
-    //
+    //call 与 apply(数组)
+    //call与apply会立刻执行，不需要额外的调用
+    let lsi = {
+      name: "李四",
+    };
+    let wangwu ={
+      name:"王五",
+    };
+
+    function User(web,url){
+      console.log(web + url + this.name);
+    };
+
+    User.call(lsi,"后盾人","houdunren.com")
+    User.apply(wangwu,["后盾人","hdcms.com"])
+
+
+    //点击按钮弹出按钮内容
+    function show(){
+      alert(this.innerHTML)
+    };
+    let btns = document.querySelectorAll("button");
+    for(let i=0; i<btns.length;i++){
+      // btns[i].addEventListener("click",() => {
+      //   show.apply(btns[i])
+      // })
+      btns[i].addEventListener("click",event => {
+        show.apply(event.target)
+      })
+    }
   </script>
 </html>

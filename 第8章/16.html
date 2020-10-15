@@ -7,31 +7,25 @@
 </head>
 <body></body>
   <script>
-    //this关键字
+    //通过常量改变this指针
+    let lesson = {
+      site:"后盾人",
+      lists:["js","css","msql"],
+      show: function(){
+        // console.log(this.lists);
+        // const self = this;  //下面的往上找到self
+        return this.lists.map(function(value){
+          // console.log(this);
+          // console.log(self);//向上找，this不向上找，有点特殊
+          // console.log(self.site);  //this是window
+          
+          console.log(this); //this是lesson
+          // return `${self.site}-${value}`
 
-    let hd = {
-      site:'后盾人',
-      show:function(){
-        console.log(this);  //打印出当前对象，因为它是对象属性或者类方法
-        function render(){
-          console.log(this.site);
-        }
-        render();  //打印出window，因为他是一个普通函数 
+          return `${this.site}-${value}`
+        },this);  //map第二个参数可以改变this指向，就不用定义一个self
       }
     };
-    console.log(hd.show());
-
-    console.log(this == window); //最外部this
-    console.log(this == hd); //false
-
-
-    function User() { //如果不传name，则里面没有name属性，向外面查找
-      this.name = name;
-      this.show = function() {
-        return this.name;
-      };
-    }
-    let lisi = new User("李四");
-    console.log(lisi.show());
+    console.log(lesson.show());
   </script>
 </html>

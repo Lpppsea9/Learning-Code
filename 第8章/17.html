@@ -5,27 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Js的函数秘密</title>
 </head>
-<body></body>
+<body>
+  <button>houdunren.com</button>
+  <button>hdcms</button>
+</body>
   <script>
-    //通过常量改变this指针
-    let lesson = {
-      site:"后盾人",
-      lists:["js","css","msql"],
-      show: function(){
-        // console.log(this.lists);
-        // const self = this;  //下面的往上找到self
-        return this.lists.map(function(value){
-          // console.log(this);
-          // console.log(self);//向上找，this不向上找，有点特殊
-          // console.log(self.site);  //this是window
-          
-          console.log(this); //this是lesson
-          // return `${self.site}-${value}`
+    //箭头函数带来的this变化实例
+    // let Dom = {
+    //   site:"后盾人",
+    //   lists:["js","css","mysql"],
+    //   bind: function(){  //bind的this是Dom对象，因为bind是Dom的属性方法
+    //     const btn = document.querySelector("button");
+    //     let self = this;
+    //     btn.addEventListener("click",function(){
+    //       console.log(self.site+this.innerHTML);  //实现dom里的site和button的内容
+    //     })
+    //   }
+    // }
 
-          return `${this.site}-${value}`
-        },this);  //map第二个参数可以改变this指向，就不用定义一个self
+    // Dom.bind();
+
+
+    let Dom = {
+      site:"后盾人",
+      handleEvent:function(evenet){  //handleEvent比较特殊，下面的this直接调用
+        console.log(this.site + event.target.innerHTML);
+      },
+      bind: function(){  //bind的this是Dom对象，因为bind是Dom的属性方法
+        let buttons = document.querySelectorAll("button");
+        buttons.forEach(elem => {
+          // console.log(this);
+          elem.addEventListener("click",event=> {
+            console.log(this.site + event.target.innerHTML);
+          })
+        })
+        
       }
-    };
-    console.log(lesson.show());
+    }
+    Dom.bind();
+    //箭头函数带来的this变化实例
+
+    //在箭头函数中的this指的就是上下文，或者是父级作用域中的this
+
+    // let lesson = {
+    //   site:"后盾人",
+    //   lists:["js","css","mysql"],
+    //   show: function(){
+    //     return this.lists.map(title => `${this.site}-${this.lists}`)
+    //   }
+    // };
+    // console.log(lesson.show());
   </script>
 </html>

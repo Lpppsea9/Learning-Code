@@ -9,24 +9,18 @@
   <button>后盾人</button>
 </body>
   <script>
-    let Dom = {
-      site: "后盾人",
-      bind: function() {
-        const button = document.querySelector("button");
-        button.addEventListener
-      })
+    // this的构造原理实现
+
+    //call apply bind
+    //
+    function User(name){
+      this.name = name;
     }
-    //箭头函数带来的this变化实例
+    let lisi = new User("李四")
+    console.log(lisi);
 
-    //在箭头函数中的this指的就是上下文，或者是父级作用域中的this
-
-    // let lesson = {
-    //   site:"后盾人",
-    //   lists:["js","css","mysql"],
-    //   show: function(){
-    //     return this.lists.map(title => `${this.site}-${this.lists}`)
-    //   }
-    // };
-    // console.log(lesson.show());
+    let hdcms = { url:"hdcms.com" };
+    User.call(hdcms,"开源系统");  //第二个参数是赋值给name
+    console.log(hdcms);
   </script>
 </html>
