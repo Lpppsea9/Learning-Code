@@ -4,9 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Js的函数秘密</title>
+  <style>
+    h1{
+      padding: 30px;
+      font-size: 30px;
+    }
+  </style>
 </head>
-<body></body>
+<body>
+  <h1>houdunren.com</h1>
+</body>
   <script>
-    //
+    //随机色
+    function Color(elem){
+      this.elem = elem;
+      this.colors = ["#1abc9c","#f1c40f","9b59b6","#f39c12"];
+      this.run = function() {
+        setInterval(
+          function(){
+            // console.log(this);
+            let i = Math.floor(Math.random() * this.colors.length);
+            this.elem.style.backgroundColor = this.colors[i];
+          }.bind(this),1000
+        );
+      };
+    }
+    let obj = new Color(document.body);
+    obj.run();
+
+    let h1 = new Color(document.querySelector("h1"))
+    h1.run();
   </script>
 </html>

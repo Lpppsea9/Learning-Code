@@ -7,6 +7,25 @@
 </head>
 <body></body>
   <script>
-    //
+    //bind,不立刻执行，有两次传参的机会
+
+    function show(){
+      console.log(this.name);
+    }
+    show.call({name:""})
+
+    let a = function(){};
+    let b =a;
+    console.log(a instanceof Object);
+    console.log(a===b); //true
+    b = a.bind() //重新复制一份函数
+    console.log(a === b); //false
+
+    function hd(a,b){
+      console.log(a,b);
+      return this.f + a + b;
+    }
+    let func = hd.bind({f: 1},1 , 2)
+    func(3,4);
   </script>
 </html>

@@ -7,6 +7,31 @@
 </head>
 <body></body>
   <script>
-    //
+    //构造函数方法继承
+
+    function Request() {
+      this.get = function(params) {
+        let str = Object.keys(params).map(k => `${k}=${params[k]}`).join("&");
+        let url = `http://houdunren.com?${this.url}/${str}`;
+        document.write(url + "<hr/>")
+      };
+    }
+    //文章
+    function Article() {
+      this.url = "article/lists";
+      Request.call(this)
+    }
+    let a = new Article();
+    console.log(a.get({id:1,cat:"js"}));
+
+
+    //用户
+    function User() {
+      this.url = "article/lists";
+      Request.call(this)
+    }
+    let b = new User();
+    console.log(b.get({id:2,role:"admin"}));
+
   </script>
 </html>
