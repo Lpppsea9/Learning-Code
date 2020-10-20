@@ -10,6 +10,6 @@ addEvent(body, "click", function () {
 const p1 = document.getElementById("p1");
 addEvent(p1, "click",event => {
   // event.stopPropagation()
-  event.preventDefault();
+  event.preventDefault();//阻止默认行为
   console.log("激活");
 })
