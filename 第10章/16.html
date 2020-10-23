@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //深拷贝
+    
+    let data = {
+      name:"后盾人",
+      user:{
+        name:"hdcms"
+      },
+      arr:[]
+    }
+
+    function deepClone(obj){
+      let res = obj instanceof Array?[]:{};
+      for (const [k,v] of Object.entries(obj)) {
+        res[k] = typeof v =="object"?deepClone(v):v
+      }
+      return res
+    }
+    let hd = deepClone(data)
+    console.log(JSON.stringify(hd,null,2));
+  </script>
+</html>

@@ -30,9 +30,16 @@
         price:300
       }
     ]
-    let hd = lessons.sort(function(a,b){
-      return a.price > b.price ? 1 : -1
-    });
+    function order(field,type = "asc"){
+      return function(a,b){
+        if(type == "asc") {
+          return a[field] > b[field] ? 1 : -1;
+        }
+        return a[field] > b[field] ? -1 : 1;
+      }
+    }
+
+    let hd = lessons.sort(order("price","asc"))
     console.table(hd);
   </script>
 </html>

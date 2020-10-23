@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //对象与原型链检测实例
+    let arr = ["后盾人","hdcms"];
+
+    console.log(arr.hasOwnProperty("length"));
+    console.log(arr.hasOwnProperty("concat"));
+
+    console.log("concat" in arr);
+    
+
+    let a = {
+      name:'后盾人'
+    };
+    let b = {
+      url:"houdunren.com"
+    }
+
+    Object.setPrototypeOf(a,b) //b变成a的父亲
+    console.log(a);
+    console.log(a.hasOwnProperty("url")); //false
+    console.log("url" in a);
+  </script>
+</html>

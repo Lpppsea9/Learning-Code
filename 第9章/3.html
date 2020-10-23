@@ -7,7 +7,20 @@
 </head>
 <body></body>
   <script>
-    //
+    //延伸环境函数生命周期
+    function out(){
+      let m =1;
+      return function sum1(){
+        let n =1;
+        return function sum2(){
+          console.log(++n);
+        }
+      }
+    }
     
+    let a = out()()
+    a();a();
+    let b = out()()
+    b();b()
   </script>
 </html>

@@ -5,9 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Js的闭包</title>
 </head>
-<body></body>
+<body>
+  <style>
+    button{
+      position: absolute;
+    }
+  </style>
+  <button message="后盾人">houdunren</button>
+  <button message="hdcms">hdcms</button>
+</body>
   <script>
     //
     
+    let btns = document.querySelectorAll('button');
+    btns.forEach(function(item){
+      //parent
+      // let left = 1;
+      // let interval = false;
+      let bind = false;
+      item.addEventListener("click",function(){
+        if(!bind){
+          bind = true;
+          let left = 1; 
+          
+          setInterval(function(){
+            item.style.left = left++ +"px";
+          },100)
+        }
+      })
+    })
   </script>
 </html>

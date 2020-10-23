@@ -8,6 +8,11 @@
 <body></body>
   <script>
     //
-    
+    function between(a,b){
+      return function(v){
+        return v.price >=100 && v.price <=300
+      }
+    }
+    console.log(lessons.filter(between(100,200)));
   </script>
 </html>

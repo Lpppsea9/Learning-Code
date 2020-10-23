@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //操作对象属性
+    let user = {
+      name:"向军",
+      "my age":18
+    }
+    // console.log(user.name);
+    // console.log(user["name"]);
+    // console.log(user["my age"]);
+
+    // for(const key in user){
+    //   console.log(user[key]);
+    // }
+    user.age = 19
+    user.get = function() {
+      return `${this.name}的年龄是${this.age}`
+    }
+    console.log(user.get());
+    delete user.age;
+    console.log(user.get());
+  </script>
+</html>

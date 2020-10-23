@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //多层对象的解构操作
+    let hd = {
+      name:"后盾人",
+      lessons: {
+        title:"javascript"
+      }
+    };
+    let {
+      name,
+      lessons:{title}
+    } = hd;
+    console.log(name,title);
+    
+  </script>
+</html>

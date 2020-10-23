@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //
+    function upload(params){
+      let config = {
+        type:"*.jpeg,*.png",
+        size:10000
+      };
+      config = {...config,...params}
+      console.log(config);
+    }
+    console.log(upload({size:99,type:"*.girf"})); //对象中同名属性后面会覆盖前面的
+  </script>
+</html>

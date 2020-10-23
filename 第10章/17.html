@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //使用工厂函数创建对象
+    // let xj = {
+    //   name:"向军",
+    //   show:function(){
+    //     console.log(this.name);
+    //   }
+    // }
+
+    function user(name){
+      return {
+        name,
+        show:function(){
+          console.log(this.name + `-houdunren`);
+        },
+        info:function(){
+          console.log(`${this.name}的指指点点`);
+        }
+      }
+    }
+    let xj = user("向军",118);
+    xj.show()
+    let lisi = user("李四",22);
+    lisi.show();
+  </script>
+</html>

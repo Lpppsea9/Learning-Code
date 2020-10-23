@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //对象属性的添加删除
+    let hd = {};
+    hd.name = '后盾人'
+    hd['age'] = 18; //增加
+    console.log(hd);
+    delete hd.name;  //删除
+    console.log(hd);
+
+    console.log(hd.hasOwnProperty("age"));  //检查是否含有属性
+    
+  </script>
+</html>

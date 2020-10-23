@@ -7,7 +7,15 @@
 </head>
 <body></body>
   <script>
-    //
+    //块级作用域
     
+    {
+      let a = 1;
+    }
+    {
+      var a = 2; //无块级作用域
+    }
+
+    console.log(a); //undefined
   </script>
 </html>

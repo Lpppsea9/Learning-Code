@@ -8,6 +8,28 @@
 <body></body>
   <script>
     //
+    // function Hd(){
+    //   let n = 1;
+    //   this.sum = function() {
+    //     console.log(++n);
+    //   };
+    // }
+    
+
+    function Hd() {
+      let n = 1;
+      function sum(){
+        console.log(++n);
+      }
+      return {
+        sum
+      }
+    }
+
+
+    let a = new Hd();
+    a.sum();
+    a.sum();
     
   </script>
 </html>

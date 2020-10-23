@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Js的闭包</title>
+  <title>Js的对象</title>
 </head>
 <body></body>
   <script>
-    //
-    let title = "后盾人";
-    function show(){
-      console.log(title);
-    };
-    show();
+    //解构作为函数参数
+    function hd(name,{sex,age}){
+      console.log(name,sex,age);
+
+    }
+    hd("向军",{name:"向军",age:15})
+    
   </script>
 </html>

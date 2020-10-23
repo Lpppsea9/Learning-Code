@@ -8,6 +8,15 @@
 <body></body>
   <script>
     //
-    
+    let hd = {
+      user:'后盾人',
+      get: function(){
+        return () => {
+          return this.user
+        }   
+      }
+    }
+    let a = hd.get()
+    console.log(a()); //a是在window中调用的
   </script>
 </html>

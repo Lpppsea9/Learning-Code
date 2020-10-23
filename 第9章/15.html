@@ -5,9 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Js的闭包</title>
 </head>
-<body></body>
+<body>
+  <div desc="houdunren">在线学习</div>
+  <div desc="hdcms">开源产品</div>
+</body>
   <script>
-    //
+    //闭包内存泄漏解决
     
+    let divs = document.querySelectorAll('div');
+    divs.forEach(function(item){
+      let desc= item.getAttribute("desc");
+      item.addEventListener("click",function(){
+        console.log(item);
+      })
+      // item = null; //
+    })
   </script>
 </html>

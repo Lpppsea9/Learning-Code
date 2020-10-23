@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //遍历操作与DOM绘制
+    let hd = {
+      name:"houdunren",
+      year:"2010"
+    };
+    // console.log(Object.keys(hd));
+    // console.log(Object.values(hd));
+    // console.log(Object.entries(hd));
+    // console.log(JSON.stringify(Object.entries(hd),null,2));
+    
+
+    // for(const key in hd) {
+    //   console.log(hd[key]);
+    // }
+    // for(const iterator of hd)  //不可以遍历对象{
+    //   console.log(iterator); 
+    // }
+
+    let lessons = [{name:"js",click:999}]
+    for (const iterator of lessons) {
+      console.log(iterator);
+    }
+
+    for(const [key,value] of Object.entries(hd)){ //[key,value]转成数组可以迭代
+      console.log(value);
+    }
+  </script>
+</html>

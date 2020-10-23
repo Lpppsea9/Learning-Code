@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //解构操作的简写形式与变量解构
+    // let web = {name:"后盾人",url:"houdunren.com"};
+    // let { name, url} = web; //{name:name,age:age}
+    // console.log(name);
+
+    // let arr = ['后盾人','houdunren']
+    // let[,b]=arr
+    // console.log(b);
+
+    // let web = { name:"houdurn",url:"sss"}
+    // let {url}=web
+    // console.log(url);
+
+    let name = "后盾人",
+        url = "houudnren.com";
+    console.log(name);
+    console.log({name:name,url:url});
+
+    let obj = {name,url}; //把变量变成对象
+    console.log(obj);
+    
+  </script>
+</html>

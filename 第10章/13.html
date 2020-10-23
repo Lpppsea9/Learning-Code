@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //计算属性与assign
+
+    // let hd = {};
+    // let name = "title";
+    // hd[name] = "houdunren";
+    // console.log(hd.title)
+    
+    function upload(params){
+      let options = {
+        size:19999
+      } ;
+      options = Object.assign(options,params); //合并，后面替换前面
+      console.log(JSON.stringify(options,null,2));
+    }
+
+    upload({size:99,type:"jpeg"})
+  </script>
+</html>
