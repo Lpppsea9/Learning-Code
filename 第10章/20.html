@@ -7,7 +7,30 @@
 </head>
 <body></body>
   <script>
-    //
+    //面向对象的封装与抽象
+    // let xj = {};
+    // xj.name = "向军";
+    // xj.show = function(name){
+    //   console.log(name);
+    // };
     
+
+    //抽象
+    function User(name,age){
+      let data = {name,age}  //抽象处理
+      let info = function(){
+        return this.age > 50 ? "老年":"青年"
+      };
+      this.show = function(){
+        console.log(data.name+info());
+      };
+
+    }
+    let xj = new User("向军")
+    xj.name = "后盾人";
+    xj.info = function(){
+      return ""
+    };
+    xj.show()
   </script>
 </html>

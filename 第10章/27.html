@@ -7,7 +7,22 @@
 </head>
 <body></body>
   <script>
-    //
+    //使用访问器伪造属性
+    "use strict"
+    let lesson = {
+      lists:[
+        {name:"js",price:100},
+        {name:"musql",price:212},
+        {name:"vue.js",price:8}
+      ],
+      get total(){
+        return this.lists.reduce((t,l) => t+l.price ,0);
+      }
+    };
+    console.log(lesson.total);
+    lesson.total = 8355;  //修改无效
+    console.log(lesson.total);
+
     
   </script>
 </html>

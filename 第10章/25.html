@@ -7,7 +7,25 @@
 </head>
 <body></body>
   <script>
-    //
+    //冻结对象API属性
+    "use strict"
+    const user = {
+      name:"后盾人",
+      age:18
+    };
+    Object.freeze(user);  //writable和configurable都为false
+    console.log(
+      JSON.stringify(Object.getOwnPropertyDescriptors(user),null,2)
+    );
+    // user.site = "houdunren.com" //不能添加
+    // delete user.name; //不能删除
+    // user.name = "向军";
+    console.log(Object.isFrozen(user)); //判断是否冻结
+
+    for (const  of object) {
+      
+    }
+
     
   </script>
 </html>

@@ -7,7 +7,22 @@
 </head>
 <body></body>
   <script>
-    //
-    
+    //封闭对象的API操作
+    "use strict"
+    const user = {
+      name:"后盾人",
+      age:18
+    };
+    // Object.seal(user);  //封闭之后不能添加删除或者配置即configurable为false
+    console.log(Object.isSealed(user)); //封闭判断
+    console.log(
+      JSON.stringify(Object.getOwnPropertyDescriptors(user),null,2)  //
+    );
+
+    if(!Object.isSealed(user)){
+      user.site = "houdunren";
+      delete user.name;
+    }
+    console.log(user);
   </script>
 </html>

@@ -7,7 +7,17 @@
 </head>
 <body></body>
   <script>
-    //
+    //不允许向对象中添加属性API
+    "use strict"
+    const user = {
+      name:"后盾人",
+      age: 18 
+    }
+    // Object.preventExtensions(user);  //禁止添加属性
     
+    if(Object.isExtensible(user)){  //判断是否能添加属性
+      user.site = "houdunren.com";
+    }
+    console.log(user);
   </script>
 </html>

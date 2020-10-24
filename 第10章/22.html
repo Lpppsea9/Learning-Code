@@ -7,7 +7,42 @@
 </head>
 <body></body>
   <script>
-    //
+    //控制属性的特征
+
+    const user = {
+      name:"向军",
+      age:18
+    }
+    console.log(
+      JSON.stringify(Object.getOwnPropertyDescriptor(user,"age"))
+    );   
+    Object.defineProperty(user,"name",{   
+      value:"后盾人",
+      writable:true,  //限制属性修改
+      enumerable:true, //限制属性遍历
+      configurable:true, //限制是否可删除，是否可配置
+    });
     
+    Object.defineProperties(user,{ //复数可以对每个属性进行配置
+      name:{
+       value:"后盾人",
+       writable:true, //限制属性修改
+       enumerable:true, //限制属性遍历
+       configurable:true, //限制是否可删除，是否可配置
+      },
+      age:{
+        value:"后盾人",
+        writable:true, //限制属性修改
+        enumerable:true, //限制属性遍历
+        configurable:true, //限制是否可删除，是否可配置
+      }
+    });
+    // console.log(user.name);
+    user.name = "向军";
+    // console.log(user.name);  //不能修改name的值，但不报错，严格模式会报错
+    // console.log(Object.keys(user)); //enumeraable为false则name属性无法遍历
+    for (const key in user) {
+      console.log(key);
+    }
   </script>
 </html>

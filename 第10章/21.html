@@ -7,7 +7,36 @@
 </head>
 <body></body>
   <script>
-    //
+    //对象的属性特征 getOwnPropertyDescriptors
+    // const user = {
+    //   name:"向军",
+    //   age:18
+    // };
+    // user.lesson = "js";
+    // console.log(user);
+    // delete user.lesson; //属性删除
+    // console.log(user);
+
+    // let arr = ['后盾人',"hdcms"];
+    // console.log(arr);
+    // console.log(Object.entries(arr));
+    // console.log(arr.entries());
+    // for (const [k,v] of Object.entries(arr)) {
+    //   console.log(k,v); //打印不出来length
+    // }
     
+
+    const user = {
+      name:"向军",
+      age:18
+    };
+    console.log( Object.keys(user));
+    console.log(Object.getOwnPropertyDescriptor(user,"name"));
+    console.log(
+      JSON.stringify(Object.getOwnPropertyDescriptor(user,"name"),null,2)
+    );
+    console.log(
+      JSON.stringify(Object.getOwnPropertyDescriptors(user),null,2)  //获取所有属性特征
+    );
   </script>
 </html>
