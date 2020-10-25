@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS的原型和继承</title>
+</head>
+<body></body>
+  <script>
+    //原型方法与对象方法优先级
+    //自己的优先级高一些（自己都有了）
+    let hd = {
+      show() {
+        console.log("后盾人");
+      },
+      render() {
+        console.log("hd自己的方法");
+      }
+    };
+
+
+    hd.__proto__.render = function(){
+      console.log("hd的长辈(原型)的方法");
+    }
+    hd.render()
+    console.log(hd);
+
+    
+  </script>
+</html>

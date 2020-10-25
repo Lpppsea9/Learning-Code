@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS的原型和继承</title>
+</head>
+<body></body>
+  <script>
+    //函数拥有多个长辈
+    // let hd = {};
+    // console.dir(hd);
+    
+    /*
+    __proto__一般服务于函数对象（本身），
+    prototype 一般服务于函数实例化的时候(想图)
+    */
+    
+
+    function User() {}
+    User.__proto__.view = function(){
+      console.log("User function view method");
+    };
+    User.view();
+
+    //User.apply
+    User.prototype.show = function() {
+      console.log("后盾人");
+    }
+    // console.dir(User);
+    let hd = new User();  //作为构造函数
+
+    hd.show();
+    console.log(User.prototype === hd.__proto__);
+  </script>
+</html>
