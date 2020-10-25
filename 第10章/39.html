@@ -7,7 +7,18 @@
 </head>
 <body></body>
   <script>
-    //
-    
+    //JSON数据解决什么问题
+    let data = {
+      name:"后盾人",
+      data: {
+        title: "php"
+      }
+    };
+
+    let json = JSON.stringify(data, null, 2);
+    console.log(json);
+
+    let phpJSon = ``
+    console.log(JSON.parse(phpJSon));  //使用JSON.parse()将字符串JSON解析成对象
   </script>
 </html>

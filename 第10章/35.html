@@ -5,9 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Js的对象</title>
 </head>
-<body></body>
+<body>
+  <input type="text" v-model="content" />
+  <h4 v-bind="content"></h4>
+  <hr>
+  <input type="text" v-model="title" />
+  <input type="text" v-model="title" />
+  <h4 v-bind="title">这里也会发生更新</div>
+</body>
   <script>
-    //
-    
+    //VUEJS数据绑定
+    function View(){
+      let proxy = new Proxy(
+        {},
+        {
+          get(obj,property){
+
+          },
+          set(obj,property,value){  
+            // console.log(value); //value指输入的值
+            // console.log(property); //property指title
+            document
+              .querySelectorAll(`[v-model="${property}"]`)
+              .forEach(item => {
+                item.value = value
+            });
+            document
+              .querySelectorAll(`[v-bind="${property}"]`)
+              .forEach(item => {
+                item.innerHTML = value
+            })
+          }
+        }
+      )
+      this.init=function(){
+        const els = document.querySelectorAll("[v-model]");
+        els.forEach(item => {
+          item.addEventListener("keyup",function(){
+            proxy[this.getAttribute('v-model')] = this.value;
+            
+          })
+        })
+      }
+    } 
+    new View().init();
   </script>
 </html>

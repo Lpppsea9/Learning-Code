@@ -7,7 +7,26 @@
 </head>
 <body></body>
   <script>
-    //
+    //访问器的由优先级
+    "use strict"
+    const DATA = Symbol();
+    // console.log(Symbol() == Symbol());  //返回false，symbol类型是唯一的
+
+    const user = {
+      // name:"后盾人",
+      [DATA]:{name},
+      age:10,
+      set name(value){
+        this[DATA].name =value  //this后面用的数组  ，没加点
+      },
+      get name(){
+        return this[DATA].name
+      }
+
+    };
+    user.name = "hdcms";
+    // user.data.name = "你好";
+    console.log(user[Symbol()].name); //用symbol获取不到，因为symbol是唯一的
     
   </script>
 </html>

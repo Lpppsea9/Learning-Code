@@ -7,7 +7,23 @@
 </head>
 <body></body>
   <script>
-    //
-    
+    //JSON转换成js可操作类型
+    let hd = {
+      title: "后盾人",
+      url: "houdunren.com",
+      teacher: {
+        name: "向军大叔"
+      }
+    };
+    let json = JSON.stringify(hd,null,2);
+    console.log(json);
+    console.log(typeof json);  //字符串类型，不能直接使用
+    let obj = JSON.parse(json,(key,value) => {
+      if(key == 'title'){
+        value = "[后盾]-" + value;
+      }
+      return value;
+    });  //解析
+    console.log(obj.title);
   </script>
 </html>

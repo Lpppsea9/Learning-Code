@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body></body>
+  <script>
+    //使用代理proxy控制函数
+    function factorial(num){
+      return num == 1 ? 1 : num*factorial(num-1);
+    }
+    /*
+       apply()接受三个参数，
+        第一个指目标对象，
+        第二个指目标对象的上下文，通过proxy.apply(this,[5])传入window
+                                      proxy.apply({},[5])
+        第三个指目标对象的参数 
+    */
+    let proxy = new Proxy(factorial,{
+      apply(func, obj, args){  //func是指原函数(对象) obj指上下文 args指参数
+        console.time('run');
+        console.log(this);
+        func.apply(this,args);
+        console.timeEnd('run');
+      }
+    });
+    
+    proxy.apply({},[1000])
+  </script>
+</html>

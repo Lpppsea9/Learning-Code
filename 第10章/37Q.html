@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+<body>
+  <input type="text" validate rule="max:12,min:3" />  
+  <input type="text" validate rule="max:3,isNumber" />
+</body>
+  <script>
+    //写一个表单验证来体验代理
+    "use strict"
+    class Validate{
+      max(value, len) {
+        return value.length < len;
+      }
+      min(value, len) {
+        return value.length > len;
+      }
+      isNumber(value) {
+        return /^\d+$/.test(value)
+      }
+    }
+    // let validate = new Validate();
+    // console.log(validate.max("abc", 3));
+
+    function ProxyFactory(target){
+      return new Proxy(target, {
+        get(target, key) {
+          return target[key];
+        },
+        set(target, key, el) {
+          const rule = el.getAttribute("rule")
+          let state = rule.split(",").every(rule => {
+            const info = rule.split(":");
+            return Validate[info[0]](el.value, info[1]);
+          })
+          console.log(state);
+          return true;
+        }
+      });
+    }
+    //包含validate的属性的表单需要验证，先找到含有validate的表单元素
+    const proxy = ProxyFactory(document.querySelectorAll("[validate]"));
+    // console.log(proxy);
+    proxy.forEach((item,i) => {
+      item.addEventListener("keyup",function(){
+        proxy[i] = this;  //触发set
+      })
+    })
+
+    
+  </script>
+</html>

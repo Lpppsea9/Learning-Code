@@ -7,7 +7,20 @@
 </head>
 <body></body>
   <script>
-    //
-    
+    //使用访问器批量设置属性
+    "use strict"
+    const web ={
+      name:"houdunren",
+      url:"houdunren.com",
+      get site() {
+        return `${this.name}的网站是${this.url}`;
+      },
+      set site(value){
+        [this.name,this.url] = value.split(",");
+      }
+    };
+    // web.name = '开源产品';
+    web.site = '开源产品,www.hdcms.com'
+    console.log(web.site);
   </script>
 </html>

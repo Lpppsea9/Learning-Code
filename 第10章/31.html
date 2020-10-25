@@ -7,7 +7,62 @@
 </head>
 <body></body>
   <script>
-    //
+    //构造函数与class语法糖中使用访问器
+    "use strict"
+    class User{
+      constructor(name,age){
+        this.data = {name,age};  //this指User这个对象
+      }
+      get name(){
+        return this.data.name
+      }
+      set name(value){
+        if(value.trim() == "" || value.length > 20){
+          throw new Error("用户名不合法");
+        }
+        this.data.name = value;
+      }
+      get age(){
+        return this.data.name
+      }
+      set age(value){
+        this.data.name = value
+      }
+    }
+
+    let xj = new User("向军",19);
+    xj.name = "后盾人"; //用户名设置为空或者长度>20，会报错：用户名不合法
+    console.log(xj.name); //能访问到data，如果要封闭则把data定义为symbol
+
+    // function User(name,age){
+    //   // this.name = name;
+    //   // this.age = age;
+    //   let data = {name:name,age:age}
+    //   Object.defineProperties(this,{
+    //     name:{
+    //       get(){
+    //         return data.name
+    //       },
+    //       set(value){
+    //         if(value.trim()=="" || value.length>20){
+    //           throw new Error("用户名不合法")
+    //         }
+    //         data.name = value;
+    //       }
+    //     },
+    //     age:{
+    //       get(){
+    //         return data.name
+    //       },
+    //       set(value){
+    //         data.name = value
+    //       }
+    //     }
+    //   })
+    // }
+    // let xj = new User("向军",19);
+    // xj.name = "后盾人";  //用户名设置为空或者长度>20，会报错：用户名不合法
+    // console.log(xj.name);  //xj访问不了，因为闭包私有化，xj.name则能访问到
     
   </script>
 </html>

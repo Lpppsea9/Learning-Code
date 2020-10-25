@@ -7,7 +7,21 @@
 </head>
 <body></body>
   <script>
-    //
-    
+    //什么是Proxy代理拦截
+    "use strict" //set里yao return true
+    const hd = { name:"后盾人" }
+    const proxy = new Proxy(hd,{
+      get(obj,property){
+        // console.log();
+        return obj[property]
+      },
+      set(obj,property,value){
+        obj[property] = value;
+        return true
+      }
+    });
+    console.log(proxy.name);
+    proxy.name = "向军"
+    console.log(proxy.name);
   </script>
 </html>

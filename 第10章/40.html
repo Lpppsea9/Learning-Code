@@ -7,7 +7,28 @@
 </head>
 <body></body>
   <script>
-    //
-    
+    //JSON序列化与自定义toJSON
+    let hd = {
+      title: "后盾人",
+      url: "houdunren.com",
+      teacher: {
+        name: "向军大叔"
+      },
+      toJSON:function() {
+        return {
+          title: this.title
+        };
+      }
+    };
+    let json2 = JSON.stringify(hd);
+    console.log(json2);
+
+
+    // let json = JSON.stringify(hd,["title","url"],2)  //第二个参数是保留哪些属性
+    // console.log(json);
+
+    // let arr = ['后盾人','hdcms.com'] 
+    // let arrJson = JSON.stringify(arr,["title","url"], 2);
+    // console.log(arrJson);
   </script>
 </html>

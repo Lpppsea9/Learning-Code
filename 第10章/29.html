@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的对象</title>
+</head>
+
+<body></body>
+<script>
+  //TOKEN的读写处理
+  "use strict"
+  //token令牌
+  let Request = {
+    set token(content) {
+      localStorage.setItem('token', content)
+    },
+    get token() {
+      let token = localStorage.getItem('token');
+      if (!token) {
+        alert("请登录");
+      }
+      return token;
+    }
+  }
+  Request.token = "326564615346846463134SAD";  //存储在application里localstorage属性里
+  console.log(Request.token);
+</script>
+
+</html>

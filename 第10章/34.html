@@ -7,7 +7,34 @@
 </head>
 <body></body>
   <script>
-    //
+    //数组使用代理拦截操作
+    const lessons = [
+      {
+        title:"媒体查询响应式布局",
+        category: "css"
+      },
+      {
+        title:"FLEX 弹性盒模型",
+        category: "css"
+      },
+      {
+        title:"MYSQL多表查询随意操作",
+        category: "mysql"
+      },
+    ];
+    let proxy = new Proxy(lessons,{
+      get(array,key){
+        const title = array[key].title;
+        // console.log(title);
+        const len = 5;
+        array[key].title = 
+         title.length > len ? title.substr(0,len) + ".".repeat(3) : title  //超过五个截断
+        return array[key];
+        // console.log(key);
+      }
+    });
+    // console.log(proxy[2]);
+    console.log(JSON.stringify(proxy[2],null,2));
     
   </script>
 </html>
