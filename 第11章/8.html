@@ -7,7 +7,20 @@
 </head>
 <body></body>
   <script>
-    //
+    //自定义原型对象的设置
+    let hd = {
+      name:"hd"
+    };
+    let parents = {
+      name:"parent",
+      show:function(){
+        console.log(`parents+ ${this.name}`);
+      }
+    }
     
+    Object.setPrototypeOf(hd,parents);
+    hd.show()
+
+    console.log(Object.getPrototypeOf(hd));
   </script>
 </html>

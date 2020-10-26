@@ -11,19 +11,26 @@
     // 构造函数: String Number Object
     let hd = new Object();
     hd.name = "后盾人";
-    console.dir(Object);
-    
-    Object.prototype.show = function() {
+    // console.dir(Object);
+
+    Object.prototype.show = function() {  //添加show方法
       console.log("houdunren.com");
     };
 
-    hd.show();
+    // hd.show();  //hd能调用
 
     function User() {}
     console.dir(User);
+    console.dir(User.prototype);
+    console.log(User.__proto__ === Function.prototype);
+    console.log(User.prototype.__proto__ === Object.prototype);
+    console.log(User.__proto__.__proto__ === Object.prototype);
+    console.log(User.prototype.__proto__ === User.__proto__.__proto__);
     // console.log(User.prototype.__proto__ === User.__proto__.__proto__);
     // console.dir(Object.prototype.__proto__);  //顶级，返回null
-    let xj = new User;
-
+    let xj = new User();
+    // console.dir(xj);
+    // xj.show()
+    // User.show()
   </script>
 </html>
