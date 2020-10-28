@@ -7,7 +7,18 @@
 </head>
 <body></body>
   <script>
-    //
+    //根据对象生成一个新的对象
+    function User(name){
+      this.name = name;
+    }
+    let hd = new User('后盾人');
+    console.log(hd);
+    function createByObject(obj,...args){
+      const constructor = Object.getPrototypeOf(obj).constructor;
+      return new constructor(...args)
+    }
     
+    let xj = createByObject(hd,'向军')
+    console.log(xj);
   </script>
 </html>

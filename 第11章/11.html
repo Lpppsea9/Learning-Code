@@ -7,7 +7,22 @@
 </head>
 <body></body>
   <script>
-    //
+    //总结原型链
     
+    // let obj = {};  //new Obj
+    // console.log(obj.__proto__===Object.prototype); 
+    // console.log(Object.prototype.__proto__);  //null
+
+    let a = {name:"a"};
+    let b = {
+      name:"b",
+      show(){
+        console.log(this.name);
+      }
+    };
+    Object.setPrototypeOf(a,b);
+    console.log(a); //a里的__proto__里会有name:"b"这个属性
+    let c = [];
+    console.log(c); 
   </script>
 </html>

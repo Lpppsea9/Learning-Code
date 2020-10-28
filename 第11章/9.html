@@ -8,6 +8,23 @@
 <body></body>
   <script>
     //原型中constructor的使用
-    
+    function User(name) {
+      this.name = name;
+    }
+    User.prototype = {
+      constructor: User, //不添加会报错,constructor指针会消失
+      show(){
+        console.log(this.name);
+      }
+    }
+    //与上面的区别是？一个是直接改变prototype对象，一个是往里面添加show方法
+    User.prototype.show1()= function() {
+      console.log(tihs.name);
+    }
+    // console.log(User);
+    // console.log(User.prototype.__proto__ === Object.prototype);
+    // console.log(User.prototype.constructor === User);
+    let lisi = new User.prototype.constructor("李四")
+    lisi.show()
   </script>
 </html>
