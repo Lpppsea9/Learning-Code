@@ -7,7 +7,20 @@
 </head>
 <body></body>
   <script>
-    //
-    
+    //继承对constructor属性的影响
+    function hd(){}
+    let obj = new hd();
+    console.log(obj.__proto__.constructor === hd); //true
+    let obj2 = obj.__proto__.constructor; //一种方法来实例化
+    console.dir(obj2);  
+
+    //!!!
+    function Admin() {}
+    Admin.prototype = Object.create(User.prototype)  //不给他加上constructor属性，会丢失这个属性
+    Admin.prototype.constructor = Admin; //加上constructor 属性
+
+    let a = new Admin();
+    let b = new a.__proto__.constructor();
+    console.log(b);
   </script>
 </html>
