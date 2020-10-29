@@ -5,9 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JS的原型和继承</title>
 </head>
-<body></body>
+<body>
+  <button onclick="this.hide()">后盾人</button>
+</body>
   <script>
-    //
+    //不要滥用原型
+    //不要在系统中滥用原型
+    Object.prototype.hide = function(){
+      this.style.display = "none"
+    }
     
   </script>
 </html>

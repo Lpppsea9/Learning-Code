@@ -7,7 +7,14 @@
 </head>
 <body></body>
   <script>
-    //
+    //in与hasOwnProperty的差异
+    let a = {url:"houdunren"};
+    let b = {name:"后盾人"};
+    Object.prototype.web="hdamc.com"
+    console.log("url" in a);  //不仅检测对象属性还会检测原型链上
+    Object.setPrototypeOf(a,b);
+    console.log("name" in a); //true
+    console.log(a.hasOwnProperty("name")); //只是单纯检测当前对象，不会攀升到原型链上
     
   </script>
 </html>

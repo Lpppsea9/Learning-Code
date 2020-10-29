@@ -7,7 +7,11 @@
 </head>
 <body></body>
   <script>
-    //
+    //两种方法
+    Admin.prototype.__proto__ = User.prototype;
+    Admin.prototype = Object.create(User.prototype) 
+    //把User设置成Admin的原型
+    
     
   </script>
 </html>

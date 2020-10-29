@@ -7,7 +7,36 @@
 </head>
 <body></body>
   <script>
-    //
+    //__proto__原来是属性访问器 getter setter
+    //面试:proto并不是严格意义的属性,他是一个getter或setter，会对设置的值自动进行判断
+    //面试:就想设置属性，用这个属性名
+      /*
+       让对象不继承原型,让这个原型为空，为null，
+       let hd = Object.create(null) 
+      */
+    let hd = {name:"刘大海"};
+    hd.__proto__ = {
+      show(){
+        console.log(this.name);
+      }
+    };
+    hd.__proto__ = 99
+    hd.show() //能够正常执行，因为99不是对象
+
+    let hd1 = {
+      action:{},
+      get proto(){
+        return this.action
+      },
+      set proto(obj){
+        if(obj instanceof Object){
+          this.action = obj
+        }
+      }
+    };
+    hd1.proto = {view:function(){}}  //设置对象可以设进来
+    hd1.proto = "abc"  //字符串设不进来
+    console.log(hd1.proto);
     
   </script>
 </html>

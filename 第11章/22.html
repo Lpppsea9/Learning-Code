@@ -7,7 +7,20 @@
 </head>
 <body></body>
   <script>
-    //
+    //标准设置原型，__proto__是浏览器开发的非标准的
+    let user = {
+      show:function(){
+        console.log(this.name);
+      }
+    }
+
+
+    let hd = {name:"后盾人"};
+    Object.setPrototypeOf(hd,user) //设置
+    console.log(hd);
+    console.log(Object.getPrototypeOf(hd));  //获取原型
+
+
     
   </script>
 </html>

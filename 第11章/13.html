@@ -7,7 +7,21 @@
 </head>
 <body></body>
   <script>
-    //
-    
+    //Object.isPrototypeOf
+    //Object
+    let a ={};
+    let b ={};
+    let c = {};
+    Object.setPrototypeOf(b,c)
+    Object.setPrototypeOf(a,b)  //b作为a的原型,即a.__proto__ === b
+    console.log(b.isPrototypeOf(a));
+    console.log(Object.prototype.isPrototypeOf(a));
+    console.log(b.__proto__.isPrototypeOf(a));
+    console.log(b.__proto__ === Object.prototype);
+    console.log(b.__proto__ === c);
+
+    // console.log(b.isPrototypeOf(a));
+    // console.log(c.isPrototypeOf(b));  //c是否是b的原型的一份子
+    // console.log(c.isPrototypeOf(a));
   </script>
 </html>
