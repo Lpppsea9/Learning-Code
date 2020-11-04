@@ -7,7 +7,32 @@
 </head>
 <body></body>
   <script>
-    //
+    //禁止constructor被遍历
+     function User(){}
+     User.prototype.name = function() {
+       console.log("user.name");
+     };
+
+     function Admin() {}
+     Admin.prototype = Object.create(User.prototype)
+    //  Admin.prototype.constructor = Admin; //加上constructor 属性，可以遍历
+     //打印出Admin.prototype的属性，enumberable为真,可遍历
+     console.log(Object.getOwnPropertyDescriptors(Admin.prototype));
+     Object.defineProperty(Admin.prototype,'constructor',{
+       value:Admin,
+       enumerable:false
+     })
+     Admin.prototype.role = function(){
+       console.log("admin.role");
+     };
+     let a = new Admin();
+     for (const key in a) {
+         console.log(key); 
+         /* 
+         constrcutoe , role , name被遍历出来,
+         但是defineproperty之后就不可遍历了 
+         */
+     }
     
   </script>
 </html>
