@@ -6,5 +6,5 @@
 //1.
 // fn.call(this,p1,p2,p3)
 // fn.apply(this, arguments)
-// call传入的是一个一个对象，而apply是一个一个类数组.
+// call传入的是一个一个对象，而apply是一个一个类数组
 
