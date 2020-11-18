@@ -12,13 +12,13 @@
       name:"向军",
       "my age":18
     }
-    // console.log(user.name);
-    // console.log(user["name"]);
-    // console.log(user["my age"]);
+    console.log(user.name);
+    console.log(user["name"]);
+    console.log(user["my age"]);
 
-    // for(const key in user){
-    //   console.log(user[key]);
-    // }
+    for(const key in user){
+      console.log(user[key]);
+    }
     user.age = 19
     user.get = function() {
       return `${this.name}的年龄是${this.age}`
