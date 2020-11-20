@@ -15,12 +15,23 @@
     //Object创建了一个没有原型的纯数据对象
     //Object.create(null,)第一个参数指原型对象,null表示没有设置原型对象
     //完全字典数据
+
+    /* 
+    Object.create(proto, [propertiesObject])
+    proto
+    第一个参数是新创建对象的原型对象
+    propertiesObject
+    可选.需要传入一个对象
+    返回一个新的对象，带着指定的原型对象和属性
+    */
+    
+    //完全的字面量的数据，没有原型
     let xj = Object.create(null,{
       name: {
         value: "后盾人"
       }
     });
-    console.log(xj.hasOwnProperty("name"));  
+    console.log(xj.hasOwnProperty("name"));   //报错，因为指定的原型为null
     
   </script>
 </html>

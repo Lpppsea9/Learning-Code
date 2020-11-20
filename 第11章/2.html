@@ -13,6 +13,8 @@
     let hd = {};
     console.log(hd);
     let xj = {};
-    console.log(Object.getPrototypeOf(hd) === Object.getPrototypeOf(xj));
+    console.log(Object.getPrototypeOf(hd));  //获取hd原型的父亲
+
+    console.log(Object.getPrototypeOf(hd) == Object.getPrototypeOf(xj));
   </script>
 </html>
