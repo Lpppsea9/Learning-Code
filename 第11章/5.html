@@ -8,29 +8,48 @@
 <body></body>
   <script>
     //函数拥有多个长辈
-    // let hd = {};
-    // console.dir(hd);
-    
-    /*
-    __proto__一般服务于函数对象（本身），
-    prototype 一般服务于函数实例化的时候(想图)
-    */
-    
-
+    //let hd = {};
+    //函数也是对象
     function User() {}
-    User.__proto__.view = function(){
-      console.log("User function view method");
-    };
-    User.view();
+    //构造函数有prototype 和 __proto__,都可以看作长辈
+    // let hd = new User();
+    // User.apply
+    
+    // console.dir(User); 
+    // console.log(hd.__proto__ === User.prototype); //true
 
-    //User.apply
-    User.prototype.show = function() {
-      console.log("后盾人");
+    User.prototype.show = function(){
+    console.log("我是prototype方法");
     }
-    // console.dir(User);
-    let hd = new User();  //作为构造函数
 
+    User.__proto__.view = function(){
+      console.log("User的__proto__方法");
+    }
+    // User.show(); //报错，因为show是定义在User的prototype上的方法，是服务于他实例化的对象的
+    User.view(); //把User当成对象使用
+
+    let hd = new User();
     hd.show();
-    console.log(User.prototype === hd.__proto__);
+    // hd.view(); //报错，因为view是定义在__proto__上的方法，是服务于构造函数本身的
+    console.dir(User);
+    console.dir(hd);
+    console.log(User.__proto__ === Function.prototype);
+    console.log(User.prototype.__proto__ === Object.prototype); //true
+    console.log(User.prototype.__proto__ === Object.__proto__); //true
+
+    //Function
+    console.dir(Function);
+    console.log(Function.prototype.__proto__ === Object.prototype);
+    console.log(Array.__proto__ === Function.__proto__);
+    console.dir(Array);
+    console.log(Function.__proto__ === Function.prototype);
+    console.log(Array.__proto__ === Function.prototype);
+    console.log(Array.__proto__ === Array.prototype); 
+    console.log(Function.__proto__ === Object.prototype);
+    console.log(Object.__proto__ === Function.prototype);
+
+
+
+    
   </script>
 </html>
