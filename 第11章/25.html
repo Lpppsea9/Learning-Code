@@ -7,11 +7,28 @@
 </head>
 <body></body>
   <script>
-    //两种方法
-    Admin.prototype.__proto__ = User.prototype;
-    Admin.prototype = Object.create(User.prototype) 
-    //把User设置成Admin的原型
+    let f = {};
+    console.log(f.__proto__); //查看对象的原型
+    //原型的继承，而不是改变构造函数的原型
+    //直接改变构造函数的原型是不对的
+    function User(){};
+    User.prototype.name = function(){
+      console.log(user.name);
+    }
     
-    
+    function Admin(){};
+    Admin.prototype = User.prototype;
+    Admin.prototype.role = function() {
+      console.log("admin角色");
+    }
+
+    function Member(){};
+    Member.prototype = User.prototype;
+    Member.prototype.role = function() {
+      console.log("member角色");
+    }
+
+    let a = new Admin();
+
   </script>
 </html>

@@ -14,7 +14,7 @@
        让对象不继承原型,让这个原型为空，为null，
        let hd = Object.create(null) 
       */
-    let hd = {name:"刘大海"};
+    let hd = {name:"后盾人"};
     hd.__proto__ = {
       show(){
         console.log(this.name);
@@ -37,6 +37,10 @@
     hd1.proto = {view:function(){}}  //设置对象可以设进来
     hd1.proto = "abc"  //字符串设不进来
     console.log(hd1.proto);
-    
+
+    //面试题，就像让hd对象的__proto__的值变成后盾人
+    let hd3 = Object.create(null) //让hd3的原型为null
+    hd3.__proto__ = "hdcms"
+    console.dir(hd3);
   </script>
 </html>

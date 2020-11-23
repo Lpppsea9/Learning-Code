@@ -13,35 +13,25 @@
     User.prototype.name = function(){
       console.log("user name method");
     }
-    let hd = new User()
-    hd.name() //使用原型对象的name方法
+    // let hd = new User()
+    // hd.name() //使用原型对象的name方法
+
 
     function Admin() {}
-    console.log(Admin.prototype.__proto__ === Object.prototype); //true
-    
+    Admin.prototype = User.prototype;
     Admin.prototype.role = function() { 
       console.log("admin.role");
     }
-    //两种方法
-    Admin.prototype.__proto__ = User.prototype;
-    Admin.prototype = Object.create(User.prototype)  //把User设置成Admin的原型
-    let a = new Admin;
-    a.name();
-    a.role();//照常执行
-
 
     function Member() {}
-    Member.prototype.__proto__ = User.prototype;
+    Member.prototype = User.prototype
     Member.prototype.role = function() {
       console.log("member.role");
     }
-    let b = new Member();
-    b.name()
-    b.role()
-     
+    
+    let a = new Admin();
+    a.role();  //实例化Admin的得到的a打印的是Member上的rolefangfa
 
-    // let a = new Admin();
-    // a.role() //打印出member的role方法
 
   </script>
 </html>
