@@ -21,12 +21,11 @@
       }
     }); 
     console.log(hd.show());
-    console.log(Object.getPrototypeOf(hd));
 
     //自主开发获取
-    // let hd1 = {name:"后盾人"}
-    // hd.__proto__ = User;
-    // console.log(hd.show());
-    // console.log(hd.__proto__); //能看到（获取）
+    let hd1 = {name:"后盾人"}
+    hd1.__proto__ = User;  //因为User是对象
+    console.log(hd1.show());
+    console.log(hd1.__proto__); //能看到（获取）
   </script>
 </html>
