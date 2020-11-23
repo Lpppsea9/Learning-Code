@@ -11,16 +11,20 @@
     let hd = {
       name:"hd"
     };
-    let parents = {
+    let parent = {
       name:"parent",
       show:function(){
-        console.log(`parents+ ${this.name}`);
+        console.log(`parent: ${this.name}`);
       }
     }
     
-    Object.setPrototypeOf(hd,parents);
+    //第一个参数是要设置的对象，
+    //设置hd的父亲，给hd设置原型
+    Object.setPrototypeOf(hd,parent);  
     hd.show()
+    parent.show()
 
+    //看hd的原型对象 getPrototypeOf
     console.log(Object.getPrototypeOf(hd));
   </script>
 </html>

@@ -7,14 +7,21 @@
 </head>
 <body></body>
   <script>
-    //in与hasOwnProperty的差异
+    //in与hasOwnProperty的差异（属性过滤）！！！
+    //in不仅检测对象属性还会检测原型链上的属性
+    //hasOwnProperty只会检测当前的对象
+
     let a = {url:"houdunren"};
     let b = {name:"后盾人"};
     Object.prototype.web="hdamc.com"
     console.log("url" in a);  //不仅检测对象属性还会检测原型链上
     Object.setPrototypeOf(a,b);
     console.log("name" in a); //true
-    console.log(a.hasOwnProperty("name")); //只是单纯检测当前对象，不会攀升到原型链上
+    console.log(a.hasOwnProperty("name")); //false 只是单纯检测当前对象，不会攀升到原型链上
+
+    for(const key in a){
+      console.log(key);
+    } //打印出 url、 name 、 web 神奇
     
   </script>
 </html>

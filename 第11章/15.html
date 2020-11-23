@@ -9,23 +9,23 @@
   <script>
     //使用call或apply借用原型链
     let hd = {
-      data : [1,2,3,34,5,7]
+      data : [1, 2, 3, 34, 5, 7]
     };
     Object.setPrototypeOf(hd,{
-      max(){
-        return this.data.sort((a,b) => b-a)[0]
+      max(data){
+        return data.sort((a,b) => b-a)[0]
       }
     });
-    console.log(hd.max());
+    console.log(hd.max(hd.data));
 
     let xj = {
-      lessons:{js:87,php:63,node:99,linux:88},
-      get data(){
-        return Object.values(this.lessons)
-      }
+      lessons:{ js: 87, php: 63, node: 99, linux: 88 },
+      //getter 将对象属性绑定到查询该对象时所调用的函数
+      // get data(){
+      //   return Object.values(data.lessons)
+      // }
     };
-    console.log(hd.max.apply(xj));
-    // console.log(hd.max.call(null,Object.values(xj.lessons)));  //上面不用this，直接传参
-    
+    console.log(hd.max.call(null,Object.values(xj.lessons)));
+
   </script>
 </html>

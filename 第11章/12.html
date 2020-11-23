@@ -7,17 +7,26 @@
 </head>
 <body></body>
   <script>
-    //原型检测instanceof
+    //原型检测instanceof,这个是判断构造函数的prototype
+
     function A(){}
     function B(){}
     function C(){}
     let c = new C();
-    B.prototype = c;
-    let b = new B();
-    A.prototype = b;
+    B.prototype = c
+    let b = new B(); // b.__proto__指向B.prototype
+    A.prototype = b; // A.prototype赋值成 b
     let a = new A();
 
+    //  console.log(a.__proto__ === b);
+    //  A.prototype
     console.log(a instanceof A);
+    console.log(a instanceof C);
+    console.log(b instanceof C);
+    console.log(c instanceof C);
+
+
+
     
   </script>
 </html>

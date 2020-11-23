@@ -7,17 +7,29 @@
 </head>
 <body></body>
   <script>
-    /*
+    // 系统构造函数的原型体现
+    // let hd = {}; // new Object
+    let hd = new Object();
+    console.log(hd.__proto__ === Object.prototype);
+
+
+    Array.prototype.show = function(){
+      console.log("Array上的show方法");
+    }
+    let arr = []; // new Array
+    console.log(arr.__proto__ === Array.prototype);
+    arr.show();
     
-    ""    new String
-    []    new Array
-    {}    new Object
-    /a/i  new Regexp 
-    true  new Bollean
-    
-    
-     */
-    
-    
+    let str = " "; // new String
+    console.log(str.__proto__ === String.prototype);
+
+    let bool = true; // new Boolean
+    console.log(bool.__proto__ === Boolean.prototype);
+
+    let reg = /a/i; // new RegExp
+    console.log(reg.__proto__ === RegExp.prototype);
+
+    let obj = {};
+    console.log(obj.__proto__ === Object.prototype);
   </script>
 </html>

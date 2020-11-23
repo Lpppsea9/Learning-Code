@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS的原型和继承</title>
+</head>
+<body></body>
+  <script>
+    //原型关系详解与属性继承实例
+    // 构造函数: String Number Object
+    let hd = new Object();
+    hd.name = "后盾人";
+    // console.dir(Object);
+
+    Object.prototype.show = function() {  //添加show方法
+      console.log("houdunren.com");
+    };
+
+    // hd.show();  //hd能调用
+
+    function User() {}
+    console.dir(User);
+    console.dir(User.prototype);
+    console.log(User.__proto__ === Function.prototype); //true
+    console.log(User.prototype.__proto__ === Object.prototype); //true
+    console.log(User.__proto__.__proto__ === Object.prototype); //true
+
+    //true 都指向Object.prototype
+    console.log(User.prototype.__proto__ === User.__proto__.__proto__);
+    console.log(Function.prototype.constructor === Function); 
+
+    console.log(Object.__proto__ === Function.prototype);
+    console.log(Function.__proto__ === Function.prototype);
+    console.log(Object.__proto__ === Function.__proto__);
+
+    console.log(Array.__proto__ === Function.prototype);
+    console.log(Array.__proto__ === Object.__proto__);
+    console.log(Array.__proto__ === Function.__proto__);
+
+    let obj = {};
+    console.dir(obj);
+    console.log(obj.__proto__ === Object.prototype);
+
+    // console.log(Object.prototype.__proto__); //指向null
+
+    // console.log(User.prototype.__proto__ === User.__proto__.__proto__); //true
+    // console.dir(Object.prototype.__proto__);  //顶级，返回null
+    let xj = new User();
+    // console.dir(xj);
+    // xj.show()
+    // User.show()
+  </script>
+</html>

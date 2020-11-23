@@ -7,7 +7,8 @@
 </head>
 <body></body>
   <script>
-    //构造函数方法声明
+    //合理的构造函数方法声明
+    //注意节省内存
 
     function User(name) {
       this.name = name;
@@ -15,6 +16,8 @@
         console.log(this.name);
       };
     }
+
+    //如果有多个方法，可以把方法都放进prototype，但是要注意constructor指回自己
     User.prototype = {
       constructor:User,
       show(){

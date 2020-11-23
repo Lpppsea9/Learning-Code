@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JS的原型和继承</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-<body></body>
-  <script>
-    //原型关系详解与属性继承实例
-    // 构造函数: String Number Object
-    let hd = new Object();
-    hd.name = "后盾人";
-    // console.dir(Object);
+<body>
+    <script>
+        // 原型关系详解及属性继承实例
+        /* 
+            typeof Function.prototype 是一个function
+            而 typeof fn.prototype 是一个object
 
-    Object.prototype.show = function() {  //添加show方法
-      console.log("houdunren.com");
-    };
-
-    // hd.show();  //hd能调用
-
-    function User() {}
-    console.dir(User);
-    console.dir(User.prototype);
-    console.log(User.__proto__ === Function.prototype);
-    console.log(User.prototype.__proto__ === Object.prototype);
-    console.log(User.__proto__.__proto__ === Object.prototype);
-    console.log(User.prototype.__proto__ === User.__proto__.__proto__);
-    // console.log(User.prototype.__proto__ === User.__proto__.__proto__);
-    // console.dir(Object.prototype.__proto__);  //顶级，返回null
-    let xj = new User();
-    // console.dir(xj);
-    // xj.show()
-    // User.show()
-  </script>
+            可以把Array、Object、Function、String、RegExp、Boolean、Symbol、
+            
+            叫做构造器
+            基本类型(原始值): undefined null boolean string number symbol   
+            引用类型: Array Obecjt Function 
+        */
+        console.log(typeof Function); //以下皆为 function
+        console.log(typeof Array);
+        console.log(typeof Object);
+        console.log(typeof Number);
+        console.log(typeof Boolean);
+        console.log(typeof RegExp);
+        console.log(typeof Symbol);
+        
+        console.log(Function instanceof Object);
+        console.log(Object instanceof Function);
+        console.log(typeof Object.prototype);
+    </script>
+</body>
 </html>

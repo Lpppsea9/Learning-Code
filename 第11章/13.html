@@ -7,17 +7,21 @@
 </head>
 <body></body>
   <script>
-    //Object.isPrototypeOf
+    //Object.isPrototypeOf原型检测
+    //是明确判断对象的，Object
+
     //Object
     let a ={};
     let b ={};
     let c = {};
     Object.setPrototypeOf(b,c)
-    Object.setPrototypeOf(a,b)  //b作为a的原型,即a.__proto__ === b
-    console.log(b.isPrototypeOf(a));
-    console.log(Object.prototype.isPrototypeOf(a));
-    console.log(b.__proto__.isPrototypeOf(a));
+    Object.setPrototypeOf(a,b)  //b作为a的原型,即a.__proto__ === b,注意b是直接作为原型
+    console.log(a.__proto__ === b); //即a.__proto__
+    console.log(b.isPrototypeOf(a)); //b是不是a的原型
+    console.log(Object.prototype.isPrototypeOf(a)); //true
+    console.log(b.__proto__.isPrototypeOf(a));  //true
     console.log(b.__proto__ === Object.prototype);
+    console.log(c.__proto__ === Object.prototype); //b的父级变成了c所以不能指向Object.prototype
     console.log(b.__proto__ === c);
 
     // console.log(b.isPrototypeOf(a));

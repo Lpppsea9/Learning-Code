@@ -11,7 +11,7 @@
     function User(name) {
       this.name = name;
     }
-    User.prototype = {
+    User.prototype = {   //这样做等于新建一个prototype原型对象，丢失constructor
       constructor: User, //不添加会报错,constructor指针会消失
       show(){
         console.log(this.name);
@@ -21,10 +21,10 @@
     User.prototype.show1()= function() {
       console.log(tihs.name);
     }
-    // console.log(User);
-    // console.log(User.prototype.__proto__ === Object.prototype);
-    // console.log(User.prototype.constructor === User);
-    let lisi = new User.prototype.constructor("李四")
+
+    //  console.log(User.prototype.constructor === User); 
+    //  User.prototype里的constructor指向User本身
+    let lisi = new User.prototype.constructor("李四") //等于let lisi = new User("李四")
     lisi.show()
   </script>
 </html>
