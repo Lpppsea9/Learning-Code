@@ -30,8 +30,13 @@
     }
     
     let a = new Admin();
-    a.role();  //实例化Admin的得到的a打印的是Member上的rolefangfa
-
+    a.role();  
+    /* 
+      实例化Admin的得到的a打印的是Member上的role方法，因为Member是后来定义的
+      会覆盖掉前面的，所以原型的继承，不要改变构造函数的原型，这是不对的，原型的
+      继承是继承，往上走一层
+    */
+    
 
   </script>
 </html>
