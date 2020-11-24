@@ -8,6 +8,45 @@
 <body></body>
   <script>
     //多继承造成的困扰
+    //现在admin又想用User的方法，又想用Request的方法
+
+    function extend(sub,sup) {
+      sub.prototype = Object.create(sup.prototype);
+      Object.defineProperty(sub.prototype,"constructor",{
+        value: sub,
+        enumerable: false
+      })
+    }
+    function Credit(){};
+    Credit.prototype.total = function() {
+      console.log("积分统计");
+    }
+    function Request() {};
+    Request.prototype.ajax = function() {
+      console.log("请求后台");
+    };
+    extend(Request,Credit);
+    function User(name,age) {
+      this.name = name;
+      this.age = age
+    }
+    extend(User, Request);
+    User.prototype.show = function() {
+      console.log(this.name, this.age);
+    }
+    
+    //现在admin又想用User的方法，又想用Request的方法
+    function Admin(name, age) {
+      User.call(this, name, age)
+    }
+    
+    extend(Admin, User);
+
+    let admin = new Admin("向军", 19);
+    // console.dir(admin);
+    admin.show();
+    admin.ajax();
+    admin.Credit()
     
     
   </script>

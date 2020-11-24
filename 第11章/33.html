@@ -16,7 +16,19 @@
       console.log(this.name, this.age);
     };
 
-    User("lll","ppp")
-    
+    //构造函数一般开头大写，而函数是小写，下面admin采用函数
+    function admin(name,age) {
+      const instance = Object.create(User.prototype);
+      User.call(instance,name,age);
+      instance.role = function() {
+        console.log("role");
+        console.dir(instance);
+      }
+      return instance;
+    }
+
+    let hd = admin("向军", 19);
+    hd.show();
+    hd.role()
   </script>
 </html>
