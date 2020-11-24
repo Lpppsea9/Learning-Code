@@ -7,7 +7,62 @@
 </head>
 <body></body>
   <script>
-    //
+    //使用mixin实现多继承
+      //php: tradit mixin 混合功能
+
+      //继承的封装方法
+      function extend(sub,sup){
+        sub.prototype = Object.create(sup.prototype);
+        Object.defineProperty(sub.prototype,"constructor",{
+          value: sub,
+          enumerable: false
+        })
+      }
+      //获取地址方法
+      function Address() {};
+      Address.prototype.getAddress = function() {
+        console.log("收取收货地址");
+      }
+      extend(Credit, Address) //把地址方法继承给积分方法
+      //积分统计方法
+      function Credit() {};
+      Credit.prototype.total = function() {
+        console.log("积分统计");
+      }
+      extend(Request, Credit)
+      //请求后台方法
+      function Request(){};
+      Request.prototype.ajax = function() {
+        console.log("请求后台");
+      }
+      //User用户
+      function User(name, age) {
+        this.name = name;
+        this.age = age
+      }
+      extend(User, Request);
+      User.prototype.show = function() {
+        console.log(this.name, this.age);
+      }
+      //Admin后台管理员
+      function Admin(name, age) {
+        User.call(this, name, age)
+      }
+
+      extend(Member, User)
+      //Member会员
+      function Member(name,age) {
+        User.call(this, name, age)
+      }
+      let lisi = new Member("李四", 22);
+      lisi.getAddress(); 
+
+      /* 
+        使用extend方法之后，就能调用收取收货地址的方法
+        但是强烈不推荐
+       */
+
+
     
   </script>
 </html>

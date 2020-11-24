@@ -17,15 +17,28 @@
         enumerable: false
       })
     }
-    function Credit(){};
+    //34.html目前还没用到这个方法，下章3.5用到
+    function Address() {};
+    Address.prototype.getAddress = function() {
+      console.log("获取收货地址");
+    }
+    function Credit() {};
     Credit.prototype.total = function() {
       console.log("积分统计");
     }
     function Request() {};
+    /* 
+      ！！！！！！！！！
+      extend方法必须用在给他的prototype添加方法之前，因为是重新
+      创造原型对象，如果在之后的话，Request.prototype添加的方法
+      是在它本身的prototype上的，下面的子类就继承不到他的新的
+      原型对象上的方法了(即通过extend的Object.create()方法)!!
+    */
+    extend(Request, Credit); 
     Request.prototype.ajax = function() {
       console.log("请求后台");
     };
-    extend(Request,Credit);
+
     function User(name,age) {
       this.name = name;
       this.age = age
@@ -39,15 +52,27 @@
     function Admin(name, age) {
       User.call(this, name, age)
     }
-    
-    extend(Admin, User);
 
+    extend(Admin, User);
     let admin = new Admin("向军", 19);
     // console.dir(admin);
     admin.show();
     admin.ajax();
-    admin.Credit()
-    
-    
+    admin.total()
+
+    function Member(name,age) {
+      User.call(this, name, age);
+    }
+    extend(Member, User);
+    let lisi = new Member("李四", 22)
+
+    /* 
+      总结：
+      现在会员Member想用这个 收货地址-getAddress方法，
+      也想用 请求-Request方法，也想用 积分统计-Credit，
+      用继承的话，会造成admin也用到getAddress收货地址方法，
+      但是后台管理员Admin不需要用这个方法，所以会造成混乱(因为我们强制加上了关系)
+      怎么解决？？？
+    */
   </script>
 </html>
