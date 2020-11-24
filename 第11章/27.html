@@ -9,6 +9,39 @@
   <script>
     //继承对constructor属性的影响
 
+    // function Hd(){}
+    // let obj = new Hd;  //new-1
+    // console.log(obj.__proto__ === Hd.prototype);
+    // console.dir(obj.__proto__.constructor); //找到了它的构造函数，即Hd，等于console.dir(Hd)
+    // let obj2 = new obj.__proto__.constructor; //new2-也可以通过这个方法来new一个实例
+    // console.dir(obj);
+
+    function User(){};
+    function Admin(){}
+    /* 
+      注意，用Object.create创建Admin的prototype时，
+      构造函数Admin里的prototype会丢失constructor属性 
+    */
+    Admin.prototype = Object.create(User.prototype) 
+    Admin.prototype.role = function() {
+      console.log("admin.role");
+    }
+    console.log(Admin.prototype.constructor); //能打印出User()，为什么？
+    /* 
+      得到的是 User 上的 prototype 里的 constructor，
+      因为Admin.prototype.__proto__ === User.prototype，
+      所以Admin.prototype.constructor顺着原型链找到了User.prototype里的constructor
+      找到了User函数本身，所以打印出f User(){}
+    */
+    let a = new Admin();
+    a.role
+    console.dir(Admin); 
+    console.log(Admin.prototype.__proto__ === User.prototype);
+    /* 
+      总结: 用Object.create()方法给某函数或某对象设置原型对象的时候
+            一定一定！ 要把它的prototype.constructor设置给本身，
+            不然他是没有constructor这个属性的
+    */
     
   </script>
 </html>

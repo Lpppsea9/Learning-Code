@@ -16,8 +16,9 @@
      function Admin() {}
      Admin.prototype = Object.create(User.prototype)
     //  Admin.prototype.constructor = Admin; //加上constructor 属性，可以遍历
-     //打印出Admin.prototype的属性，enumberable为真,可遍历
-     console.log(Object.getOwnPropertyDescriptors(Admin.prototype));
+
+     //打印出Admin.prototype的属性，enumberable为真,所以可遍历
+     console.log(Object.getOwnPropertyDescriptors(Admin.prototype));  //查看Admin.prototype属性特征
      Object.defineProperty(Admin.prototype,'constructor',{
        value:Admin,
        enumerable:false
@@ -26,13 +27,19 @@
        console.log("admin.role");
      };
      let a = new Admin();
-     for (const key in a) {
+     for (const key in a) { //使用in遍历，会找原型链上
          console.log(key); 
          /* 
-         constrcutoe , role , name被遍历出来,
-         但是defineproperty之后就不可遍历了 
+         没有给constructor设置不可遍历之前，遍历a的话
+         constrcutoe , role , name三个属性都遍历出来,
+         但是defineproperty设置之后constructor就不可遍历了 
          */
      }
+
+     /* 总结: 知道了Object.create来实现继承的缺点，
+              知道了Object.defineProperty的方法，
+              Object.defineProperty(设置的对象,'对象中的属性名',{属性值})
+     */
     
   </script>
 </html>

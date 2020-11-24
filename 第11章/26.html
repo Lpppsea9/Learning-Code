@@ -8,17 +8,21 @@
 <body></body>
   <script>
     //继承对新增对象的影响 ,两种继承原型的方法
+
+    function User(){
+      console.log("user-method");
+    }
     
     function Admin(){};
     let a = new Admin();
-    Adimn.prototype.__proto__ = User.prototype;  
-    //1.改变原来原型对象的原型,继承到User.prototype上
-    Admin.prototype = Object.create(User.prototype); 
+    Admin.prototype.__proto__ = User.prototype;  
+    //1.方法一：改变原来原型对象的原型,继承到User.prototype上
+    // Admin.prototype = Object.create(User.prototype); 
     /* 
-      2.新建原型,如果立刻实例化，a.role找不到role方法，就算把role方法放在下面也会报错
-        因为是新建的原型对象所以Admin实例化得到的a还是会指向Admin.prototype,就是因为
+      2.方法二：新建原型,如果立刻实例化，a.role找不到role方法，就算把role方法放在下面
+        也会报错因为是新建的原型对象所以Admin实例化得到的a还是会指向Admin.prototype,就是因为
         Object.create()方法是重新创建一个对象，而Admin。prototype.__proto__是改变它
-        原型对象的本身的指向  
+        原型对象的本身的指向,所以a不能调用role方法
     */
 
     Admin.prototype.role = function () {
