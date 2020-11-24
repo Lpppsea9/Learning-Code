@@ -8,22 +8,25 @@
 <body></body>
   <script>
     //使用原型工厂封装继承
+
+    //尝试封装起来
     function extend(sub,sup){
       sub.prototype = Object.create(sup.prototype);
       Object.defineProperty(sub.prototype,"constructor",{
         value: sub,
         enumerable: false
-      });
+      })
     }
 
     function User(name,age){
       this.name = name,
-      this.age = age;
+      this.age = age,
       show1=function(){
         console.log("show1 mehod");
       }
       // show:function(){}  定义在这里admin是继承不了的
     };
+    console.dir(User);
     
     User.prototype.show = function(){
       console.log(this.name,this.age);
@@ -35,6 +38,13 @@
     extend(Admin,User);
     let admin = new Admin("管理员",23)
     admin.show();
+
+    /* 
+      总结: 第一步要Object.create()
+            第二步要constructor指回自己
+            第三步要defineProperty设置constructor不可遍历
+            比较麻烦，所以用extend()给他封装起来
+    */
 
   </script>
 </html>
