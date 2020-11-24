@@ -18,8 +18,9 @@
     };
 
     function Admin(name,age) {  //参数多的话用...args,apply
-      User.call(this,name,age)
-      // User.apply(this,args)
+      // User.call(this,name,age)
+      const args = arguments;
+      User.apply(this,args)
     }
     Admin.prototype = Object.create(User.prototype)
     let xj = new Admin("向军", 18);

@@ -8,31 +8,71 @@
 <body></body>
   <script>
     //面向对象的多态
+    // function User(){};
+    // User.prototype.show = function(){
+    //   console.log(this.description());
+    // };
+
+    // function Admin(){};
+    // Admin.prototype = Object.create(User.prototype)
+    // Admin.prototype.description = function(){
+    //   return "管理员在此"
+    // }
+
+    // function Member(){};
+    // Member.prototype = Object.create(User.prototype)
+    // Member.prototype.description = function(){
+    //   return "会员在此"
+    // }
+
+    // function Enterprise(){};
+    // Enterprise.prototype = Object.create(User.prototype)
+    // Enterprise.prototype.description = function(){
+    //   return "企业账户"
+    // }
+
+    // for (const obj of [new Admin(),new Member(),new Enterprise()]) {
+    //   obj.show() //如果不用继承User.prototype，则实现不了多态
+    // }
+
+
+    //不用多态的话
     function User(){};
     User.prototype.show = function(){
       console.log(this.description());
     };
 
     function Admin(){};
-    Admin.prototype = Object.create(User.prototype)
-    Admin.prototype.description = function(){
+    // Admin.prototype = Object.create(User.prototype)
+    Admin.prototype.showAdmin = function(){
       return "管理员在此"
     }
 
     function Member(){};
-    Member.prototype = Object.create(User.prototype)
-    Member.prototype.description = function(){
+    // Member.prototype = Object.create(User.prototype)
+    Member.prototype.showMember = function(){
       return "会员在此"
     }
 
     function Enterprise(){};
-    Enterprise.prototype = Object.create(User.prototype)
-    Enterprise.prototype.description = function(){
+    // Enterprise.prototype = Object.create(User.prototype)
+    Enterprise.prototype.showEnterprise = function(){
       return "企业账户"
     }
 
     for (const obj of [new Admin(),new Member(),new Enterprise()]) {
-      obj.show()
+      //不用多态，则通过判断来实现
+      if (obj instanceof Admin) {
+        console.log(obj.showAdmin());
+      }else if (obj instanceof Member) {
+        console.log(obj.showMember());
+      }else if (obj instanceof Enterprise) {
+        console.log(obj.showEnterprise());
+      }
     }
+
+    /* 
+      总结，对象的多态可以使代码更加简单优雅，不用多态则会使代码显得冗余
+    */
   </script>
 </html>
