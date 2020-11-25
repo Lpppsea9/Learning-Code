@@ -7,7 +7,59 @@
 </head>
 <body></body>
   <script>
-    //
+    //let hd = {};
+    //hd.__proto__ === Object.prototype
+    function extend(sub, sup){
+      sub.prototype = Object.create(sup.prototype);
+      Object.defineProperty(sub.prototype, "costructor", {
+        value: sub,
+        enumerable: false
+      })
+    }
+    const Address = {
+      getAddress() {
+        console.log("获取收货地址");
+      }
+    };
+    const Request = { //Request放在前面是因为下面的Credit的原型要指向他
+      ajax() {
+        return "请求后台"
+      }
+    }
+    const Credit = {
+      __proto__: Request,
+      total() {
+        //super就等于this.__proto__
+        console.log(super.ajax()+"积分统计"); 
+      }
+    };
+    
+    function User(name, age) {
+      this.name = name;
+      this.age = age
+    }
+    User.prototype.show = function() {
+      console.log(this.name, this.age);
+    }
+
+    function Admin(name, age) {
+      User.call(this, name, age)
+    }
+    extend(Admin, User);
+    Admin.prototype = Object.assign(Admin.prototype, Request, Credit)
+
+    let admin = new Admin("向军", 19)
+    admin.show();
+    admin.ajax();
+    admin.total();
+    /* 
+      总结:
+        Object.assign()合并对象的时候，比如total()方法是在Cedit对象中的函数，
+        所以在调用积分统计方法(admin.total())的时候其实是访问Credit这个对象来
+        调用这个统计，而Credit里的this是他本身，他调用super(this.__proto__),
+        其实就是访问Credit的原型(即Request对象)，所以admin.taotal()不是访问
+        Admin的原型(Admin.prototype)，Ap跟Credit和Request没什么关系
+    */
     
   </script>
 </html>
