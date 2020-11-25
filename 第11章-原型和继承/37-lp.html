@@ -28,11 +28,11 @@
 
   main nav {
     display: flex;
-    height: 5px;
+    height: 50px;
     align-items: center;
   }
 
-  main nav a {
+  main nav a, main nav span {
     background: #95a5a6;
     margin-right:0px;
     padding: 10px 20px;
@@ -40,7 +40,8 @@
     color: #fff;
   }
 
-  main nav a:first-of-type{
+  main nav a:first-of-type,
+  main nav span:first-of-type{
     background: #e67e22;
   }
 
@@ -83,7 +84,7 @@
   <script>
     //TAB选项卡显示效果基类开发
 
-    
+    //继承工厂
     function extend(sub, sup) {
       sub.prototype = Object.create(sup.prototype);
       Object.defineProperty(sub.prototype, "constructor", {
@@ -91,42 +92,60 @@
         enumerable: false
       })
     }
+
+    //动作类
     function Animation(){}
     Animation.prototype.show = function() {
       this.style.display = "block";
     }
+    //隐藏所有元素
     Animation.prototype.hide = function() {
       this.style.display = "none";
     }
-    Animation.prototype.background = function(color) {
+    //必变元素集合背景
+    Animation.prototype.changebg = function(color) {
       this.style.backgroundColor = color;
     }
-    function Tab(el) {
+
+    //选项卡类
+    function Tab(el, link='a', section='section', callback = null) {
       this.tab = document.querySelector(el);
-      this.links = this.tab.querySelectorAll('a');
-      this.sections = this.tab.querySelectorAll('section')
+      this.links = this.tab.querySelectorAll(link);
+      this.sections = this.tab.querySelectorAll(section);
+      this.callback = callback;
     }
     extend(Tab, Animation)
     Tab.prototype.run = function() {
       this.bindEvent();
-    }
+      this.reset();
+      this.action(0);
+    };
+    //绑定事件
     Tab.prototype.bindEvent = function() {
       this.links.forEach((el, i) => {
         el.addEventListener('click', () => {
           this.reset();
-          this.action(i)
+          this.action(i);
+          if(this.callback) this.callback()
         })
       })
-    }
+    };
+    //点击后触发动作
     Tab.prototype.action = function(i) {
-      this.background.call(this.links[i], "#e67e22");
-      this.sections
-    }
+      this.changebg.call(this.links[i], "#e67e22");
+      this.show.call(this.sections[i])
+    };
+    //重置link与section
     Tab.prototype.reset = function() {
       this.links.forEach((el, i) => {
-        this.background.call(this.links[i], "#95a5a6")
+        this.changebg.call(this.links[i], "#95a5a6")
+        this.hide.call(this.sections[i])
       });
     }
-    new Tab(".tab2").run();
+
+    new Tab(".tab1").run();
+    new Tab(".tab2", "span", "section", function() {
+      console.log("后盾人");
+    }).run();
   </script>
 </html>
