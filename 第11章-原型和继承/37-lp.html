@@ -74,8 +74,8 @@
   </main>
   <main class="tab2">
     <nav>
-      <a href="javascript:;">后盾人</a>
-      <a href="javascript:;">hdcms</a>
+      <span href="javascript:;">后盾人</span>
+      <span href="javascript:;">hdcms</span>
     </nav>
     <section>1</section>
     <section>2</section>
@@ -105,6 +105,7 @@
     //必变元素集合背景
     Animation.prototype.changebg = function(color) {
       this.style.backgroundColor = color;
+      // console.log(color);
     }
 
     //选项卡类
@@ -132,6 +133,7 @@
     };
     //点击后触发动作
     Tab.prototype.action = function(i) {
+      console.log(i);
       this.changebg.call(this.links[i], "#e67e22");
       this.show.call(this.sections[i])
     };
@@ -147,5 +149,6 @@
     new Tab(".tab2", "span", "section", function() {
       console.log("后盾人");
     }).run();
+    
   </script>
 </html>
