@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JS的原型和继承</title>
+  <title>TAB选项卡显示效果基类开发</title>
 </head>
 <style>
   * {
@@ -82,6 +82,8 @@
 </body>
   <script>
     //TAB选项卡显示效果基类开发
+
+    
     function extend(sub, sup) {
       sub.prototype = Object.create(sup.prototype);
       Object.defineProperty(sub.prototype, "constructor", {
@@ -111,12 +113,19 @@
     Tab.prototype.bindEvent = function() {
       this.links.forEach((el, i) => {
         el.addEventListener('click', () => {
+          this.reset();
           this.action(i)
         })
       })
     }
     Tab.prototype.action = function(i) {
-      this.background.call(this.links[i], "#e67e22")
+      this.background.call(this.links[i], "#e67e22");
+      this.sections
+    }
+    Tab.prototype.reset = function() {
+      this.links.forEach((el, i) => {
+        this.background.call(this.links[i], "#95a5a6")
+      });
     }
     new Tab(".tab2").run();
   </script>
