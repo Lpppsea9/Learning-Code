@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js类</title>
+</head>
+<body>
+    <script>
+        //class声明的方法为什么不能遍历
+
+        function Hd() {}
+        Hd.prototype.show = function() {};
+        let h = new Hd();
+        for (const key in h) {
+            console.log(key);
+        }
+
+        
+    </script>
+</body>
+</html>

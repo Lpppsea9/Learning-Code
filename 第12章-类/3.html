@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js类</title>
+</head>
+<body>
+    <script>
+        //类的内部工作机制就是原型
+        class User{
+            constructor(name) {
+                this.name = name
+            }
+            show() {} //自动把show方法放到原型当中
+        }
+        let h1 = new User("向军")
+        console.log(Object.getOwnPropertyNames(User.prototype)); 
+        // console.log(Object.getOwnPropertyNames(h1)); // ["name"]
+        // console.dir(h1);
+        // console.dir(User);
+        // console.log(User === User.prototype.constructor); //true
+
+        function Hd(name){
+            this.name = name
+        }
+        // console.log(Hd === Hd.prototype.constructor); //true
+        Hd.prototype.show = function() {}; //手动把show方法放到Hd的原型中
+        let h2 = new Hd("向军")
+        console.log(Object.getOwnPropertyNames(Hd.prototype));
+        // console.log(Object.getOwnPropertyNames(h2)); // ["name"]
+        // console.dir(h2);
+        // console.dir(Hd);
+
+        /* 
+            总结： 类跟构造函数的原型继承差不多，只是更方便把方法直接放在了原型
+                  上，不用手动指定了(之前需要手动改将方法写到构造函数的原型上)
+         */
+
+
+
+        
+    </script>
+</body>
+</html>

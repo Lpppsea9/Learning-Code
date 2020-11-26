@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js类</title>
+</head>
+<body>
+    <script>
+        //class声明类的语法
+         
+        // class User {}
+        // console.log(typeof User); //function
+        // let Hd = class {};
+        // console.log(Hd);
+
+        // class User { //使用类时不需要加逗号
+        //     show() {}
+        //     get() {
+        //         console.log("后盾人");
+        //     }
+        // }
+        // let hd = new User();
+        // hd.get();
+        
+        class User {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age
+            }
+            getName(){
+                return this.name 
+            }
+        }
+        console.dir(User);
+        let hd = new User("后盾人");
+        console.log(hd.getName());
+    </script>
+</body>
+</html>

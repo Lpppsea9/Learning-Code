@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js类</title>
+</head>
+<body>
+    <script>
+        //对象属性的声明
+        class User{
+            site = "后盾人";
+            constructor(name) {
+                this.name = name
+            }
+            changeSite(value) {
+                this.site = value
+            }
+            show() {
+                return `${this.site}:${this.name}`
+            }
+        }
+        let hd = new User("后盾人")
+        hd.changeSite("houdunren")
+        console.log(hd.show());
+        // console.log(hd);
+        // let xj = new User("向军")
+        // console.log(xj);
+
+        /* 
+            总结：
+                使用this关键字的话，即hd和xj设置属性的时候是他们独有的
+                这是对象的属性声明，不是类！搞清楚hd是对象，而User是类，
+                是相当于构造函数
+         */
+
+        
+    </script>
+</body>
+</html>
