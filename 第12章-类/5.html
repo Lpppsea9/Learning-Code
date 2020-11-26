@@ -12,7 +12,7 @@
         function Hd() {}
         Hd.prototype.show = function() {};
         let h = new Hd();
-        for (const key in h) {
+        for (const key of h) {
             console.log(key);
         }
 
