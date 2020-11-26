@@ -7,10 +7,42 @@
 </head>
 <body>
     <script>
-        //
+        //严格模式下运行class
+        "use strict"
+        function show(){
+            console.log(this);
+        }
+        show()
+        //严格模式下，显示undefined
 
+        function User(){}
+        User.prototype.show2 = function(){
+            function sw(){
+                console.log(this);
+            }
+            sw()
+        }
+        let u = new User();
+        u.show2()
+        
 
+        class User2{
+            get(){
+                function cw(){
+                    console.log(this);
+                }
+                cw();
+            }
+        }
+        let u2 = new User2();
+        u2.get()
 
+        /* 
+            总结：
+                构造函数平时只有在严格模式下才能打印出undefined，一般都是window
+                而class默认为我们使用了严格模式，更方便
+        */
+        
 
         
     </script>
