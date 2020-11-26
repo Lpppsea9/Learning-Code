@@ -9,12 +9,57 @@
     <script>
         //class声明的方法为什么不能遍历
 
-        function Hd() {}
-        Hd.prototype.show = function() {};
-        let h = new Hd();
-        for (const key of h) {
-            console.log(key);
+
+        //以下是构造函数声明为什么能够遍历
+        // function Hd(name) {
+        //     this.name = name
+        // }
+        // Hd.prototype.show = function() {};
+        // console.dir(Hd);
+        // console.log(JSON.stringify(
+        //     Object.getOwnPropertyDescriptor(Hd.prototype,"show"),null,2
+        // )); // 显示 "enumerable": true, 可遍历
+
+        // let h = new Hd("后盾人");
+        // for (const key in h) {
+        //     console.log(key);  //同时打印出name和show,因为forin可以遍历到原型链上
+        // }
+        // for(const key in h){
+        //     if(h.hasOwnProperty(key)){
+        //         console.log(key); //只能打印出name，因为经过hasOwnproperty属性过滤
+        //     }
+        // }
+        
+        //以下是class声明为什么不能够遍历
+        class Hd2{
+            constructor(name){
+                this.name = name
+            }
+            show(){
+                console.log("类里的方法是直接在原型链上，并且已经设置好enumerable:false");
+            }
         }
+        console.dir(Hd2);
+        console.log(JSON.stringify(
+            Object.getOwnPropertyDescriptor(Hd2.prototype,"show"),null,2
+        )); // 显示 "enumerable":false ，不可遍历，class特有的属性
+        let h2 = new Hd2()
+        for(const key in h2){
+            console.log(key);  //只能打印出name，因为class声明会直接设置特征为不可遍历
+        }
+
+        /* 
+            总结：
+                用class更方便，因为循环遍历实例对象的属性时，用forin会遍历到它的原型链上，
+                而用class会直接设置特性为不可遍历
+                1.JSON.stringfy的方法
+                2.Object.getOwnPropertyDescriptor(需要查找的目标对象,目标对象内属性名称) 
+                    返回自有属性对应的属性描述符
+                3.知道了forin和forof的区别:forin能遍历到原型链上，而forof不会，
+                    但是forof遍历的对象必须时可迭代的
+                4.hasOwnproperty返回true或false，判断一个属性是否是对象的自有属性
+        */
+        
 
         
     </script>
