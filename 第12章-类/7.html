@@ -7,11 +7,33 @@
 </head>
 <body>
     <script>
-        //
+        //静态属性的使用
+        // function Web(url){
+        //     this.url = url  
+        // }
+        // Web.url = "hdcms.com" //分配给构造函数的属性称为静态属性
+        // let hd = new Web("houdunren");
+        // console.log(hd);
+            
+        class Request{
+            static host = 'https://www.houdunren.com';  ///静态属性
+            api(url) {
+                return Request.host + `/${url}`
+            }
+        }
+        let obj1 = new Request();
+        console.log(obj1.api("article"));
 
+        // console.log(obj1);
+        // let obj2 = new Request();
+        // obj1.host = "http://baidu"; //改变obj不会影响obj2
+        // console.log(obj2);
 
-
-
+        /* 
+            总结:
+                如果想让某种属性是为所有对象共用的，不是为某一个对象来
+                使用的，这时候可以把他定义成静态属性，这样也减少了内存占用
+        */
         
     </script>
 </body>

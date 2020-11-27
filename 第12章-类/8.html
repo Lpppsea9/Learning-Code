@@ -7,7 +7,14 @@
 </head>
 <body>
     <script>
-        //
+        //静态方法的实现
+        
+        //首先从函数开始给h来进行分析
+        function User() {
+            this.show = function() {}; //this就是构造函数实例出来的新对象
+        }
+        let hd = new User();
+        console.log(hd);
 
 
 
