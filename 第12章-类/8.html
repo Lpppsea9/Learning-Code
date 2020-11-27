@@ -10,14 +10,62 @@
         //静态方法的实现
         
         //首先从函数开始给h来进行分析
-        function User() {
-            this.show = function() {}; //this就是构造函数实例出来的新对象
+        // function User() {
+        //     this.show = function() {}; //this就是构造函数实例出来的新对象
+        // }
+        // let hd = new User();
+        // console.log(hd);
+        // console.dir(User);
+        
+
+        //构造函数
+        function User() {}
+        //普通方法
+        User.prototype.show = function() { //定义在原型对象上，给实例化的对象使用
+            console.log("prototype.show" + this);
         }
-        let hd = new User();
-        console.log(hd);
 
+        // //静态方法
+        User.show = function() { //定义在函数对象本身上，优先使用
+            console.log("static.show" + this);
+        }
 
+        //静态方法,会污染Function.prototype,并且实例化的对象无法调用
+        User.__proto__.show = function() { //定义在隐原型上，本身上找不到就找这
+            console.log("__proto__.show" + this);
+        }
+        console.dir(User);
+        User.show()
+        let hd1 = new User();
+        hd1.show()
+        //上面是三种不同的方法
 
+        //类
+        class User2 {
+            show2() {
+                console.log('prototype.show');
+            }
+            static show2 = function() { //静态方法
+                console.log("static.show");
+            }
+        }
+        // User2.show2()
+        // let hd2 = new User2();
+        // hd2.show2();  //使用原型方法
+
+        class Member {
+            constructor(name, age, sex) {
+                this.name = name
+                this.age = age
+                this.sex = sex
+            }
+            static create(...args){
+                return new this(...args)
+            }
+        }
+        //向通过自定义的create方法来实现，怎么做?
+        let xj = Member.create("向军",18);
+        console.log(xj);
 
         
     </script>
