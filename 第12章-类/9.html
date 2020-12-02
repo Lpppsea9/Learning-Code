@@ -7,10 +7,36 @@
 </head>
 <body>
     <script>
-        //
+        //静态属性练习之课程管理类
 
+        const data = [
+            {name: "js" ,grade: 50},
+            {name: "vue.js" ,grade: 85},
+            {name: "mysql" ,grade: 65},
+        ]
 
+        class Lesson {
+            constructor(data1){
+                this.model = data1;
+            }
+            
+            grade() {
+                return this.model.grade;
+            }
 
+            static createBatch(data) {
+                return data.map(item => new Lesson(item))
+            }
+            static maxGrade(data) {
+                return data.sort((a,b)=> {b.grade() - a.grade()})
+            }
+        }
+        // let obj1 = new Lesson(data[1]);
+        // console.log(obj1); 
+
+        let Lessons = Lesson.createBatch(data);
+        console.log(Lessons);
+        Lesson.maxGrade(Lessons)
 
         
     </script>
