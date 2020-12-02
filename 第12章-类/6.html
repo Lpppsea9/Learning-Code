@@ -8,12 +8,12 @@
 <body>
     <script>
         //严格模式下运行class
-        "use strict"
+        // "use strict"
         function show(){
             console.log(this);
         }
         show()
-        //严格模式下，显示undefined
+        //严格模式下，显示undefined, 不是严格模式则指向window
 
         function User(){}
         User.prototype.show2 = function(){
@@ -24,7 +24,7 @@
         }
         let u = new User();
         u.show2()
-        
+        //严格模式下，显示undefined, 不是严格模式则指向window
 
         class User2{
             get(){
