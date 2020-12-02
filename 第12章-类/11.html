@@ -7,8 +7,34 @@
 </head>
 <body>
     <script>
-        //
-
+        //属性保护
+        class User{
+            //public
+            // site = "后盾人"; //在外部随意修改
+            _url = "https://houdunren.com"
+            constructor(name) {
+                this.name = name;
+            }
+            set url(url){ //保护措施:外面要修改只能满足https开头的条件
+                if(!/^https?:/i.test(url)){
+                    throw new Error("非法网址");
+                }
+                this._url = url;
+            }
+        }
+        let hd = new User("后盾人");
+        hd.name = "李四";
+        // hd.site = "hdcms.com" //在外部修改site
+        hd.url = "hdcms.com";
+        hd.url = "https://hdmcs.com"
+        console.log(hd);
+        
+        /* 
+            总结：
+                _url，开头为_的属性默认为保护属性；
+                使用访问器定义一个方法将其保护起来；
+                当外界满足条件时(如https开头)才能修改类内部属性
+         */
 
 
 
