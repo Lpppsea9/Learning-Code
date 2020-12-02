@@ -7,10 +7,51 @@
 </head>
 <body>
     <script>
-        //
+        //静态属性练习之课程管理类
 
+        const data = [
+            {name: "js" ,grade: 50},
+            {name: "vue.js" ,grade: 85},
+            {name: "mysql" ,grade: 65},
+            {name: "php" ,grade: 30},
+            {name: "ts" ,grade: 40},
+            {name: "react.js" ,grade: 25},
+        ]
 
+        class Lesson {
+            constructor(data1){
+                this.model = data1;
+            }
+            
+            get grade() { //访问器在类里面的使用
+                return this.model.grade;
+            }
+            get name() {
+                return this.model.name;
+            }
 
+            static createBatch(data) { //获取data，并将其批量实例化出来
+                return data.map(item => new Lesson(item))
+            }
+
+            static maxGrade(data) {
+                return data.sort((a,b) => b.grade-a.grade)[0] //返回最高分数的数组单项
+            }
+
+            static totalGrade(data) { //查看总分数
+                return data.reduce((t,c) => {
+                    return t+c.grade
+                },0)
+            }
+        }
+        // let obj1 = new Lesson(data[1]);
+        // console.log(obj1); 
+
+        let Lessons = Lesson.createBatch(data);
+        console.log(Lessons);
+        console.log(data);
+        console.log(Lesson.maxGrade(Lessons).grade); 
+        console.log(Lesson.totalGrade(Lessons));
 
         
     </script>

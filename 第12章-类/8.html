@@ -34,10 +34,10 @@
         User.__proto__.show = function() { //定义在隐原型上，本身上找不到就找这
             console.log("__proto__.show" + this);
         }
-        console.dir(User);
-        User.show()
+        // console.dir(User);
+        // User.show()
         let hd1 = new User();
-        hd1.show()
+        // hd1.show()
         //上面是三种不同的方法
 
         //类
@@ -45,11 +45,12 @@
             show2() {
                 console.log('prototype.show');
             }
-            static show2 = function() { //静态方法
+            //静态方法1，还可以在外面用User2.__proto__.show2来定义静态方法
+            static show2 = function() { 
                 console.log("static.show");
             }
         }
-        // User2.show2()
+        // User2.show2()  //优先调用static方法
         // let hd2 = new User2();
         // hd2.show2();  //使用原型方法
 
@@ -60,12 +61,17 @@
                 this.sex = sex
             }
             static create(...args){
-                return new this(...args)
+                return new this(...args)  //this指向当前调用create方法的对象Member
             }
         }
-        //向通过自定义的create方法来实现，怎么做?
-        let xj = Member.create("向军",18);
+        //想通过自定义的create方法来实现，怎么做?
+        let xj = Member.create("向军", 18, "男");
         console.log(xj);
+
+        /* 
+            总结：
+                this指向调用方法的对象
+        */
 
         
     </script>
