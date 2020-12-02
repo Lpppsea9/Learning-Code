@@ -7,7 +7,23 @@
 </head>
 <body>
     <script>
-        //
+        //在类中使用访问器
+        class Request {
+            constructor(url){
+                this._host = url
+            }
+            setUrl(url){
+                if(!/^https?;\/\//i.test(url)){ //如果不是以https开头
+                    throw new Error("地址错误")
+                }
+                this._host = url
+            }
+        }
+        let hd = new Request("https://www.houdunren.com");
+        // hd.host = "baidu.com";
+        hd.setUrl("baidu.com"); //如果设置网址不是以https开头的话，则会报错地址错误
+        console.log(hd);
+
 
 
 
