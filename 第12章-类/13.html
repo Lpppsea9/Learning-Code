@@ -15,7 +15,7 @@
         class Common {
             constructor() {
                 // host.set(this, "https://houdunren.com");
-                protecteds.set(this,{
+                protecteds.set(this, {
                     host: "https://houdunren.com"
                 });
             }
@@ -35,15 +35,20 @@
                 super()
                 this.name = name;
             }
-            
-            
+            set name(name) {
+                protecteds.set(this, { ...protecteds.get(this), name})
+            }
+            get name() {
+                return protecteds.get(this)["name"];
+            }
         }
         let hd = new User("后盾人");
-        console.log(hd.host);
-        let xj = new User("向军");
-        xj.host = 'https://www.hdcms.com'
-        console.log(xj.host);
-
+        // console.log(hd.host);
+        // let xj = new User("向军");
+        // xj.host = 'https://www.hdcms.com'
+        // console.log(xj.host);
+        hd.name = "向军"
+        console.log(hd.name);
 
 
 
