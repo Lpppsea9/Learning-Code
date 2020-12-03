@@ -7,7 +7,25 @@
 </head>
 <body>
     <script>
-        //
+        const HOST = Symbol('主机');
+        class User {
+            //public
+            [HOST] = "https://houdunren.com";
+            constructor(name) {
+                this.name = name;
+            }
+            set url(url) {
+                if(!/^https?:/i.test(url)){
+                    throw new Error("非法网址")
+                }
+                this._url = url;
+            }
+        }
+        
+        //使用symbol定义protected属性
+        let hd = new User("后盾人");
+        // hd.name = "李四";
+        console.log(hd);
 
 
 

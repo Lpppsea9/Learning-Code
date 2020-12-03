@@ -7,7 +7,43 @@
 </head>
 <body>
     <script>
-        //
+        //使用weakmap保护属性
+        //就记住外部看不见他
+        // const host = new WeakMap();
+        const protecteds = new WeakMap();
+        
+        class Common {
+            constructor() {
+                // host.set(this, "https://houdunren.com");
+                protecteds.set(this,{
+                    host: "https://houdunren.com"
+                });
+            }
+            set host(url){
+                if(!/^https?:/i.test(url)) {
+                    throw new Error("非法网址")
+                }
+                protecteds.set(this,{...protecteds.get(this), url})
+            }
+            get host() {
+                return protecteds.get(this).host;
+            }
+
+        }
+        class User extends Common{
+            constructor(name) {
+                super()
+                this.name = name;
+            }
+            
+            
+        }
+        let hd = new User("后盾人");
+        console.log(hd.host);
+        let xj = new User("向军");
+        xj.host = 'https://www.hdcms.com'
+        console.log(xj.host);
+
 
 
 
