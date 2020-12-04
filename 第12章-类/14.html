@@ -25,7 +25,7 @@
                 this.name = name;
                 this.#check(name)
             }
-            set prihost(url) { //访问器方法来修改私有属性，注意传参方式
+            set prihost(url) { //访问器方法来修改私有属性，注意prihost传参方式
                 if(!/^https?:/i.test(url)) {
                     throw new Error("非法网址");
                 }
