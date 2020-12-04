@@ -9,21 +9,46 @@
     <script>
         //pricate私有属性使用  
         //public protected private
-        class User{
-            constructor(name) {
-                this.name = name;
+
+        class Common { //父类的私有属性方法，子类无法调用
+            #check = () => {
+                if(this.name.length < 5) {
+                    throw new Error("名字长度不能少于5位")
+                }   
+                return true
             }
-            set url(url) {
+        }
+        class User extends Common{
+            #host = "https://houdunren.com";
+            constructor(name) {
+                super();
+                this.name = name;
+                this.#check(name)
+            }
+            set prihost(url) { //访问器方法来修改私有属性，注意传参方式
                 if(!/^https?:/i.test(url)) {
                     throw new Error("非法网址");
                 }
-                this.host = url;
+                this.#host = url;
             }
+            
         }
 
-        let hd = new User("后盾人");
-        console.log(hd);        
+        let hd = new User("后盾人大于五位");
+        hd.prihost = "https://hdcms.com";
+        console.log(hd);  
+        // hd.#check( )      
 
+        /* 
+            总结：
+                1.私有属性是严格属于某一类的，连子类都无法继承调用父类的
+                私有属性和私有方法
+
+                2.私有属性在外部无法更改，可以设置访问器方法来改变属性
+                类里面加#可以设置私有属性和私有方法
+
+                3.注意set 后面prihost方法的传参方式
+         */
 
 
 
