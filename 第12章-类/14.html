@@ -7,7 +7,22 @@
 </head>
 <body>
     <script>
-        //
+        //pricate私有属性使用  
+        //public protected private
+        class User{
+            constructor(name) {
+                this.name = name;
+            }
+            set url(url) {
+                if(!/^https?:/i.test(url)) {
+                    throw new Error("非法网址");
+                }
+                this.host = url;
+            }
+        }
+
+        let hd = new User("后盾人");
+        console.log(hd);        
 
 
 
