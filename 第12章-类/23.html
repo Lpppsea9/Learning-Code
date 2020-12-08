@@ -31,7 +31,10 @@
         console.log(checkPrototype(hd, User)); //上面递归调用才返回true
         console.log(hd.__proto__.__proto__ == User.prototype);
 
-
+        /* 
+            instanceof  判断的是一个对象的原型链当中是否存在一个构造函数的原型
+                        或者说一个对象是否由另一个构造函数实现的
+         */
 
 
     </script>

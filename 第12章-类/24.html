@@ -7,9 +7,15 @@
 </head>
 <body>
     <script>
-        //
+        //isPrototypeOf 检测继承关系
 
-
+        let a = {};
+        let b = {
+            __proto__: a
+        };
+        //判断b的原型链当中是否含有a对象,即a对象是b对象的原型
+        console.log(a.isPrototypeOf(b));
+        
 
 
         
