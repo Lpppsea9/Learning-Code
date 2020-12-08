@@ -7,12 +7,35 @@
 </head>
 <body>
     <script>
-        //
+        //静态继承原理
 
+        // function User() {}
+        // User.site = "后盾人";
+        // User.show = function() {
+        //     console.log("User.static.method");
+        // }
+        // function Admin() {}
+        // Admin.__proto__ = User;
+        // // console.dir(User);
 
+        // Admin.show();
+        // console.log(Admin.site);
 
+        class User {
+            static site = '后盾人'
+            static show() {
+                console.log("user.static show");
+            }
+        }
+        class Admin extends User{}
+        console.dir(Admin);
+        Admin.show()
 
-        
+        /* 
+            静态继承的原理在上面，比较麻烦，所以用类实现比较方便
+            class内部就是基于原型链实现的
+         */
+
     </script>
 </body>
 </html>

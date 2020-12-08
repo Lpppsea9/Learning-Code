@@ -7,8 +7,47 @@
 </head>
 <body>
     <script>
-        //
+        //重写父类方法
+        class Common {
+            sum() {
+                return this.data.reduce((t, c) => t + c.num, 0);
+            }
+            getByKey(key) {
+                return this.data.filter(item => item.name.includes(key))
+            }
+        }
 
+        class Controller extends Common {}
+
+        class Lesson extends Controller {
+            constructor(data) {
+                super();
+                this.data = data;
+            }
+            info() {
+                return {
+                    totalPrice: super.sum(),
+                    data: this.data
+                }
+            }
+            getByKey(key) {
+                return super.getByKey(key).map(item => item.name)
+            }
+        }
+        let data = [
+            { name: "js", type: "web", num:60},
+            { name: "mysql", type: "server", num: 70},
+            { name: "vue.js", type: "web", num: 60},
+        ]
+
+        let hd = new Lesson(data);
+        // console.log(hd.info());
+        console.log(hd.getByKey("js"));
+
+        /* 
+            子类也定义了一个getByKey方法,优先级高于父类，只返回课程的名字
+            访问时先访问子类
+         */
 
 
 

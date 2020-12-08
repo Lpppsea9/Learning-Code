@@ -7,12 +7,33 @@
 </head>
 <body>
     <script>
-        //
+        //使用instanceof检测对象实现
+        function User() {}
+        function Admin() {}
+        Admin.prototype = Object.create(User.prototype);
+        let hd = new Admin;
+
+        // console.log(Admin.prototype.__proto__ == User.prototype);
+        // console.log(hd instanceof Admin);
+        // console.log(hd instanceof User);
+        // console.log(hd.__proto__ == Admin.prototype);
+        // console.log(hd.__proto__.__proto__ == Admin.prototype.__proto__);
+        // console.log(Admin.prototype.__proto__.__proto__.__proto__); 
+        //多了一层Object.create，最终指向null
+
+        function checkPrototype(obj, constructor){
+            if(!obj.__proto__) return false; //如果没有原型，则返回假
+            if(obj.__proto__ == constructor.prototype) return true;
+            return checkPrototype(obj.__proto__, constructor) //递归调用，实现原型链的攀升
+        }
+
+        // console.log(checkPrototype(hd,Admin));
+        console.log(checkPrototype(hd, User)); //上面递归调用才返回true
+        console.log(hd.__proto__.__proto__ == User.prototype);
 
 
 
 
-        
     </script>
 </body>
 </html>
