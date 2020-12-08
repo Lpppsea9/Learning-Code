@@ -7,12 +7,43 @@
 </head>
 <body>
     <script>
-        //
+        //super原理分析
+        // class User {
+        //     show() {
+        //         console.log("user.show");
+        //     }
+        // }
+        // class Admin extends User {
+        //     show() {
+        //         super.show()
+        //         console.log("admin show");
+        //     }
+        // }
+        // let hd = new Admin();
+        // hd.show()
 
+        let hd = {
+            name: "hd.name",
+            show() {
+                console.log(this.name);
+            }
+        }
+        let xj = {
+            __proto__:hd,
+            name:"xj.name",
+            show() {
+                this.__proto__.show.call(this)
+                //不加call改变this会调用上面hd的name属性 
+                console.log("xj.show");
+            }
+        }
+        xj.show();
 
-
-
-        
+        /* 
+            总结：
+                class语法糖会解决通过普通继承原型链的方法
+                super不用改变this，比较方便
+         */        
     </script>
 </body>
 </html>

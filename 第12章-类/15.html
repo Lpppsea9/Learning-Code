@@ -7,7 +7,44 @@
 </head>
 <body>
     <script>
-        //!!
+        //class属性继承原理
+
+        // function User(name) {
+        //     this.name = name;
+        // }
+        // function Admin(name) {
+        //     User.call(this, name)
+        // }
+        // Admin.prototype = Object.create(User.prototype);
+        // Admin.prototype.show = function() {};
+        // console.dir(Admin);
+        // let hd = new Admin("后盾人")
+        // console.log(hd);
+        
+
+        //通过类的形式来继承
+        class User{
+            constructor(name) {
+                console.log("调用了父类User的函数");
+                this.name = name;
+            }
+        }
+
+        class Admin extends User {
+            constructor(name) {
+                super(name)
+            }
+        }
+
+        let hd = new Admin("后盾人");
+        console.log(hd);
+        
+        /* 
+            总结：
+                下面的是类实现继承父类里的方法；
+                跟上面差不多，class就是语法糖
+        
+         */
 
 
 
