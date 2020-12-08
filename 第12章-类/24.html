@@ -13,12 +13,28 @@
         let b = {
             __proto__: a
         };
+        let c = {
+            __proto__: b
+        }
         //判断b的原型链当中是否含有a对象,即a对象是b对象的原型
         console.log(a.isPrototypeOf(b));
-        
+        console.log(a.isPrototypeOf(c));
+        console.log(c.isPrototypeOf(b));
 
-
+        class Common{}
+        class User extends Common{}
+        class Admin extends User{}
+        let hd = new Admin;
+        console.log(Admin.prototype.isPrototypeOf(hd));
+        console.log(Common.prototype.isPrototypeOf(hd));
         
+        console.log(hd instanceof Common); //更方便一点
+
+        /* 
+            根据不同场景来选择 isPrototypeof 和 instanceof
+                可以把对象作为主角，也可以把原型对象作为主角
+                来判断继承关系
+         */
     </script>
 </body>
 </html>
