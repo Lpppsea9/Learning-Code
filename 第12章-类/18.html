@@ -7,9 +7,46 @@
 </head>
 <body>
     <script>
-        //
+        //多重继承中super的魅力
 
+        let common = {
+            show() {
+                console.log("common.name" + this.name);
+            }
+        }
+        let hd = {
+            __proto__: common,
+            name: "hd.name",
+            show() {
+                super.show()
+                // this.__proto__.show.call(this);
+            }
+        };
+        let xj = {
+            __proto__: hd,
+            name: "xj.name",
+            show() {
+                super.show()
+                // this.__proto__.show.call(this);
+            }
+        }
+        xj.show()
 
+        /* 
+            总结：
+                1.super是作为原型攀升，而this还是最开始调用的对象(比如xj里的name:"xj.name")
+                2.super 只能在
+                show() {
+                    super.show()
+                }
+                这种情况下调用，
+                如果是function的情况：
+                show: function() {
+                    super.show()
+                }
+                就不能调用super，会报错
+                所以定义类的时候，写里面的方法都要写成 show(){} 的形式
+         */
 
 
         

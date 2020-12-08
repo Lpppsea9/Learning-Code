@@ -7,9 +7,40 @@
 </head>
 <body>
     <script>
-        //
+        //为什么子类constructor中执行super
+
+        class User{
+            constructor(name) {
+                this.name = name;
+            }
+        }
+        class Admin extends User {
+            constructor(...args) {
+                super(...args);  //为什么调用super就不报错，不调用super就报错
+            }
+        }
+        let hd = new Admin("后盾人");
+        console.log(hd);
 
 
+
+        // function User(name){
+        //     this.name = name;
+        // }   
+        // function Admin(name) {
+        //     User.call(this,name);
+        // }
+        // Admin.prototype = Object.create(User.prototype);
+        // let hd = new Admin("后盾人");
+        // //刚开始是没有值的，因为赋值的过程是在父类中完成的,在admin中call一下才能有值
+        // console.log(hd);  
+
+        /* 
+            总结：
+                如果在子类中定义了构造函数，即使用constructor时，一定要调用super，
+                其次this一定要在super的下面，不然子类的优先级会低于父级，而子类的
+                优先级应该是高于父级的，只是借用一下父级，子类中应该覆盖父类的
+         */
 
 
         
