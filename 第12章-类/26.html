@@ -25,7 +25,7 @@
             }
             remove(value) {
                 let pos = this.findIndex( item => item == value);
-                // console.log(pos);
+                // console.log(pos);  // 找到相等的索引
                 this.splice(pos, 1)
             }
         }
@@ -49,7 +49,10 @@
         // }
         // Arr.prototype = Object.create(Array.prototype)
         
-
+        /* 
+            我们可以增强我们的内置类
+            在原有内置类的功能之上的话，使用继承特性再添加一些可能需要的额外的方法
+        */
 
 
 
