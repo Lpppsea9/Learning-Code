@@ -65,6 +65,7 @@
 
         class Animation {
             constructor(el){
+                this.timeout = 5;
                 this.el = el;
                 this.isShow = true;  //定义一个属性决定他是隐藏还是显示的
                 this.defaultHeight = this.s1height; //元素s1的初始高度
@@ -73,23 +74,25 @@
             hide(callback) {
                 this.isShow = false;
                 let id = setInterval(() => {
-                    this.s1height = this.s1height - 1;
                     // console.log(3);
                     if(this.s1height <= 0) {
                         clearInterval(id);
                         callback && callback();
+                        return;
                     }
-                },10)
+                    this.s1height = this.s1height - 1;
+                },this.timeout)
             }
             show(callback) {
                 this.isShow = false;
                 let id = setInterval(() => {
-                    this.s1height = this.s1height + 1;
                     if(this.s1height >= this.defaultHeight) {
                         clearInterval(id);
                         callback && callback();
+                        return;
                     }
-                },10)
+                    this.s1height = this.s1height + 1;
+                },this.timeout)
             }
             get s1height(){
                 return window.getComputedStyle(this.el).height.slice(0,-2)*1; //乘1是为了让他转换成数字类型
@@ -112,19 +115,29 @@
                 this.links.forEach((item, i) => {
                     item.addEventListener('click', () => {
                         // console.log(i);
-                        this.action();  //不要出现多层嵌套
+                        this.action(i);  //不要出现多层嵌套
                     })
                 })
             }
-            action(i){
+            action(i) {
                 // Panel.hideAll(this.panels)
-                console.log(Panel.filter(this.panels, i));
-                // Panel.hideAll(Panel.filter(this.panels, i));
+                // console.log(Panel.filter(this.panels, i));
+                Panel.hideAll(Panel.filter(this.panels, i), () => {
+                    this.panels[i].show(); // 点击哪个，其余的两个就隐藏
+                });  
             }   
         }
         class Panel extends Animation {
-            static hideAll(items) {
-                items.forEach(item => item.hide())
+            static num = 0;
+            static hideAll(items, callback) {  //回调函数
+                if(Panel.num > 0) return;
+                items.forEach(item => {
+                    Panel.num ++;
+                    item.hide(() => {
+                        Panel.num --;
+                    });
+                });
+                callback && callback();
             }
             static filter(items, i) {
                 return items.filter((item, index) => index != i);
