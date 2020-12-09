@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Js模块化</title>
+    </head>
+    <body>
+    </body>
+    <script>
+        //开发一个模块管理引擎
+
+        //AMD require.js
+        //CMD sea.js
+        //COMMONJS NODE.JS
+        //UMD
+
+        let module = (function(){
+            const moduleList = {};
+            function define(name, modules, action) {
+                moduleList[name] = action.apply(null, modules);
+                console.log(moduleList);
+            };
+            return { define };
+        })();
+        module.define('hd',[],function(){
+            return {
+                first(arr)
+            }
+        });
+
+
+
+
+        
+    </script>`
+</html>
