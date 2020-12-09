@@ -7,9 +7,31 @@
 </head>
 <body>
     <script>
-        //
+        //内置类 继承的原型实现
 
+        //构造函数
+        function Arr(...args){
+            args.forEach(item => this.push(item));
+            this.first = function() {
+                return this[0];
+            };
+            this.max = function() {
+                return this.sort((a,b) => b-a)[0]
+            }
+        }
+        Arr.prototype = Object.create(Array.prototype);
+        console.dir(Arr);
 
+        let hd = new Arr(1,2,3,4,5,4);
+        console.log(hd);
+        console.log(hd.first());
+        console.log(hd.max());
+
+        /* 
+            Arr的原型继承了js内置的类：Array数组的原型
+            所以能够使用数组原型的方法
+        
+        */
 
 
         
