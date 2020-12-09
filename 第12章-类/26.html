@@ -9,19 +9,46 @@
     <script>
         //使用继承增强内置类
 
-        function Arr(...args) {
-            args.forEach(item => this.push(item))
-            this.first = function() {
+
+        class Arr extends Array{
+            constructor(...args){
+                super(...args)
+            }
+            first() {
                 return this[0]
             }
-            this.max = function() {
-                return this.sort((a,b) => b-a)[0]
+            max() {
+                return this.sort((a,b) => b-a)[0];
+            }
+            add(item) {
+                this.push(item);
+            }
+            remove(value) {
+                let pos = this.findIndex( item => item == value);
+                // console.log(pos);
+                this.splice(pos, 1)
             }
         }
-        Arr.prototype = Object.create(Array.prototype)
         let hd = new Arr(1,5,6,7,8,5)
         console.log(hd.first());
         console.log(hd.max());
+        hd.add("后盾人");
+        console.log(hd);
+        hd.remove(5);
+        console.log(hd);
+
+
+        // function Arr(...args) {
+        //     args.forEach(item => this.push(item))
+        //     this.first = function() {
+        //         return this[0]
+        //     }
+        //     this.max = function() {
+        //         return this.sort((a,b) => b-a)[0]
+        //     }
+        // }
+        // Arr.prototype = Object.create(Array.prototype)
+        
 
 
 
