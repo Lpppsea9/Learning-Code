@@ -10,6 +10,7 @@
 </body>
   <script>
     //什么是环境与作用域？
+
     let title = "后盾人";  //全局环境下，在下面的函数里也有效
     function show(){
       console.log(title);
@@ -19,7 +20,19 @@
 
     /* Js是服务于前端的，如果后面有dom操作，他应该被使用，而不是被回收
         全局的环境他是不会被回收的，只要访问就不会被回收
-        
+
+        以下是 php 的作用域例子,执行会报错
+          $title = "后盾人";   
+          function show()
+          {
+            echo $title;
+          }
+          show()
+
+          
+        php 比 js严格，$title只在全局有效，渗透不到函数里面，
+        但是js可以渗透到函数里面，注意他们的区别
+         
     */
   </script>
 </html>

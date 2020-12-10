@@ -7,10 +7,11 @@
 </head>
 <body></body>
   <script>
-    //
-    let title = "houdrnen"
-    function show(){
-      let url = "houdunren";
+    //函数的环境与作用域原理
+
+    let title = "houdrnen";   // 在全局的环境当中定义的，它影响的范围就是辐射到整个全局
+    function show(){          // 在全局环境中定义一块show的环境，即开辟一块新的内存地址
+      let url = "houdunren";  // url变量是属于show函数的，在外面无法调用，默认在函数里面使用
       function hd() {
         let site = "hdcms";
         console.log(site);
@@ -19,6 +20,11 @@
     }
 
     show();
-    show();show();show();show(); //每次调用会产生新的内存地址，他们之间不会共享
+    show();show();show();show(); 
+    
+    /* 
+
+    
+    */
   </script>
 </html>
