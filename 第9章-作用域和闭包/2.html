@@ -9,22 +9,25 @@
   <script>
     //函数的环境与作用域原理
 
-    let title = "houdrnen";   // 在全局的环境当中定义的，它影响的范围就是辐射到整个全局
-    function show(){          // 在全局环境中定义一块show的环境，即开辟一块新的内存地址
-      let url = "houdunren";  // url变量是属于show函数的，在外面无法调用，默认在函数里面使用
+    let title = "houdrnen";   //  在全局的环境当中定义的，它影响的范围就是辐射到整个全局
+    function show(){          //  在全局环境中定义一块show的环境，即开辟一块新的内存地址
+      let url = "houdunren";  //  url变量是属于show函数的，在外面无法调用，默认在函数里面使用
       function hd() {
-        let site = "hdcms";
+        let site = "hdcms";   //  site是属于函数hd里的
         console.log(site);
       }
-      hd();
+      hd(); //  执行了就会构建环境(hd在show里构建了环境)
     }
 
-    show();
-    show();show();show();show(); 
-    
-    /* 
+    show();   //第一次执行
+    // show();   //第二次执行
 
-    
+    show();show();show();show();
+    /* 
+      多次执行会产生多个内存地址，每次调用会存一份数据，
+      他们之间不会共享！！！
+      其次的话  
+      函数定义的数据，他的作用域范围是函数及其子函数当中
     */
   </script>
 </html>

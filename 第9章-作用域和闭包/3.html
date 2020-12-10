@@ -8,19 +8,41 @@
 <body></body>
   <script>
     //延伸环境函数生命周期
-    function out(){
-      let m =1;
-      return function sum1(){
-        let n =1;
-        return function sum2(){
-          console.log(++n);
-        }
-      }
-    }
+
+    // function hd() {
+    //   let n = 1;
+    //   return function sum(){ //返回出去给外部访问，不然每次调用会产生新的内存地址
+    //     let m = 1;
+    //     return function show(){//返回出去，调用的就是同一个内存地址,重复调用就会在基础上自加
+    //       console.log('m:' + (++m));
+    //       console.log('n:' + (++n));
+    //     }
+    //   }
+    // }
+
+    // let a = hd()()
+    // a();
+    // a();
+
+    /* 
+        
     
-    let a = out()()
-    a();a();
-    let b = out()()
-    b();b()
+    */
+
+
+    var name = "听风是风";
+    var obj = {
+        name: "行星飞行",
+        sayName: function () {
+            return function () {
+                console.log(this.name);
+            };
+        }
+    };
+
+    // obj.sayName()(); // ？
+    let a = obj.sayName();
+    a();
+
   </script>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的闭包</title>
+</head>
+<body>
+</body>
+  <script>
+    let fn = function() {
+        let num = 1;
+        return {
+            a: function () {
+                console.log(num);
+            },
+            b: function () {
+                num++;
+            }
+        };
+    };
+
+    let closure = fn();
+    fn = null; //函数被清空
+    closure.a()  //依然能调用a()
+
+  </script>
+</html>
