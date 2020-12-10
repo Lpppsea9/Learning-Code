@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Js的闭包</title>
+</head>
+<body>
+  <button>houdunren.com</button>
+</body>
+  <script>
+    //什么是环境与作用域？
+    let title = "后盾人";  //全局环境下，在下面的函数里也有效
+    function show(){
+      console.log(title);
+    };
+    document.querySelector("button").addEventListener("click", show)
+    // show();
+
+    /* Js是服务于前端的，如果后面有dom操作，他应该被使用，而不是被回收
+        全局的环境他是不会被回收的，只要访问就不会被回收
+        
+    */
+  </script>
+</html>
