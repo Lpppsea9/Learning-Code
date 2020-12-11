@@ -17,21 +17,55 @@
 
         let module = (function(){
             const moduleList = {};
-            function define(name, modules, action) {
-                moduleList[name] = action.apply(null, modules);
-                console.log(moduleList);
+            //第一个参数：模块的名字
+            //第二个参数：依赖模块(数组)
+            //第三个参数：模块的动作
+            function define(name, modules, action) { 
+                //m 就是'hd', i 就是编号0
+                modules.map((m, i) => {
+                    modules[i] = moduleList[m] //?
+                }) 
+                moduleList[name] = action.apply(null, modules); //往容器里压入一个模块
+                // console.log(moduleList);
             };
-            return { define };
+            return { define };  // 这是一个闭包
         })();
-        module.define('hd',[],function(){
+
+        module.define('hd',[],function(){ 
             return {
-                first(arr)
+                first(arr){     //返回第一个数的功能
+                    return arr[0]
+                },
+                max(arr,key){   //返回最大值的功能
+                    return arr.sort((a,b) => b[key] - a[key])[0];
+                }
             }
+        });
+
+        module.define('lesson',['hd'],function(hd){ // 课程管理模块,lesson
+            let data = [
+                {name: 'js', price: 199}, {name:'mysql', prcie: 78}
+            ]
+            // console.log(hd.max(data,'price'));
+        });
+
+        module.define('a',[],function(){    // a模块，谁也不依赖 
+            return {
+                site: "后盾人",
+                url: "houdunren.com"
+            }
+        });
+
+        module.define('b',['a'],function(a){    // a模块，谁也不依赖 
+            a.site = "hdcms"; //模块是共用一个内容
+        });
+
+        module.define('c',['a'],function(a){    // a模块，谁也不依赖 
+            console.log(a);
         });
 
 
 
-
         
-    </script>`
+    </script>
 </html>
