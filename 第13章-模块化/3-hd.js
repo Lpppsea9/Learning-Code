@@ -1,3 +1,6 @@
 let title = "后盾人";
 let url = "houdunren.com";
-export{ title };
+function show() {
+    console.log("向军");
+}
+export{ title, url, show }; 

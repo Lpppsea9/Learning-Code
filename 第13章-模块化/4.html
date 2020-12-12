@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Js模块化</title>
+    <title>//模块延迟解析与严格模式</title>
 </head>
+<script type="module">
+    import {} from "./4-hd.js"
+    /* 
+        1. 模块是后解析的，所以script标签即使在上面也能获取到button元素；
+        2. 模块里是自动严格模式的js，如定义变量 site = "lll"的时候，不加声明会报错
+    */
+</script>
 <body>
-    <script>
-        //
-
-
-
-
-        
-    </script>
+    <button>后盾人</button>
 </body>
 </html>

@@ -9,8 +9,15 @@
     <script type="module">
         //模块的基本使用
 
-        import { title } from './3-hd.js'
-        console.log(title);
+        import { title, url, show } from './3-hd.js'  //只能用开放的
+        console.log(url);
+        show();
+
+        /* 
+            1.  js文件模块不导出的时候它是私有的，导出少量的接口使用
+            2.  type="module"
+            3.  导入时要加路径，一些打包工具不需要加路径
+        */
         
     </script>
 </body>
