@@ -6,6 +6,16 @@
     <title>JS正则表达式</title>
 </head>
 <body>
-    
+    <script>
+        let hd = "houdunren2200hdcms9988";
+        // NaN => not a number
+
+        //不使用正则表达式
+        let nums = [...hd].filter(a => !Number.isNaN(parseInt(a)));
+        console.log(nums.join(""));
+
+        //使用正则表达式
+        console.log(hd.match(/\d/g).join(""));
+    </script>
 </body>
 </html>
