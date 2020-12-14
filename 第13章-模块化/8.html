@@ -6,10 +6,21 @@
     <title>Js模块化</title>
 </head>
 <body>
-    <script>
-        //
+    <script type="module">
+        //批量导入与建议
+        // import * as api from "./module/m8.js"
+        import { site } from './module/m8.js' 
+        console.log(api);
+        console.log(api.site);
+        console.log(api.show());
+        console.log(api.User.render());
 
-
+        /* 
+            只有一个被使用的话，打包工具会将下面两个不打包来减少文件的体积
+            所以一般来讲，虽然提供了批量导入的功能，但是建议使用具名导入
+            用哪个导入哪个，从效率来讲，从清晰度来讲，他都是有好处的
+            
+        */
 
 
         

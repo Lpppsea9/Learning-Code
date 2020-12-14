@@ -6,9 +6,13 @@
     <title>Js模块化</title>
 </head>
 <body>
-    <script>
-        //
+    <script type="module">
+        //模块的具名导出与导入
 
+        import { site, show, User } from "./module/m7.js";
+        console.log(site);
+        console.log(show());
+        console.log(User.render());
 
 
 
