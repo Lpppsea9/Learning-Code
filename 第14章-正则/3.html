@@ -6,6 +6,17 @@
     <title>JS正则表达式</title>
 </head>
 <body>
-    
+    <script>
+        function c(n) {
+            var sum = 0; //1
+            for(var i = 0; i < n; i++) { //n
+                for(var j = 0; j < n; j++) { //n^2
+                    sum = sum + i + j;
+                    return sum
+                }
+            }
+        }
+        console.log(c(6));
+    </script>
 </body>
 </html>
