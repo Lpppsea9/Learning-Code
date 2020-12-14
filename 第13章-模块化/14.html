@@ -6,8 +6,26 @@
     <title>Js模块化</title>
 </head>
 <body>
-    <script>
-        //
+    <button>houdunren</button>
+    <script type="module">
+    //按需动态加载模块
+    // document.querySelector('button').addEventListener('click',() => {
+    //     import { site, url } from "./module/m14.js";
+    //     console.log(site, url);
+    // }); //报错
+    document.querySelector("button").addEventListener('click',() => {
+        import("./module/m14.js").then(({ site, url }) => {
+        console.log(site, url);
+        });
+    });
+    
+
+    /* 
+        体验了静态的，动态的两种加载模块的方式的区别
+        调用import函数会返回一个promise对象，调用成功后就立即执行里面的函数
+    
+    */
+    
 
 
 

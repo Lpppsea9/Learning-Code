@@ -6,14 +6,21 @@
     <title>Js模块化</title>
 </head>
 <body>
-    <script>
+    <script type="module">
         //混合导入导出的使用
+        // import hd, { site } from './module/m11.js';
+        // import { site } from "./module/m11.js";
+        import * as api from "./module/m11.js";
 
-
-
+        // console.log(hd.render());
+        // console.log(site);
+        console.log(api.default.render());
+        console.log(api.site);
 
         /* 
             默认导出只能有一个
+            不在花括号里就是默认导出，在花括号里就是具名导出;
+            注意混合导出的规则
         */
     </script>
 </body>
