@@ -6,9 +6,18 @@
     <title>Js模块化</title>
 </head>
 <body>
-    <script>
+    <script type="module">
         //导入和导出的别名使用
 
+        import { 
+            hd,
+            show as action, 
+            User as UserController 
+        } from "./module/m9.js";
+        
+        // let site = "hdcms.com"; //不允许重名
+        // console.log(s);
+        console.log(hd);
 
 
 

@@ -6,12 +6,19 @@
     <title>Js模块化</title>
 </head>
 <body>
-    <script>
-        //
+    <script type="module">
+        //default默认导出
+        import a from './module/m10.js';
+        // import { default as hd } from './module/m10.js'; //很麻烦a
 
+        console.log(a);
 
-
-
+        /* 
+            默认导出只能有一个
+        
+        */
+        
+        
         
     </script>
 </body>
