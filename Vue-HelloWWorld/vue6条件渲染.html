@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue 条件渲染</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- 
+        v-if 对应的变量的值是false，在页面上不显示，那他就不存在于DOM之上(删除dom，增加dom)
+        性能低
+        v-show 对应的变量的值是false，在页面上不显示，但是dom中是以display：none存在着的
+        性能高
+     -->
+    <div id="app">
+        <div v-if="show === 'a'">This is A</div>
+        <div v-else-if="show === 'b'">This is B</div>
+        <div v-else-if="show === 'c'">This is C</div>
+        <div v-else-if="show === 'd'">This is D</div>
+        <div v-else>This is Others</div>
+        <!-- <div v-show="show" data-test="v-show">{{message}}</div> -->
+
+
+        <div v-if="show2">
+            用户名: <input key="username"/>
+        </div>
+        <div v-else>
+            邮箱名：<input key="password"/>
+        </div>
+    </div>
+
+    <script>
+        /* 
+            静态数据
+            安卓app wx公众号 苹果app
+        */
+        var vm = new Vue({
+            el: "#app",
+            data(){
+                return {
+                    show: 'a',
+                    show2: false,
+                    message: "Hello World"
+                }
+            },
+            methods: {
+                
+            },
+        })
+        /* 
+            加 key 值，就不会复用之前的内容 
+         */
+    </script>
+</body>
+</html>
