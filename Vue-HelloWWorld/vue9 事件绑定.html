@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue事件处理</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <form action="/abc" @click.prevent="handleClick">
+            <input type="submit" />
+        </form> -->
+
+        <!-- <div @click.self="handleClick">
+            nice
+            <div @click="handleClickInner">hello world</div>
+        </div> -->
+
+        <div id="app">
+            <input @keydown.right="handleKeyDown"/>
+        </div>
+    </div>
+
+    <script>
+        // 事件的两种写法
+        /* 
+            1. 直接写handleClick
+            2. 写成handleClick($event)，好处是可以传递一些额外的参数
+        */
+
+        // 阻止事件默认行为
+        /* 
+            1. 下面方法中使用 e.preventDefault() 方法，---比较s麻烦
+            2. 在上面的 @click.prevent 加上后缀就能实现，后面正常添加事件
+            3. self要求,click事件只有在e.target = e.currentTarget 的时候才会执行
+
+            @click.stop 阻止事件向外冒泡
+            @click.self 
+            @click.once 事件只执行一次
+            @click.capture 使事件遵循事件捕获的规则(从外到内)
+
+            // 按键修饰符
+            @keydown.enter 只有enter按下时，才会打印出事件的value值
+            @keydown.tab
+            @keydown.delete
+            @keydown.esc
+
+            // 系统修饰符
+            @keydown.ctrl 按住
+            @keydown.meta 按住
+
+            // 鼠标修饰符
+            @click.right 只有鼠标右键点击才会执行
+            @click.left
+            @click.middle
+        */
+        var vm = new Vue({
+            el: "#app",
+            methods: {
+                handleClick: function() {
+                    alert("outter")
+                },
+                handleClickInner: function() {
+                    alert("inner")
+                },
+                handleKeyDown:function(e) {
+                    console.log(e.target.value);
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue8 set方法</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-for="(item, key, index) in userInfo">
+            {{item}}
+        </div>
+    </div>
+
+    <script>
+        // 对象的添加方法
+        /* 
+            1. Vue.set(vm.userInfo, "address", "shang hai")
+            2. vm.$set(vm.userInfo, "address", "shang hai")
+        */
+
+        // 数组的添加方法
+        /* 
+            1. Vue提供的数组变异方法
+            2. Vue.set(vm.userInfo, 1, 5)
+            3. vm.$set(vm.userInfo, 1, 5)
+
+            在Vue中，改变数组，希望实现一个 数组改变，页面跟着变的效果？？
+            有三种方式:
+            1. 直接改变数组的引用
+            2. 调用数组的一些变异方法
+            3. set这个方法
+        */
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return{
+                    // userInfo:{
+                    //     name: "Dell",
+                    //     age: 28,
+                    //     gender: "male",
+                    //     salary: "secret"
+                    // }
+
+                    userInfo: [1, 2, 3, 4]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

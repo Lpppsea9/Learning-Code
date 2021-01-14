@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue10 表单绑定</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    
+    <div id="root">
+        <input type="text" v-model.lazy="value">
+        {{value}}
+    </div>
+
+    <script>
+    // 可以用 v-model的地方
+    /* 
+        1.  input
+        2.  textarea 多行文本
+        3.  input type="checkbox" 复选框
+        4.  input type="radio" value="text"   单选框
+
+        5.  如果有value，优先选择value，没有value优先选择innertext
+            <select  v-model="value">  
+                <option disabled>--请选择--</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
+            </select>
+        
+        表单
+        v-model.lazy    input框失去焦点时获得数据
+        v-model.number  input框里默认都是字符串，添加修饰符会转化成number
+        v-model.trim    input框去除首尾空格，获取剩下的字符串
+        
+        题目   下列选项中，在按下回车键时，才将输入框内容显示在页面中的是（选择一项）
+        v-model的修饰符不要和 @keydown 搞混 v-model.enter不存在 
+        v-model.lazy按下空格也是失焦，可以打印出数据
+    */
+        new Vue({
+            el: "#root",
+            data(){
+                return{
+                    value:""
+                }
+            },
+            watch: {
+                value: function() {
+                    console.log(typeof this.value);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
