@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非Props特性</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <child content="hell"></child>
+    </div>
+    <script>
+
+        Vue.component('child', {
+            props: ['content'],
+            template: '<div>{{content}}</div>'
+        })
+
+        var vm = new Vue({
+            el: '#root'
+        })
+        /* 
+            Props特性指的是
+                当你的父组件使用子组件的时候，通过属性向子组件传值的时候
+                恰好子组件里面声明了对父组件传递过来的属性的一个接收
+                同时 props 属性不会让属性显示在你的 dom 标签中
+
+            非Props特性
+                指父组件传而子组件不接
+                那么在子组件里面就没法使用父组件传递过来的内容，
+                同时非Props对应的属性值其实会显示在子组件的最外层标签的html属性之中
+        */
+
+    </script>
+</body>
+</html>

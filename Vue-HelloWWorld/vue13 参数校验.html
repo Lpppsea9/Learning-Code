@@ -8,13 +8,36 @@
 </head>
 <body>
     <div id="root">
-        <child content="hello world"></child>
+        <child content="hello "></child>
     </div>
 
     <script>
         // 父组件向子组件传递参数，子组件有权利对参数进行约束
+        /* 
+            子组件Props为{},将参数的类型进行约束如 content: String
+            传递的参数为数字的话，需要加冒号:
+
+            content: {
+                type: String,
+                required: true 必传
+                default:'defalut value' //默认值
+                validator: function(value) { //校验器：要求传的参数长度大于5
+                        return (value.length > 5)
+                }
+            }
+        */
         Vue.component('child', {
-            template: '<div>Child</div>'
+            props: {
+                content: {
+                    type: String,
+                    required: false, // 是不是必传
+                    default:'defalut value', //默认值
+                    validator: function(value) {
+                        return (value.length > 5)
+                    }
+                }
+            },
+            template: '<div>{{content}}</div>'
         })
 
         var vm = new Vue({
