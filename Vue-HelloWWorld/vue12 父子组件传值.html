@@ -8,11 +8,42 @@
 </head>
 <body>
     <div id="root">
+        <counter :count="3" @inc=""></counter>
+        <counter :count="2"></counter>
 
+        <div>{{total}}</div>
     </div>
 
     <script>
-        
+        // 单向数据流 子组件不能改变父组件传过来的值，因为如果是引用类型的值，会影响
+        /* 
+            如果子组件一定要修改
+        */
+        var counter = {
+            props: ['count'],
+            data() {
+                return{
+                    number: this.count
+                }
+            },
+            template: '<div @click="handleClick">{{number}}</div>',
+            methods: {
+                handleClick: function() {
+                    this.number ++;
+                    this.$emit('inc', 1)
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                total: 5
+            },
+            components: {
+                counter: counter
+            }
+        })
     </script>
 </body>
 </html>
