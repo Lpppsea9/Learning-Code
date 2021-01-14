@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue11 组件使用中的细节点</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    
+    <div id="root">
+        <counter ref="one" @change="handleChange"></counter>
+        <counter ref="two" @change="handleChange"></counter>
+        <!-- 实现两个counter中的数字求和的效果 -->
+        <div>{{total}}</div>
+    </div>
+
+    <script>
+        // h5 规定 tbody里面只能写 tr
+        /* 
+            1.
+            使用is属性 解决 组件row跑到 table同级情况下的bug
+            可以用在
+            table下的 tr
+            ul、ol下的 li
+            select下的 option
+
+            2.
+            在子组件里面，定义data的时候，data必须是一个函数，而不能是一个对象
+            之所以这么设计，是因为一个子组件，它不像根组件，只会被调用一次，他可能
+            在不同的地方被调用多次，那么每一个子组件它的数据，我们不希望与其它的子组件
+            产生冲突，每一个子组件都应该有自己独立的数据
+
+            3.
+            <1> 通过ref获取dom节点
+                ref操作dom，处理复杂的动画，光靠操作数据不太行
+
+            <2> !!!!重点
+                组件上写ref，获取到的是子组件的引用
+
+        */
+        // Vue.component('row', {
+        //     data() {
+        //         return{
+        //             content: 'this is row'
+        //         }
+        //     },
+        //     template: '<tr><td>{{content}}</td></tr>'
+        // })
+
+        Vue.component('counter', {
+            template: '<div @click="handleClick">{{number}}</div>',
+            data() {
+                return{
+                    number: 0
+                }
+            },
+            methods: {
+                handleClick: function() {
+                    this.number ++
+                    this.$emit('change')
+                }
+            },
+        })
+
+        var vm = new Vue({
+            el:"#root",
+            data: {
+                total: 0
+            },
+            methods: {
+                handleChange: function() {
+                    this.total = this.$refs.one.number + this.$refs.two.number
+                    console.log(this.$refs.one.number);
+                    console.log(this.$refs.two.number);
+                }
+            },
+        })
+    </script>
+</body>
+</html>
