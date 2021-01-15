@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非父子组件间的传值(Bus/总线/发布订阅模式/观察者模式)</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <child content="Dell"></child>
+        <child content="Lee"></child>
+    </div>
+
+    <script>   
+    /* 
+        非父子组件传值的方式：
+            1.通过vuex来进行
+            2.通过发布订阅模式来解决(总线机制)
+    */
+        /* 
+            往Vue的prototype上挂载了一个名字叫做 bus 的属性，这个属性
+            指向Vue的实例，只要我们之后去调用new Vue 或者 创建组件的时候，
+            每一个组件上都会有bus这个属性，为什么？
+                因为每一个实例或者组件都是通过Vue这个类来创建的，而我们在
+                Vue的类上挂了一个 bus 这样的一个属性，而且挂载vue 类的prototyep
+                的上面，所以每一个通过这个类创建的对象(也就是vue的实例上，
+                都会有bus这个属性)，他都指向同一个Vue的实例
+         */
+        Vue.prototype.bus = new Vue()
+
+        Vue.component('child', {
+            data(){
+                return {
+                    selfContent: this.content
+                }
+            },
+            props: {
+                content: String
+            },
+            template: '<div @click="handleClick">{{selfContent}}</div>',
+            methods: {
+                handleClick: function(){
+                    /* 
+                        this.bus指的就是这个实例上挂载的bus，
+                        因为每个实例上都会有bus这个属性, 所以child这个组件的bus是存在的
+                        而这个bus又是Vue的实例，所以this.bus上就会有 $emit 这个方法
+                     */
+                    // console.log(this);
+                    this.bus.$emit('change', this.selfContent)
+                }
+            },
+            // mounted:这个组件被挂载的时候它会执行
+            mounted() {
+                var this_ = this
+                this.bus.$on('change', function(msg) {
+                    this_.selfContent = msg
+                })
+            },
+        })
+
+        var vm = new Vue({
+            el: '#root'
+
+        })
+    </script>
+</body>
+</html>

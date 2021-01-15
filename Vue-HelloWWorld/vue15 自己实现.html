@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现兄弟组件之间传值</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <child content="Dell"></child>
+        <child content="Lee"></child>
+    </div>
+
+    <script>   
+        Vue.prototype.bus = new Vue()
+
+        Vue.component('child',{
+            template: '<div @click="handleClick">{{childContent}}</div>',
+            props: {
+                content: String
+            },
+            data() {
+                return{
+                    childContent: this.content
+                }
+            },
+            methods: {
+                handleClick:function() {
+                    this.bus.$emit('a', this.childContent)
+                }
+            },
+            // mounted() {
+            //     var this_ = this
+            //     this.bus.$on('a', function(msg){
+            //         this_.childContent = msg
+            //     })
+            // },
+        })
+
+        var vm = new Vue({
+            el: "#root"
+        })
+    </script>
+</body>
+</html>
