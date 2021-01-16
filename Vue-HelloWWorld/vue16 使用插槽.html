@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 使用插槽 ()</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <body-content>
+            <div class="footer" slot="footer">footer</div>
+        </body-content>
+    </div>
+
+    <script>
+        /* 
+            1.通过插槽可以更方便的向子组件传递dom元素
+            2.slot可以定义默认值(如果使用子组件时不传递插槽内容),定义在slot标签内部
+            3.具名插槽 slot=""  给插槽起一个名字
+            4.插槽只有一个，而具名插槽可以有多个，同时具名插槽可以有默认值
+
+        */
+        Vue.component('body-content', {
+            template: `<div>
+                            <slot name="header">
+                                <h1>default header</h1>
+                            </slot>
+                            <div class='content'>content</div>
+                            <slot name="footer"></slot>
+                      </div>`
+        })
+
+        var vm = new Vue({
+            el:'#root'
+        })
+    </script>
+</body>
+</html>
