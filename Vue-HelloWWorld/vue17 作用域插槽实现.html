@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue 作用域插槽实现</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <child :childlist="nameList">
+            <template slot-scope="ppp">
+                {{ppp.b}}
+            </template>
+        </child>
+    </div>
+
+    <script>
+        /* 
+            作用域插槽的使用场景:
+                当子组件做循环或者某一部分他的dom结构应该由外部传递进来
+                的时候，这个时候我们去用作用域插槽
+        */
+        Vue.component('child', {
+            props:['childlist'],
+            template: `<div>
+                            <ul>
+                                <li v-for="item in childlist">
+                                    <slot :b="item"></slot>
+                                </li>
+                            </ul>
+                        </div>`
+        })
+        var vm = new Vue({
+            el: "#root",
+            data:{
+                nameList: [
+                    {id:1,name:'孙悟空'},
+                    {id:2,name:'猪八戒'},
+                    {id:3,name:'沙和尚'},
+                    {id:4,name:'唐僧'},
+                    {id:5,name:'小白龙'},
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

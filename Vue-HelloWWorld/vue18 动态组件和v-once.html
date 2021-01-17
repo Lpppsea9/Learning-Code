@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件和v-once</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <component :is="type"></component>
+        <!-- <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-if="type === 'child-two'"></child-two> -->
+        <button @click="handleBtnClick">点击</button>
+    </div>
+
+    <script>
+        /* 
+            1.动态组件就是
+                <componen :is="">
+            
+            2.vue-once
+                内部的内容只能渲染一次，后面再变化也不重新渲染
+        */
+        Vue.component('child-one',{
+            template:'<div>child-one</div>'
+        })
+
+        Vue.component('child-two',{
+            template:'<div>child-two</div>'
+        })
+
+        Vue.component('child-three',{
+            template:'<div>child-three</div>'
+        })
+        
+        var vm = new Vue({
+            el:"#root",
+            data:{
+                type:'child-one'
+            },
+            methods: {
+                handleBtnClick: function() {
+                    if(this.type === "child-one") {
+                        this.type="child-two"
+                    } else if(this.type === "child-two") {
+                        this.type = "child-three"
+                    } else if(this.type === "child-three") {
+                        this.type = "child-one"
+                    } 
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
