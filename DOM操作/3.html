@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS DOM</title>
+</head>
+
+<body>
+    后盾人
+    <!-- houdunren.com -->
+    <!-- 节点 -->
+    <script>
+        /* 
+            一般情况下，dom节点和脚本是同步执行的，如果dom节点在脚本
+            的下面，那么脚本是获取不到这个dom元素的，返回的是null
+            怎么避免？
+                1. 把js放在body的最后面
+                2. 定义成异步任务，如setTimeout
+                3. 可以用事件,如window.onload(内容加载之后会执行脚本)
+                4. defer 人为的延迟脚本加载
+         */
+        // document.getElementById('hd');
+        // console.log(hd);
+    </script>
+    <script src="3.js" defer></script>
+    <div id="hd"></div>
+</body>
+</html>
