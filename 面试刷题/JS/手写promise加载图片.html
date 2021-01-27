@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写promis加载一张图片</title>
+</head>
+<body>
+    <script>
+        // function loadImg(src) {
+        //     const p = new Promise(
+        //         (resolve, reject) => {
+        //             const img = document.createElement("img")
+        //             img.onload = () => {
+        //                 resolve(img)
+        //             }
+        //             img.onerror = () => {
+        //                 const err = new Error(`图片加载失败 ${src}`)
+        //                 reject(err)
+        //             }
+        //             img.src=src
+        //         }
+        //     )
+        //     return p
+        // }
+        // const url1 = "https:\/\/pic.36krcnd.com\/avatar\/201909\/04105212\/zg8v24kyjs1yislg!120"
+        // const url2 ="https://gss3.bdstatic.com/84oSdTum2Q5BphGlnYG/timg?wapp&quality=80&size=b150_150&subsize=20480&cut_x=0&cut_w=0&cut_y=0&cut_h=0&sec=1369815402&srctrace&di=dd174c7c62edf86bb3ee966f3ce1d1e6&wh_rate=null&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fpic%2Fitem%2Fcefc1e178a82b901306d7032708da9773812efeb.jpg"
+
+        // loadImg(url2).then(img1 => {
+        //     console.log(img1.width);
+        //     return img1
+        // }).then(img1 => {
+        //     console.log(img1.height);
+        //     return loadImg(url2)
+        // })
+
+        
+        // pop 改变原数组，返回被删除的值
+        // shift 改变原数组，返回被删除的值(删除第一个数)
+        // unshift 返回新的长度 在开头添加值
+        // push 改变原数组，返回添加元素后的长度值
+        // reverse 改变原数组 反转
+        // splice() 改变原数组 第一个参数是指定修改开始的位置 第二个参数是要移除的数组元素的个数 第三个是要添加进数组的元素
+        // slice 不改变原始数组 (start,end)
+        // map 返回一个由原数组每个元素执行回调函数的结果组成的新数组,不改变原数组
+        // reduce  
+        // concat不改变原素组 用来合并数组
+
+        console.log('script start'); //1
+        setTimeout(() => {
+            console.log('北歌'); //宏1
+        }, 1 * 2000);
+        Promise.resolve()
+        .then(function() {
+            console.log('promise1');
+        }).then(function() {
+            console.log('promise2');
+        });
+        async function foo() {
+            await bar()
+            console.log('async1 end')
+        }
+        foo()
+        async function errorFunc () {
+        try {
+            await Promise.reject('error!!!')
+        } catch(e) {
+            console.log(e)
+        }
+        console.log('async1');
+            return Promise.resolve('async1 success')
+        }
+        errorFunc().then(res => console.log(res))
+        function bar() {
+            console.log('async2 end') 
+        }
+        console.log('script end');
+
+
+    </script>
+</body>
+</html>
