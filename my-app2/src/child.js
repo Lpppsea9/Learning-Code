@@ -3,9 +3,12 @@ import React, { Component, Fragment } from 'react'
 
 class Child extends Component {
     render() {
-        console.log('renderchild')
+        // console.log('renderchild')
         return (
-            <div>{this.props.number}</div>
+            <Fragment>
+                <div>{this.props.number}</div>
+            </Fragment>
+            
         )
     }
 }

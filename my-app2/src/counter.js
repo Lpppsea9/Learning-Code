@@ -14,11 +14,13 @@ class Counter extends Component {
     }
 
     handleBtnClick() {
+        console.log(this.buttonElem.clientTop);
+
         const newCounter = this.state.counter + 1;
         this.setState({
             counter: newCounter
         })
-        console.log(this.state.counter);
+
     }
 
     render() {
@@ -30,7 +32,12 @@ class Counter extends Component {
         // 当props数据发生变更的时候，render函数会被重新执行
         return (
             <Fragment>
-                <button onClick={this.handleBtnClick}>增加</button>
+                <button
+                    onClick={this.handleBtnClick}
+                    ref={(button) => {this.buttonElem = button}}
+                >
+                    增加
+                </button>
                 <Child number={this.state.counter}></Child>
             </Fragment>
         )
