@@ -1,44 +1,45 @@
 import React, { Component, Fragment } from 'react'
-import Child from './child'
+// import Child from './child'
+// 生命周期函数指的是组件在某一时刻会自动执行的函数
 
 class Counter extends Component {
 
     constructor(props) {
         super(props);
-
         this.handleBtnClick = this.handleBtnClick.bind(this)
-
         this.state = {
             counter:1
         }
     }
 
     handleBtnClick() {
-        console.log(this.buttonElem.clientTop);
-
         const newCounter = this.state.counter + 1;
-        this.setState({
-            counter: newCounter
+        console.log(this.divElem.innerHTML);
+        // setState 是异步的
+        // this.setState({
+        //     counter: newCounter
+        // })
+        this.setState(() => {
+            return {
+                counter: newCounter
+            }
+        }, () => {
+            console.log(this.divElem.innerHTML);
         })
-
     }
 
     render() {
-        // 父组件的render
-        // console.log('render');
-
-        // 当组件初次创建的时候，render函数会被执行一次
-        // 当state数据发生变更的时候，render函数会被重新执行，页面重新渲染
-        // 当props数据发生变更的时候，render函数会被重新执行
+        // ref 写在html标签上，获取的是dom节点
+        // ref 写在组件标签上，获取的是组件的js实例
         return (
             <Fragment>
                 <button
                     onClick={this.handleBtnClick}
-                    ref={(button) => {this.buttonElem = button}}
+                    // ref={(button) => {this.buttonElem = button}}
                 >
                     增加
                 </button>
-                <Child number={this.state.counter}></Child>
+                <div ref={(div) => {this.divElem = div}}>{this.state.counter}</div>
             </Fragment>
         )
     }

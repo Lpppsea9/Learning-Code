@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import Counter from './counter'
+// import Counter from './counter'
+// import LifeCycle from './lifecycle'
+import 'antd/dist/antd.css'
+import Antdtest from './antdtest'
 
-ReactDom.render(<Counter></Counter>,document.getElementById('root'))
+ReactDom.render(<Antdtest />,document.getElementById('root'))
