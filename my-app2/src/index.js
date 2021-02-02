@@ -17,7 +17,7 @@ class Entry extends Component {
 
     render() {
         return (
-            // BrowserRouter是定义一个路由
+            // BrowserRouter是定义一个路由,内部只能有一个元素
             // Route是一个路由项,什么时候显示什么组件是通过route设置的
             // Link 
             <BrowserRouter>

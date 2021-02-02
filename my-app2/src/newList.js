@@ -26,10 +26,10 @@ class NewList extends Component {
         // console.log(this.props.location.search); // ?123
 
         // 方式2：/123来获取，但是也不能直接拿到参数
-        console.log(this.props);        // search为空，也取不到
+        // console.log(this.props);        // search为空，也取不到
 
-        // 方法3：(推荐)通过设置在index.js里的path:'/list/:id'
-         
+        // 方法3：(推荐)通过设置在 index.js 里的path:'/list/:id'
+        console.log(this.props.match.params.id);
 
         return (
             <List
