@@ -9,22 +9,18 @@
     <script>
         // push返回length值
 
-        // const a = [1, 2, 3, 4, 5];
+        const a = [1, 2, 3, 4, 5];
         // // Implement this
         // // a.multiply();
         // // console.log(a); // [1, 2, 3, 4, 5, 1, 4, 9, 16, 25]
 
-        // Array.prototype.multiply = function(){
-        //     let muls = a.map(x => x*x)
-        //     return this.push(...muls)
-        // }
-        // a.multiply()
-        // console.log(a);
-
-        const b=[1,2,3];
-        const c = [9,1,5]
-        b.push(c)
-        console.log(b);
+        Array.prototype.multiply = function () {
+            const muls = this.map(x => x*x)
+            // console.log(muls)
+            return this.push(...muls)
+        }
+        a.multiply()
+        console.log(a)
     </script>
 </body>
 </html>

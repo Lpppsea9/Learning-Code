@@ -38,8 +38,23 @@
         // })
 
         // 节流封装
-        function throttle(fn, delay = 100) {}
-
+        function throttle(fn, delay = 100) {
+            // timer 是闭包中的，所以不能随意更改
+            let timer = null
+            return function () {
+                if(timer) {
+                    return
+                }
+                timer = setTimeout(() => {
+                    fn.apply(this, arguments)
+                    timer = null
+                },delay)
+            }
+        }
+        
+        div1.addEventListener('drag', throttle(function(e){
+            console.log(e.offsetX, e.offsetY)
+        }, 100))
     </script>
 </body>
 </html>
