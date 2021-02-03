@@ -8,7 +8,43 @@
 <body>
   <input type="text" id="input1" />
   <script>
+    /* 
+        监听一个输入框的，文字变化后触发change事件
+        直接用 keyup事件，则会频繁触发change事件
+        防抖：
+            ！！！用户输入结束或暂停时，才会触发change事件
+    */
+        const input = document.getElementById('input1')
+        // let timer = null
+        // input.addEventListener('keyup', () => {
+        //     if(timer) {
+        //         clearTimeout(timer)
+        //     }
+        //     timer = setTimeout(() => {
+        //         console.log(input.value) // 模拟触发change事件
 
+        //         // 清空定时器
+        //         timer = null
+        //     },500)
+        // })
+
+        function debounce(fn, delay=500) {
+            // timer 是闭包中的，所以不能随意更改
+            let timer = null
+            return function () {
+                if(timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {
+                    fn.apply(this,arguments)
+                    timer = null
+                },delay)
+            }
+        }
+
+        input.addEventListener('keyup', debounce(() => {
+            console.log(input.value)
+        },500))
   </script>
 </body>
 </html>
