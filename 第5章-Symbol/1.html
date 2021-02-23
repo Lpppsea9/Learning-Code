@@ -22,7 +22,14 @@
     let houdunren = Symbol('houdunren');
     let houdunren1 = Symbol('houdunren');
     let houdunren2 = Symbol('houdunren');
-    console.log(Symbol.keyFor(houdunren));
+    // console.log(Symbol.keyFor(houdunren));
+
+    const a = { 
+      key1: Symbol(),    
+      key2: 10
+    }
+    // What will happen?
+    console.log(JSON.stringify(a));
   </script>
 </body>
 </html>
