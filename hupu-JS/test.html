@@ -20,11 +20,42 @@
             let scoreList = [];
             let studentId = 0;
             let name = '';
-            let total = 0;
-            let result = [];
+            let total = 0; 
+            let result = []; // 存储结果
             try {
-                const students = await getStudents
+                const students = await getStudents();
+                const filterClassroom = students.filter(x => x.classroomId === classroomId);
+                filterClassroom.map((item) => {
+                    try {
+                        studentId = item.id;
+                        name = item.name;
+                        scoreList = []; //初始化 各 成绩数组
+                        temp = await getAllCourses(item.id);
+                        temp.map((v) => {
+                            try {
+                                score = await getEveryCourses(v.id, v.studentId);
+                                scoreList.push(score);
+                                total = 0; // 初始化各科成绩总分
+                                scoreList.map((x) => {
+                                    total += x.score
+                                })
+                            } catch (e) {
+                                console.log("getEveryCourses接口出错"+ e)
+                            }
+                        })
+                    } catch (e) {
+                        console.log('getAllCourses接口出错'+ e)
+                    }
+                    result.push({
+                        id: studentId,
+                        name: name,
+                        average: total / scoreList.length
+                    })
+                })
+            } catch (e) {
+                console.log("getStudents接口出错，出错信息" +e)
             }
+            return result
         }
     </script>
 </body>
