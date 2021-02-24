@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fetch 上传文件</title>
+    <title>手写测试</title>
 </head>
 <body>
     <input type="file" id="fileUpload" />
     <script>
-        window.fetch("https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js")
-            .then(res => console.log(res))
-        
-        document.querySelector("#fileUpload").addEventListener('change' ,event => {
-            handleImage
-        })
+        import {
+            getStudents,
+            getAllCourses,
+            getEveryCourses
+        } from '~/service/getData.js';
+
+        const getAverage = async (classroomId) => {
+            let temp = [];
+            let score = {};
+            let scoreList = [];
+            let studentId = 0;
+            let name = '';
+            let total = 0;
+            let result = [];
+            try {
+                const students = await getStudents
+            }
+        }
     </script>
 </body>
 </html>
