@@ -49,13 +49,13 @@ const getAverage = async (classroomId) => {
     let total = 0;
     let result = [];
     try {
-        const students = await getStudents(); //[{ "id": 1, "name": "John", "classroomId": 75 }]
+        const students = await getStudents(); 
         const filterClassroom = students.filter(x => x.classroomId === classroomId); //过滤特定classroomId的教室数组
-        filterClassroom.map((item) => {
+        filterClassroom.map((item) => { //item指 getStudents 获得的数据
             try {
-                studentId = item.id;
-                name = item.name;
-                scoreList = []; //初始化各科成绩数组
+                studentId = item.id; // item.id = 1
+                name = item.name;    // item.name = "John"
+                scoreList = [];      // 初始化各科成绩数组
                 temp = await getAllCourses(item.id);
                 temp.map((v) => {
                     try {
