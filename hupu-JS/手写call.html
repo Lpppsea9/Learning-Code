@@ -1,50 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>手写 call</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+
 <body>
-  <script>
-    var obj = {
-      z:11
-    }
-    Function.prototype.myCall = function(context) {
-      if(typeof this !== "function") {
-        console.error("typeerror")
-      }
-      let args = [...arguments].slice(1);
-      context = context || window
-      console.log(context)
-      console.log(arguments)
-    }
-    const fn1 = function() {
-      // console.log(this.z)
-    }
-    fn1.myCall(obj,1)
+    <script>
+        Function.prototype.myCall = function(context) {
+            if(typeof this !== "function") {
+                console.error("type error")
+            }
+            let args = [...arguments].slice(1),
+                result = null;
+            // 判断 context是否传入
+            context = context || window;
 
-    Function.prototype.myApply = function(context) {
-      if(typeof this !== "function") {
-        console.error("Error")
-      }
-      let result = null;
+            context.fn = this;
 
-      context = context || window;
-
-      context.fn = this;
-
-      if(arguments[1]) {
-        result = context.fn(...arguments[1]);
-      } else {
-        result = context.fn()
-      }
-
-      delete context.fn;
-
-      return result;
-    }
-  </script>
+            result = context.fn(...args);
+        }
+    </script>
 </body>
+
 </html>

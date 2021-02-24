@@ -14,55 +14,12 @@
         // // a.multiply();
         // // console.log(a); // [1, 2, 3, 4, 5, 1, 4, 9, 16, 25]
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        // Array.prototype.multiply = function () {
-        //     const muls = this.map(x => x*x)
-        //     // console.log(muls)
-        //     return this.push(...muls)
-        // }
-        // a.multiply()
-        // console.log(a)
+        Array.prototype.multiply = function () {
+            let muls = this.map(x => x*x)
+            return this.push(...muls)
+        }
+        a.multiply()
+        console.log(a)
     </script>
 </body>
 </html>
