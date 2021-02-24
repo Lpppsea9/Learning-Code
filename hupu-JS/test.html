@@ -14,15 +14,24 @@
                     clearTimeout(timer)
                 }
                 timer = setTimeout(() => {
-                    fn.apply(thiss, arguments)
+                    fn.apply(this, arguments)
                     timer = null
                 })
             }
         }
 
         function throttle(fn,delay=100) {
-            
-        }
+            let timer = null;
+            return function() {
+                if(timer) {
+                    return
+                }
+                timer = setTimeout(() => {
+                    fn.apply(this, arguments)
+                    timer = null
+                }, delay);
+            }
+        }   
 
         var quickSort = function(arr) {
             if(arr.length <= 1) {
