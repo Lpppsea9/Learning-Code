@@ -48,13 +48,17 @@
                 timer = setTimeout(() => {
                     fn.apply(this, arguments)
                     timer = null
-                },delay)
+                }, delay)
             }
         }
         
         div1.addEventListener('drag', throttle(function(e){
             console.log(e.offsetX, e.offsetY)
         }, 100))
+
+        // div1.addEventListener('drag', function(e){
+        //     console.log(e.offsetX, e.offsetY)
+        // })
     </script>
 </body>
 </html>

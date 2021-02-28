@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>手写 call</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+<<<<<<< HEAD
 <body>
   <script>
     // 手写call
@@ -52,17 +53,23 @@
       let result = null;
 
       context = context || window;
+=======
+>>>>>>> 7687870bf8573b7188822653c21d0cceec3f297f
 
-      context.fn = this;
+<body>
+    <script>
+        Function.prototype.myCall = function(context) {
+            if(typeof this !== "function") {
+                console.error("type error")
+            }
+            let args = [...arguments].slice(1),
+                result = null;
+            // 判断 context是否传入
+            context = context || window;
 
-      if(arguments[1]) {
-        result = context.fn(...arguments[1]);
-      } else {
-        result = context.fn()
-      }
+            context.fn = this;
 
-      delete context.fn;
-
+<<<<<<< HEAD
       return result;
     }
 
@@ -81,5 +88,11 @@
     }
 
   </script>
+=======
+            result = context.fn(...args);
+        }
+    </script>
+>>>>>>> 7687870bf8573b7188822653c21d0cceec3f297f
 </body>
+
 </html>

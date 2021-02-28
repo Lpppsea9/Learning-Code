@@ -36,6 +36,12 @@
     </div>
 
     <script>
+        /* 
+            Outer div click处理程序将 hello outer打印到控制台。
+            Inner div click处理程序将 hello inner 打印到控制台。
+            Innermost div click 处理程序将 hello innermost 打印到控制台。
+            编写一段代码来分配这些任务，以便在单击innermost div 时始终打印以下序列？    hello inner → hello innermost → hello outer 
+        */
         const outer = document.getElementById("outer")
         const inner = document.getElementById("inner")
         const innermost = document.getElementById("innermost")
@@ -50,7 +56,7 @@
             console.log("hello innermost")
         }
 
-        outer.addEventListener("click",outerEvent,false)
+        outer.addEventListener("click",outerEvent)
 
         inner.addEventListener("click",innerEvent,true)
 

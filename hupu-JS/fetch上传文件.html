@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch 上传文件</title>
+</head>
+
+<body>
+    <input type="file" id="fileUpload" />
+    <script>
+        // window.fetch("https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js")
+        //     .then(res => console.log(res))
+
+        document.querySelector("#fileUpload").addEventListener('change', event => {
+            handleImageUpload(event)
+        })
+
+        const handleImageUpload = event => {
+            const files = event.target.files
+            const formData = new FormData()
+            formData.append("myFile", files[0])
+
+            fetch('./IMG/a', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+        }
+    </script>
+</body>
+</html>
