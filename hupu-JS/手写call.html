@@ -8,23 +8,43 @@
 </head>
 <body>
   <script>
-    var obj = {
-      z:11
-    }
+    // 手写call
     Function.prototype.myCall = function(context) {
       if(typeof this !== "function") {
-        console.error("typeerror")
+        console.error("type error")
       }
-      let args = [...arguments].slice(1);
+      let args = [...arguments].slice(1),
+        result = null;
       context = context || window
       console.log(context)
       console.log(arguments)
-    }
-    const fn1 = function() {
-      // console.log(this.z)
-    }
-    fn1.myCall(obj,1)
+      console.log(args)
 
+      //this指fn1，把fn1方法给到obj的fn上
+      context.fn = this 
+      result = context.fn(...args);
+      delete context.fn;
+      return result
+    }
+
+    // 验证
+    // const first = "windw-Lppp";
+    // const second = "windw-Sea9";
+
+    const obj = {
+      full: function(txt) {
+        console.log(`${txt} + ${this.first} + ${this.second}`)
+      }
+    }
+    const obj1 = {
+      first: "Lppp",
+      second: "Sea9"
+    }
+    obj.full.myCall(obj1,"Hello","Hello2")
+    // obj.full.myApply(obj1,["Hello","Hello2"])
+
+
+    // 手写apply
     Function.prototype.myApply = function(context) {
       if(typeof this !== "function") {
         console.error("Error")
@@ -45,6 +65,21 @@
 
       return result;
     }
+
+    // 实现 bind
+    Function.prototype.myBind = function(context) {
+      if(typeof this !== 'function') {
+        throw new TypeError("Error")
+      }
+      // 获取参数
+      var args = [...arguments].slice(1),
+        fn = this;
+      
+      return function Fn() {
+        return fn.apply(this instanceof Fn ? this : context, args.concat(...arguments));
+      }
+    }
+
   </script>
 </body>
 </html>

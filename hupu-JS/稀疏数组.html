@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>稀疏数组</title>
 </head>
+
 <body>
   <script>
     var a = [];
-    a[4] = a[5];
-    console.log(a.length)
+    a[4] = a[5]; 
+    console.log(a.length) //5
+    console.log(a)
+
+    var b = [];
+    b[5] = 1;
+    console.log(b.length)
+
+    a.forEach(elem => {
+      console.log(elem); //undefined
+    });
+    // console.log(a); //[,,,,undefined]
   </script>
 </body>
+
 </html>

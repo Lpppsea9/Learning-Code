@@ -4,25 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>手写</title>
+    <title>手写promise加载图片</title>
 </head>
 <body>
-    <button onclick="getData()">点击</button>
     <script>
-        function getData(){
-            return new Promise((resolve,reject) => {
-                $.ajax({
-                    url:'https://unidemo.dcloud.net.cn/api/banner/36kr',
-                    success(data) {
-                        
-                    },
-                    error(err) {
+        const loadImg = function(src) {
+            const p =  new Promise (
+                (resolve, reject) => {
+                    const img = document.createElement('img')
+                    img.onload = () => {
+                        resolve(img)
+                    }
+                    img.onerror = () => {
+                        const err = new Error(`图片加载失败${src}`)
                         reject(err)
                     }
-                })
-            })
+                    img.src = src
+                } 
+            )
+            return p
         }
+        const url1 = "httsps://i0.hdslb.com/bfs/face/a4f8bb9c1cabc8575f07de28d54cd6b09264ea35.jpg@.webp"
+        const url2 = "https://img4.sycdn.imooc.com/szimg/5eddd7aa09cfdb1c12000676-360-202.png"
+
+        loadImg(url1)
+            .then( img1 => {
+                console.log(img1.width)
+                return img1
+            }).then( img1 => {
+                console.log(img1.height)
+                return loadImg(url2)
+            }).then( img2 => {
+                console.log(img2.width)
+                return loadImg(url2)
+            }).then( img2 => {
+                console.log(img2.height)
+            }).catch( reason => {
+                console.log(reason)
+            })
+        
     </script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
 </body>
 </html>
