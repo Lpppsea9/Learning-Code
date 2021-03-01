@@ -18,3 +18,21 @@ someButton.addEventListener('click', () => {
 function fetchAndRenderPage(n) { 
     
 }
+
+Promise.race = function (promises) {
+    return new Promise((resolve, reject) => {
+        // 遍历所有promise获取每个promise的结果
+        promises.forEach((p, index) => {
+            p.then(
+                value => { //成功的回调
+                    // 一旦有成功了，将return变为成功
+                    resolve(value)
+                },
+                reason => { //失败的回调
+                    // 一旦有失败了，将return
+                    reject(reason)
+                }
+            )
+        })
+    })
+}
