@@ -14,7 +14,7 @@
             循环数组的方式？循环对象的方式？
          -->
         <!-- 1.循环数组 -->
-        <!-- <template 
+        <template 
             v-for="(item, index) of list" 
             :key="index"
         >
@@ -24,7 +24,7 @@
             <span>
                 {{item.text}}
             </span>
-        </template> -->
+        </template>
 
         <!-- 2.循环对象 -->
         <div v-for="(item, key, index) of userInfo">
@@ -39,6 +39,7 @@
             且不使用index ，使用index比较耗费性能
         */
         /* 
+            // 数组
             Vue里动态数组响应？
             当在vue里去尝试修改数组里内容的时候，不能直接通过下标的形式，如:
             vm.list[3] = {id: "003", text: "第四项"}
@@ -48,8 +49,11 @@
             1.  vue提供的几个数组变异方法来操作数组，才能够实现数据发生变化，
                 页面也跟着变这种响应式的效果
             push pop shift unshift splice sort reverse
+                vue中本身只是监视了 list 的改变，没有监视数组内部数据的改变
+                vue重写了数组中一系列改变数组内部数据的方法(先调用原生,更新页面)--->数组内部改变, 界面自动变化
             2.  直接改变数组的引用-----改变数据的引用地址
 
+            // 对象
             Vue里动态对象响应？
             当在vue里去尝试修改对象里内容的时候，不能直接通过添加的形式，如:
             vm.userInfo.address = "shanghai"
@@ -70,16 +74,11 @@
             data(){
                 return{
                     /* 数组 */
-                    // list:[{
-                    //     id: "0102011",
-                    //     text: "hello"    
-                    // },{
-                    //     id: "0102022",
-                    //     text: "Dell"
-                    // },{
-                    //     id: "0102023",
-                    //     text: "Lee"
-                    // }]
+                    list:[
+                        {id: "0102011", text: "hello"},
+                        {id: "0102022", text: "Dell"},
+                        {id: "0102023", text: "Lee"}
+                    ],
 
                     /* 对象 */
                     userInfo: {

@@ -6,17 +6,31 @@
     <title>Vue中的样式绑定</title>
     <script src="vue.js"></script>
     <style>
-        .activated{
-            color: red;
+        .aClass{
+            color:red;
+        }
+        .bClass{
+            color:blue;
+        }
+        .cClass{
+            font-size: 30px;
         }
     </style>
 </head>
 <body>
     <!-- 可以通过class和style来绑定 -->
     <div id="app">
-        <div :style="[styleObj, {fontSize: '20px'}]" @click="handleDivClick">
-            Hello world
-        </div>
+        <!-- class -->
+        <h2>1. class绑定: :class='xxx'</h2>
+        <p class="cClass" :class="a">xxx是字符串</p>
+        <p :class="{aClass: isA, bClass: isB}">xxx是对象</p>
+        <p :class="['aClass', 'cClass']">xxx是数组</p>
+
+        <!-- style -->
+        <h2>2. style绑定</h2>
+        <p :style="{color: activeColor, fontSize: fontSize + 'px'}">style颜色的更新</p>
+        
+        <button @click="changeColor">更新颜色</button>
     </div>
 
     <script>
@@ -24,14 +38,20 @@
             el: "#app",
             data(){
                 return{
-                    styleObj: {
-                        color: "black"
-                    }
+                    a: 'aClass',
+                    isA: true,
+                    isB: false,
+                    activeColor: "red",
+                    fontSize: 20
                 }
             },
             methods: {
-                handleDivClick: function(){
-                    this.styleObj.color = this.styleObj.color === "black" ? "red" : "black";
+                changeColor() {
+                    this.a = 'bClass'
+                    this.isA = false
+                    this.isB = true
+                    this.activeColor = 'green'
+                    this.fontSize = 30
                 }
             },
         })

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    一:
+        1.  一般采用JPEG比较好,gif表现出的颜色没有jpeg多，而且大小比jpeg大，png虽然表现的颜色比jpeg多，但是大小相比jpeg比他大，所以图片的格式优先选择jpeg 80%
+
+        2.  一些小的图标可以使用png(但是，如果图标库里有:比如iconfont有的话，优先选择图标库里的图标)，大图别用png，因为太大了
+            png可以有透明色(jpeg缺失透明属性)
+
+        3.  gif(动画)
+
+        4.  tiff
+     -->
+
+    <img src="路径" alt="描述" >
+    <!-- 二: 存储图片的时候不要都放在服务器上，可以放在云上(静态数据)，或者CDN加速-->
+
+    <a href="路径" target="_blank/_self/" title="鼠标放上去提示的文字"></a>
+    <!-- 三: 链接-->
+
+    <a href="#houdunren">跳转到本页面id对应位置锚点</a>
+    <a href="4.html#houdunren">跳转到其他页面的对应位置锚点</a>
+    <div style="background: powderblue; height: 3000px"></div>
+    <footer id="houdunren">footer</footer>
+    <div style="background: blue; height: 2000px;"></div>
+
+    <!-- 邮箱，一般不这么做 -->
+    <a href="mailto:2685448598@qq.com">发送邮件</a>
+    <!-- 电话号 -->
+    <a href="tel:9999999">拨打电话</a>
+    <!-- 跳转到图片，psd可以下载 -->
+    <a href="houdunren.png"></a>
+    <a href="houdunren.psd"></a>
+
+
+</body>
+</html>
