@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>state</title>
+    <script src="./vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vuex/4.0.0-rc.1/vuex.cjs.js"></script> -->
+</head>
+
+<body>
+    <div id="root">
+        
+    </div>
+    
+
+    <script>
+        new Vue({
+            el:"#root",
+            // state
+            data() {
+                return {
+                    count: 0
+                }
+            },
+            // view
+            template: `
+            <div>
+                <div>{{ count }}</div>
+                <button @click="increment">点击</button>
+            </div>
+            `,
+            // actions
+            methods: {
+                increment() {
+                    this.count++
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
