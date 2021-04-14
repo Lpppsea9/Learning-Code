@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 列表渲染</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    /* 
+        v-for 的优先级比 v-if 高,所以两个不能一起使用, 可以让v-for在外层使用,v-if在内层使用
+    */
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 数组
+                listArray: ['dell', 'lee', 'teacher'],
+                // 对象
+                listObject: {
+                    firstName: 'dell',
+                    lastName: 'lee',
+                    job: 'teacher'
+                }
+            }
+        },
+        methods: {
+            handleAddBtnClick() {
+                /* 如何改变数据 */
+                // <1>改变数组
+                    // 1. 使用数组的变更函数 push, pop, shift, unshift, splice, sort, reverse
+                    // this.listArray.push('hello')
+                    // this.listArray.push('hello')
+
+                    // 2. 直接替换数组(直接改变原始数组的引用)
+                    // this.listArray = ['bye', 'world']
+                    // this.listArray = ['bye', 'world'].filter(item => item === 'bye')
+
+                    // 3. 直接更新数组的内容
+                    // this.listArray[1] = 'Hello'
+
+                // <2>改变对象
+                    // 1. 直接添加对象的内容,也可以自动的展示出来
+                    this.listObject.age = 100;
+                    this.listOject.sex = 'male';
+            }
+        },
+        template:`
+            <div>
+                <template 
+                    v-for="(value, key, index) in listObject" 
+                    :key="index"
+                >
+                    <div v-show="key !== 'lastName'">
+                        {{value}}--{{key}}
+                    </div>
+                </template>
+                <div v-for="item in 10">{{item}}</div>
+                <button @click="handleAddBtnClick">新增</button>
+            </div>
+        `
+    })
+
+    const vm = app.mount('#root')
+</script>
+
+</html>

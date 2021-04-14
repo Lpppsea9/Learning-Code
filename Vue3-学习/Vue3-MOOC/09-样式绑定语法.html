@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 样式绑定语法</title>
+    <style>
+        .red{
+            color: red
+        }
+        .green{
+            color: green
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                /* class样式绑定 */
+                // 字符串形式 控制样式
+                classString: 'red',
+                // 对象形式 控制样式
+                classObject: { red: false, green: true },
+                // 数组形式 控制样式(里面还可以加对象形式)
+                classArray: ['red', 'green', {brown: true}],
+
+                /* style行内样式 */
+                styleString: 'color: yellow;',
+                // 推荐写法
+                styleObject: {
+                    color: 'orange',
+                    background: 'yellow'
+                }
+            }
+        },
+        template: `
+            <div :style="styleObject">
+                Hello World
+                <demo class="green" />
+            </div>
+        `
+    })
+
+    app.component('demo', {
+        // $attrs.class可以用来 使one这个子组件的样式是父组件的 class 的值
+        template: `
+            <div :class="$attrs.class">one</div>
+            <div>two</div>
+        `
+    })
+    const vm = app.mount('#root')
+</script>
+
+</html>

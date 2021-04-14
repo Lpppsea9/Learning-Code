@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 模板语法</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    /* 
+        v-html
+        v-once
+        v-if ——> dom节点直接不存在
+        v-on ——> @
+        v-bind ——> :
+    注意 事件绑定 和 动态属性 的写法(以下方式):
+    动态参数
+        @[event]="handleClick"
+        :[name]="message"
+    */
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'hello world',
+                show: false,
+                name: 'title',
+                event: 'mouseenter'
+            }
+        },
+        methods: {
+            handleClick(e) {
+                // alert('click')
+                // e.preventDefault(); //直接在@click后面加上.prevent 的后缀
+            }
+        },
+        // template: `
+        //     <div 
+        //         @[event]="handleClick"
+        //         :[name]="message"  
+        //     >
+        //         {{message}}
+        //     </div>
+        // `
+        template: `
+            <form action="https://www.baidu.com" @click.prevent="handleClick">
+                <button type="submit">提交</button>
+            </form>
+        `
+    });
+    const vm = app.mount('#root')
+</script>
+
+</html>

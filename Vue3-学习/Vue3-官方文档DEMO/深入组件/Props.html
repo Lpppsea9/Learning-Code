@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Props</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <!--
+1. Props类型
+    props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
+    props: {
+        title: String,
+        likes: Number,
+        isPublished: Boolean,
+        commentIds: Array,
+        author: Object,
+        callback: Function,
+        contactPromise: Promise // 或任何其他的构造函数
+    }
+    -->
+    <!-- 
+2. 传入静态或动态的Prop
+     -->
+    <!-- 这样，你已经知道了可以像这样给 prop 传入一个静态的值 -->
+    <blog-post title="My journey with Vue"></blog-post>
+    <!-- 你也知道 prop 可以通过 v-bind 或简写 : 动态赋值，例如： -->
+        <!-- 动态赋予一个变量的值 -->
+        <blog-post :title="post.title"></blog-post>
+        <!-- 动态赋予一个复杂表达式的值 -->
+        <blog-post :title="post.title + 'by' + post.author.name"></blog-post>
+    <!-- 在上述两个示例中,我们传入的值都是字符串类型的，但实际上任何类型的值都可以传入一个prop。 -->
+
+    <!-- 
+传入一个数字
+     -->
+    <!-- 即便`42`是静态的，我们仍然需要`v-bind` 来告诉 Vue -->
+    <!-- 这是一个 JavaScript 表达式而不是一个字符串 -->
+    <blog-post :likes="42"></blog-post>
+
+    <!-- 用一个变量进行动态赋值 -->
+    <blog-post :likes="post.likes"></blog-post>
+
+    <!-- 
+传入一个布尔值
+     -->
+    <!-- 包含该 prop 没有值的情况在内，都意味着 `true`。          -->
+    <blog-post is-published></blog-post>
+
+    <!-- 即便 `false` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue  -->
+    <!-- 这是一个 JavaScript 表达式而不是一个字符串。             -->
+    <blog-post :is-published="false"></blog-post>
+
+    <!-- 用一个变量进行动态赋值。                                -->
+    <blog-post :is-published="post.isPublished"></blog-post>
+
+    <!-- 
+传入一个数组
+    -->
+    <!-- 即便数组是静态的，我们仍然需要 `v-bind` 来告诉 Vue        -->
+    <!-- 这是一个 JavaScript 表达式而不是一个字符串。             -->
+    <blog-post :comment-ids="[234, 266, 273]"></blog-post>
+
+    <!-- 用一个变量进行动态赋值。                                -->
+    <blog-post :comment-ids="post.commentIds"></blog-post>
+
+    <!-- 
+传入一个对象
+    -->
+    <!-- 即便对象是静态的，我们仍然需要`v-bind`来告诉 Vue -->
+    <!-- 这是一个 JavaScript 表达式而不是一个字符串 -->
+    <blog-post
+        :author="{
+            name: 'Veronica',
+            company: 'Verdian Dynamics'
+        }"
+    ></blog-post>
+    
+    <!-- 用一个变量进行动态赋值 -->
+    <blog-post :author="post.author"></blog-post>
+
+    <!-- 
+传入一个对象的所有property
+    如果你想要把一个对象的所有property都作为prop传入,
+    你可以使用不带参数的 v-bind (取代 v-bind:prop-name)。
+    例如，对于一个给定的对象 post:
+    js: 
+        post: {
+            id: 1,
+            title: 'My Journey with vue'
+        }
+    下面的模板:
+    -->
+    <blog-post v-bind="post"></blog-post>
+    <!-- 等价于 -->
+    <blog-post v-bind="post.id" v-bind="post.title"></blog-post>
+
+    <!-- 
+3.单向数据流
+    父子 prop 之间形成了一个单向下行绑定(父子prop): 父级 prop 的更新会向下流动到子组件中,
+    但是反过来则不行。这样会防止从子组件意外变更父级组件的状态,从而导致你应用的数据流难以理解
+
+    另外，每次父级组件发生变更时，子组件中所有的prop都将会刷新为最新的值。这意味着你 不 应该在
+    一个子组件内部改变prop。如果你这样做了，Vue 会在浏览器的控制台发出警告。
+
+    这里有两种常见的试图变更一个 prop 的情形:
+    -->
+        <!-- 
+    1.这个 prop用来传递一个初始值; 这个子组件接下里希望将其作为一个本地的prop数据来使用。在这种
+        情况下，最好定义一个本地的 data property 并将这个prop 作为其初始值 
+        -->
+        props: ['initialCounter'],
+        data() {
+            return {
+                counter: this.initialCounter
+            }
+        }
+        <!-- 
+    2.这个 prop 以一种原始的值传入且需要进行转换。在这种情况下，最好使用这个prop的值来定义一个
+        计算属性:         
+        -->
+        props: ['size'],
+        computed: {
+            normalizedSize: function () {
+                return this.size.trim().toLowerCase()
+            }
+        }
+    <!-- 
+        提示:
+        注意在 JavaScript 中对象和数组是通过引用传入的，所以对于一个数组或对象类型的 prop 来说，
+        在子组件中改变变更这个对象或数组本身将会影响到父组件的状态
+    -->
+
+    
+
+</body>
+<script>
+/* 
+4.Prop 验证
+    我们可以为组件的 prop 指定验证要求，例如你知道的这些类型
+    为了定制 prop 的验证方式,你可以为 props 中的值提供一个带有验证需求的对象，
+    而不是一个字符串数组。
+*/
+app.component('my-component', {
+    props: {
+        // 基础的类型检查(`null`和`undefined` 会通过任何类型验证)
+        propA: Number,
+        // 多个可能的类型
+        propB: [String, Number],
+        // 必填的字符串
+        propC: {
+            type:String,
+            required: true
+        },
+        // 带有默认值的数字
+        propD: {
+            type: Number,
+            default: 100
+        },
+        // 带有默认值的对象
+        propE: {
+            type: Object,
+            // 对象或数组默认值必须从一个工厂函数获取
+            default: function() {
+                return {message: 'hello'}
+            }
+        },
+        // 自定义验证函数
+        propF: {
+            validator: function(value){
+                // 这个值必须匹配下列字符串中的一个
+                return ['success', 'warning', 'danger'].indexOf(value) !== -1
+            }
+        },
+        // 具有默认值的函数
+        propG: {
+            type: Function,
+            // 与对象或数组默认值不同，这不是一个工厂函数——这是一个用作默认值的函数
+            default: function() {
+                return 'Default function'
+            }
+        }
+    }
+})
+/* 
+5.类型检查
+    type 可以是下列原生构造函数中的一个:
+        String
+        Number
+        Boolean
+        Array
+        Object
+        Date
+        Function
+        Symbol
+    此外, type 还可以是一个自定义的构造函数,并且通过 instanceof 来进行检查确认。例如，给定下列现成的构造函数:
+*/
+function Person(firstName, lastName) {
+    this.firstName = firstName
+    this.lastName = lastName
+}
+/*  你可以使用: */
+app.component('blog-post', {
+    props: {
+        author: Person
+    }
+})
+/* 用于验证 author prop 的值是否是通过 new Person 创建的。 */
+
+/* 
+6.Prop的大小写命名(camelCase vs kebab-case)
+    HTML 中的 attribute 名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你
+    使用 DOM 中的模板时，camelCase (驼峰命名法)的prop名需要使用其等价的 kebab-case (短横线分隔命名)命名:
+*/
+
+const app = Vue.createApp({}) 
+app.component('blog-post',{
+    // camelCase in JavaScript
+    props: ['postTitle'],
+    template: '<h3>{{ postTitle }}</h3>'
+})
+/* kebab-case in HTML (短横线分隔命名)*/
+`<blog-post post-title="hello"></blog-post>`
+
+</script>
+</html>

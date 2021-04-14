@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 模板语法</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    /* 
+data & methods & computed & watcher
+data: 如果是根数据的话,那么可以通过两种方法修改数据
+    <1> 在控制台中 vm.$data.message 来改变 data 中的 message
+    <2> 在控制台中 vm.message 来改变 data 中的 message
+
+methods: 
+    <1> 注意this指向,不要用箭头函数,会指向外面一层对象的this
+    <2> methods里面定义的方法不仅可以在 @click 后面加方法名使用
+        而且可以在插值表达式里面去用
+    <3> computed 和 method 都能实现的一个功能, 建议使用 computed 因为有缓存
+        computed 和 watcher 都能实现的功能, 建议使用 computed 因为更加简洁
+
+computed 和 methods 都能实现的一个功能, 建议使用 computed 因为有缓存
+computed 和 watcher 都能实现的功能, 建议使用 computed 因为更加简洁
+
+watcher: 
+        同步的可以放在computed里
+        异步的可以考虑用watch来实现
+    */
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'Lppp Sea9',
+                count: 5,
+                price: 2,
+                newTotal: 10,
+            }
+        },
+        // 监听变量的一些改变,并进行一些异步操作
+        watch: {
+            // 接收两个参数,一个是当前值,另一个是之前的值
+            // price 发生变化时, 函数会执行
+            price(current, prev) {
+                // console.log(current, prev)
+                this.newTotal = current * this.count
+                // setTimeout(() => {
+                //     console.log('price change')
+                // }, 3000)
+            }
+        },
+        computed: {
+            //当计算属性依赖的变量发生变化时,才会重新执行计算
+            total() {
+                return Date.now()+(this.count * this.price)
+            }
+        },
+        methods: {
+            // click事件绑定
+            handleClick() {
+                // this指向这个实例
+                console.log('click',this)
+            },
+            // 直接在插值表达式里使用<div>{{formatString(message)}}</div>
+            formatString(string) {
+                return string.toUpperCase();
+            },
+            /* 
+            和计算属性computed相同的方法,
+            只要页面重新渲染,才会重新计算
+            */
+            getTotal() {
+                return Date.now()+(this.count * this.price)
+            }
+        },
+        template:`
+            <div>{{message}}——{{newTotal}}</div>
+        `
+    })
+    const vm = app.mount('#root')
+</script>
+
+</html>
