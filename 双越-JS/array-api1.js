@@ -43,7 +43,7 @@ const arr4 = arr.splice()
 console.log(arr);
 console.log(arr4);
 
-// 非纯函数
+// 非纯函数 
 // push pop shift unshift
 // forEach
 // some every
