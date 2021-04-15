@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 组件间的传值</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    /* 
+        动态传参: 通过 v-bind 进行传参
+        静态传参: 不加冒号
+    */
+    const app = Vue.createApp({
+        data() {
+            return {
+                num: 1211
+            }
+        },
+        template: `
+            <div>
+                <test :content="num" />
+            </div>
+        `
+    }) 
+
+    app.component('test', {
+        // props: ['content'],
+        // 如果传递过来的 props 要进行校验,那么把 props 定义成一个对象
+        // type: String, Boolean, Array, Object, Function, Symbol 
+        // required: 必填
+        // default: 默认值 
+        // validator: 自定义验证函数(深度校验)
+        props: {
+            content: {
+                // 判断类型
+                type: Number,
+                // 必须传这个参数
+                required: true,
+                validator: function(value) {
+                    return value < 1000
+                },
+                default: function (){
+                    return 456;
+                }
+            }
+            
+        },
+        template: `
+            <div>{{content}}</div>
+        `
+    })
+
+    const vm = app.mount('#root')
+</script>
+</html>
