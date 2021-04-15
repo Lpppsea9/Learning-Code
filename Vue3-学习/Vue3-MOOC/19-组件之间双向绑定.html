@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 组件之间的双向绑定</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    /*  Vue自带的 modelValue 和 update:modelValue
+        <counter v-model="num" />
+        props:['modelValue']
+        this.$emit('update:modelValue', this.modelValue + 4)
+
+        如果不用 modelValue 要在绑定属性后面加上 冒号 和 自定义的属性名
+        <counter v-model:Lppp="num" />
+        props:['Lppp']
+        this.$emit('update:Lppp', this.Lppp + 4)
+
+    */
+    const app = Vue.createApp({
+        data() {
+            return {
+                num: 1
+            }
+        },
+        template: `
+            <div>
+                <counter v-model:Lppp="num" />
+            </div>
+        `
+    })
+
+    app.component('counter', {
+        props: ['Lppp'],
+        methods: {
+            handleClick() {
+                this.$emit('update:Lppp', this.Lppp + 4)
+            }
+        },
+        template: `
+            <div @click="handleClick">{{Lppp}}</div>
+        `
+    })
+
+    const vm = app.mount('#root')
+</script>
+
+</html>

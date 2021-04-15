@@ -12,28 +12,42 @@
     <div id="root"></div>
 </body>
 <script>
+    // v-bind="params"
+    // :content="params.content" :a="params.a" :b="params.b" :c="params.c"
+    // 属性传的时候, 使用 content-abc 这种命名(短横线), 接的时候, 使用 contentAbc 命名(驼峰)
+    // 单向数据流的概念: 子组件可以使用父组件传递过来的数据, 但是绝对不能修改传递过来的数据
     const app = Vue.createApp({
         data() {
             return {
-                params: {
-                    num: 1234,
-                    a: 123,
-                    b: 456,
-                    c: 789
+                num: 1,
+                params:{
+                    content: 1212,
+                    a: 121,
+                    b: 122,
+                    c: 123
                 }
             }
         },
         template: `
             <div>
-                <test v-bind="params" />
+                <counter :count="num" />
+                <counter :count="num" />
+                <counter :count="num" />
             </div>
         `
     })
 
-    app.component('test', {
-        props: ['counter', 'a', 'b', 'c'],
+    app.component('counter', {
+        // props: ['content', 'a', 'b', 'c'],
+        props: ['count'],
+        data() {
+            return{
+                // 定义一个自己的数据来存传过来的 count,这个时候就能自己修改了
+                myCount: this.count,
+            }
+        },
         template: `
-            <div>{{counter}}</div>
+            <div @click="myCount += 1">{{myCount}}</div>
         `
     })
 

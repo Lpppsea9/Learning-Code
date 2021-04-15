@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 组件间的传值</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // counter这个组件会向外面触发 add 这个事件,目的是让你知道这个组件会向外面触发什么事件
+    // emits:['add'], //数组形式, 单纯表示子组件触发了什么事件
+    // emits:{} 对触发事件的传递的参数进行校验(里面写函数)
+    /*  props:['modelValue']
+        this.$emit('update:modelValue')
+    */
+    const app = Vue.createApp({
+        data() {
+            return {
+                count: 1 
+            }
+        },
+        methods: {
+            handleAddOne(count) {
+                this.count = count;
+            }
+        },
+        template: `
+            <div>
+                <counter :count="count" @add-one="handleAddOne" />
+            </div>
+        `
+    })
+
+    app.component('counter', {
+        props:['count'],
+        // counter这个组件会向外面触发 add 这个事件,目的是让你知道这个组件会向外面触发什么事件
+        // emits:['add'], //数组形式, 单纯表示子组件触发了什么事件
+        emits: {
+            // 对add这个事件触发的参数进行校验
+            add: (count) => {
+                if(count < 0) {
+                    return true
+                }
+                return false
+            }
+        },
+        methods: {
+            handleItemClick() {
+                // 一般触发事件使用驼峰,而在上面的父组件监听的时候,则使用横线间隔
+                this.$emit('addOne', this.count + 3)
+            }
+        },
+        template: `
+            <div @click="handleItemClick">{{count}}</div>
+        `
+    })
+
+    const vm = app.mount('#root')
+</script>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 组件间的传值</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // Non-prop 属性
+    /* 
+        就是不用 props 接收的时候, 可以通过 $attrs 进行接收
+    */
+    const app = Vue.createApp({
+        template: `
+            <div>
+                <counter msg />
+            </div>
+        `
+    })
+
+    app.component('counter', {
+        // props: ['msg'], //如果不用 props 接的话, msg="hello" 会自动在dom元素上添加这个属性
+        // inheritAttrs: false,
+        template: `
+            <div>Counter</div>
+            <div v-bind="$attrs">Counter</div>
+            <div>Counter</div>
+        `
+    })
+
+    const vm = app.mount('#root')
+</script>
+
+</html>
