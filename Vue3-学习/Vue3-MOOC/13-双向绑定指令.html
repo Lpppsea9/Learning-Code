@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 事件绑定</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // input textarea checkbox radio select
+    /* 
+        checkbox 使用 true-value 和 false-value 
+        v-model.lazy 鼠标点击input框外时再去更新页面上的数据
+        v-model.number 转换成 number类型
+        v-model.trim 取消空格
+    */
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: ''
+            }
+        },
+        template:`
+            <div>
+                {{message}}
+                <select v-model="message" multiple>
+                    <option disabled value=''>请选择内容</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
+        `
+    })
+
+   const vm = app.mount('#root')
+</script>
+
+</html>

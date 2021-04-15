@@ -13,6 +13,31 @@
     <div id="root"></div>
 </body>
 <script>
+    /* 
+        传参,多个参数
+        <1>如果在模板中绑定事件时已经传入参数,怎么解决
+            <button @click="handleBtnClick(2,$event)">button</button>
+            通过在模板绑定事件中 $event 这个参数, 进行接收
+
+        <2>如果在模板中绑定一个事件需要执行多个函数的时候 
+            <button @click="handleBtnClick(), handleBtnClick1()">button</button>
+            把多个函数写在后面,用 , 间隔,并且要加 () 来调用,否则无法调用
+
+        <3> 事件修饰符
+                @click.prevent 阻止默认行为
+                @click.stop 阻止事件冒泡
+                @click.self 点击元素是自己的时候才能触发事件(子元素不触发事件)
+                @click.capture 因为事件绑定默认是事件冒泡的形式, capture修饰符可以让它变成事件捕获
+                @click.once 事件绑定只执行一次
+                
+                @scroll.passive 滚动时提升性能
+            按键修饰符
+                enter, tab, delete, esc, up, down, left, right
+            鼠标修饰符
+                left, right, middle
+            精确修饰符
+                exact
+     */
     const app = Vue.createApp({
         data() {
             return {
@@ -20,17 +45,32 @@
             }
         },
         methods: {
-            handleBtnClick(num) {
-                // console.log(e.target) //打印出button dom元素对象
-                this.counter += num;
+            // handleDivClick() {
+            //     alert('divClick')
+            // },
+            // handleBtnClick() {
+            //     this.counter +=1
+            // }
+            handleKeyDown() {
+                console.log('keydown')
             }
         },
-        template: `
-            <div>{{counter}}</div>
-            <button @click="handleBtnClick(2)">button</button>
+        template: 
+        // `
+        //     <div>
+        //         <div @click.self="handleDivClick">
+        //             {{counter}}
+        //             <button @click.stop="handleBtnClick(2,$event)">button</button>
+        //         </div>
+        //     </div>
+        // `
+        `
+            <div>
+                <input @keydown.enter="handleKeyDown" />    
+            </div>
         `
     })
-    
+
     const vm = app.mount('#root')
 </script>
 

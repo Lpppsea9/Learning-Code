@@ -26,3 +26,4 @@ export async function mount(props) {
 export async function unmount(props) {
   instance.$destroy();
 }
+
