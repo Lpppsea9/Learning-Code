@@ -13,26 +13,37 @@
     <div id="root"></div>
 </body>
 <script>
-        const app = Vue.createApp({
-            template: `
-                <div>
-                    <counter/>
-                    <counter />
-                    <counter />
-                </div>`
-        });
+    // 组件的定义
+    // 组件具备复用性
+    // 全局组件, 只要定义了, 处处可以使用, 性能不高, 但是
+    const app = Vue.createApp({
+        template: `
+            <div>
+                <counter/>
+                <counter />
+                <counter />
+            </div>`
+    });
 
-        app.component('counter',{
-            data() {
-                return {
-                    counter: 1
-                }
-            },
-            template: `
-                <div @click="counter += 1">{{counter}}</div>
-            `
-        })
-        const vm = app.mount('#root')
+    /* 
+    counter-parent 这个全局组件可以直接使用 counter 组件,相当于一层中转
+    
+     */
+    app.component('counter-parent', {
+        template: `<counter />`
+    })
+
+    app.component('counter',{
+        data() {
+            return {
+                counter: 1
+            }
+        },
+        template: `
+            <div @click="counter += 1">{{counter}}</div>
+        `
+    })
+    const vm = app.mount('#root')
 </script>
 
 </html>
