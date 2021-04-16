@@ -23,29 +23,44 @@
         props:['Lppp']
         this.$emit('update:Lppp', this.Lppp + 4)
 
+******有没有办法进行两个 v-model 进行双向绑定???? 同时添加冒号:
     */
     const app = Vue.createApp({
         data() {
             return {
-                num: 1
+                num: 'a',
             }
         },
+        // 调用的时候用短横线分隔的形式
         template: `
             <div>
-                <counter v-model:Lppp="num" />
+                <counter v-model.uppercase="num" />
             </div>
         `
     })
 
     app.component('counter', {
-        props: ['Lppp'],
-        methods: {
-            handleClick() {
-                this.$emit('update:Lppp', this.Lppp + 4)
+        props: {
+            'modelValue':String,
+            'modelModifiers': {
+                defalut: () => ({})
             }
         },
+        methods: {
+            handleClick() {
+                let newValue = this.modelValue + 'b';
+                if(this.modelModifiers.uppercase) {
+                    newValue = newValue.toUpperCase()
+                }
+                this.$emit('update:modelValue', newValue)
+            },
+            // handleClick1() {
+            //     // 触发的时候用驼峰形式
+            //     this.$emit('update:num1', this.num1 + 3)
+            // }
+        },
         template: `
-            <div @click="handleClick">{{Lppp}}</div>
+            <div @click="handleClick">{{modelValue}}</div>
         `
     })
 
