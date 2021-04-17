@@ -11,12 +11,12 @@
     "use strict"
     let lesson = {
       lists:[
-        {name:"js",price:100},
-        {name:"musql",price:212},
-        {name:"vue.js",price:8}
+        {name:"js", price:100},
+        {name:"musql", price:212},
+        {name:"vue.js", price:8}
       ],
       get total(){
-        return this.lists.reduce((t,l) => t+l.price ,0);
+        return this.lists.reduce((t,l) => t + l.price , 0);
       }
     };
     console.log(lesson.total);

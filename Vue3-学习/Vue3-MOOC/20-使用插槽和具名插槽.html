@@ -24,7 +24,7 @@
                 <template v-slot:header>
                     <div>header</div>
                 </template>
-                <template v-slot:footer>
+                <template #footer>
                     <div>footer</div>
                 </template>
             </layout>
@@ -37,6 +37,7 @@
                 <slot name="header"></slot>
                 <div>content</div>
                 <slot name="footer"></slot>
+                <slot name="header"></slot>
             </div>
         `
     })

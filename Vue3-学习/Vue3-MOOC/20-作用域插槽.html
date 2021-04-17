@@ -13,10 +13,17 @@
 </body>
 <script>
     // 作用域插槽
+    /* 
+        为什么要用作用域插槽？
+            因为按照这种写法,能让父组件调用子组件里的item数据
+            以前直接在父组件里写 item 是不行的,因为他只能从父组件这个作用域里面去找item数据,所以找不到,他就显示不了
+            他能把子组件作用域的 item 数据 传递给父组件, 那么父组件就可以调用子组件的数据了
+    */
     const app = Vue.createApp({
+        // 往slot传值的时候可以使用es6的解构语法
         template: `
-            <list v-slot="slotProps">
-                <span>{{slotProps.item}}</span>
+            <list v-slot="{item}">
+                <div>{{item}}</div>
             </list>
         `
     })

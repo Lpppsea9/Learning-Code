@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用插槽和具名插槽解决组件内容传递问题</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    /* 
+    v-once 让某个元素标签只渲染一次
+        表示这个 div 标签只被渲染一次,后面即使数据发生变化了, 也只渲染一次就行了
+
+    ref 实际上是 <1>获取 Dom 节点 / <2>组件引用 的一个语法
+    
+    provide / inject 可以实现多层传值
+    */
+    const app = Vue.createApp({
+        data() {
+            return {
+                count:1
+            }
+        },
+        // provide: {
+        //     count: 1
+        // },
+        // 传递数据
+        provide() {
+            return{
+                count: this.count
+            }
+        },
+        // mounted() {
+        //     this.$refs.common.sayHello()
+        // },
+        template: `
+            <div>
+                <child :count="count" />
+                <button @click="count += 1">Add</button>
+            </div>
+        `
+    });
+
+    app.component('child', {
+        // 子组件不用count,就不用传
+        // props:['count'],
+        template: `<child-child />`
+    })
+
+    app.component('child-child', {
+        // 孙子组件要用count
+        inject: ['count'],
+        template: `<div>{{count}}</div>`
+    })
+
+    
+
+    const vm = app.mount('#root')
+</script>
+
+</html>
