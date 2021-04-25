@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 36</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        methods: {
+            handleClick() {
+                alert('change')
+            }
+        },
+        template: `
+            <child @change="handleClick">parent</child>
+        `,
+    });
+
+    app.component('child', {
+        template: `
+            <div @click="handleClick">123</div>
+        `,
+        mounted() {
+            // 在以前没有 compositi API 这个基础语法的时候,想调用 slots 只能这样调
+            // console.log(this.$slots);
+
+            // 在以前没有 compositi API 这个基础语法的时候,向外触发一个 change 事件
+            // this.$emit('change')
+        },
+        setup(props, context) {
+            const { h } = Vue;
+            // 有了 composition API 就可以通过 context 里面的这个属性来获得 attrs、slots、emit 这三个属性
+            const {attrs, slots, emit} = context
+            // 1. console.log(attrs.app) // 父组件传递过来的 None-Props 属性(不用props接收的属性)
+
+            // 2. console.log(slots.default()); //slots.default是一个数组
+            //    返回一个虚拟dom
+            //    return () => h('div', {}, slots.default())
+
+            // 3. composition API 向外触发事件的写法
+            function handleClick() { emit('change') }
+            return { handleClick }
+        }
+    })
+
+    const vm = app.mount("#root")
+    /* 总结:
+        在 composition API 里面,
+        通过 attrs 可以获得传统语法里面 No-props 里面
+        通过 slots 可以实现之前传统的语法里面 this.$slots 这样的一个作用,
+        通过 emit 可以实现传统语法里面 this.$emit 这样的一个向外触发事件的功能
+    */
+</script>
+
+</html>

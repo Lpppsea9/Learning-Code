@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28-mixin</title>
+    <style>
+        
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // mixin 混入
+    // 组件 data, methods 优先级高于mixin中的data, methods 优先级
+    // 生命周期函数, 先执行mixin 里面的, 再执行组件里面的
+    // 自定义的属性, 组件中的属性优先级高于 mixin 属性的优先级
+    // 怎么去修改优先级, 可以自定义优先级
+
+    const myMixin = {
+        // number: 1
+    }
+
+    const app = Vue.createApp({
+        data() {
+            // return { number: 2 }
+        },
+        created() {
+            console.log("created")
+        },
+        // 用mixins(第一种方法)
+        mixins: [myMixin],
+        methods: {
+            handleClick() {
+                console.log('handleClick')
+            }
+        },
+        template: `
+            <div>
+                <div>{{this.$options.number}}</div>
+                <button @click="handleClick">增加</button>
+            </div>
+        `
+    });
+
+    // 全局的mixin(不用声明mixin:[]), 但是全局mixin不推荐使用
+    app.mixin({
+        data() {
+            return {
+                number: 2,
+                count: 22
+            }
+        },
+        created() {
+            console.log("myMixin created")
+        },
+        methods: {
+            handleClick() {
+                console.log("mixin handleClick")
+            }
+        }
+    })
+    
+    app.component('child', {
+        // mixins:[myMixin],
+        template: "<div>{{count}}</div>"
+    })
+
+    app.config.optionMergeStrategies.number = (mixinVal, appValue) => {
+        // mixin 如果有 value, 先去 return mixinVal,如果没有的话,再去使用app 里面的value
+        return mixinVal || appValue;
+    }
+
+    const vm = app.mount("#root")
+</script>
+
+</html>

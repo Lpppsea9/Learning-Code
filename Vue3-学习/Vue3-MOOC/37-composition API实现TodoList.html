@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用 composition API 实现 ToDoList</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 关于 list 操作的内容进行了封装
+    const ListRelativeEffect = () => {
+        const {reactive} = Vue
+        const list = reactive([])
+        const addItemToList = (item) => {
+            list.push(item)
+        } 
+        return {
+            list,
+            addItemToList
+        }
+    }
+
+    // 关于 input 操作的内容进行了封装
+    const inputRelativeEffect = () => {
+        const {ref} = Vue
+        const inputValue = ref('input框默认值')
+        const handleInputValueChange = (e) => {
+            inputValue.value = e.target.value
+        }
+        return {
+            inputValue,
+            handleInputValueChange
+        }
+    }
+
+    const app = Vue.createApp({
+        setup() {
+            const {list,addItemToList} = ListRelativeEffect();
+            const {inputValue,handleInputValueChange} = inputRelativeEffect();
+
+            return {
+                inputValue,
+                list,
+                addItemToList,
+                handleInputValueChange,
+            }
+        },
+        template: `
+            <div>
+                <input :value="inputValue" @input="handleInputValueChange" />   
+                <div>{{inputValue}}</div>
+                <button @click="addItemToList(inputValue)">提交</button>
+                <ul>
+                    <li v-for="item in list">{{item}}</li>
+                </ul>
+            </div>
+        `,
+    });
+
+
+    const vm = app.mount("#root")
+    /* 总结:
+    */
+</script>
+
+</html>

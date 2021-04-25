@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>29-自定义指令</title>
+    <style>
+        .header {
+            position: absolute;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 自定义指令 directive
+
+    // 定义局部的自定义指令(定义在前, 然后才能在实例中使用)
+    // const directives = {
+    //     focus: {
+    //         mounted(el) {
+    //             el.focus()
+    //         }
+    //     }
+    // }
+
+    const app = Vue.createApp({
+        data() {
+            return{
+                hello: true,
+                top: 110,
+                distance:200
+            }
+        },
+        // 使用局部自定义指令
+        // directives: directives,
+        mounted() {
+            // this.$refs.input.focus();
+        },
+        template: `
+            <div>
+                <div v-pos:right="distance" class="header">
+                    <input />
+                </div>
+            </div>
+        `,
+        
+    });
+
+    // 全局的自定义指令
+    // app.directive('focus', {
+    //     beforeMount(el) {
+    //         console.log('beforeMount')
+    //     },
+    //     mounted(el) {
+    //         console.log('mounted')
+    //         el.focus()
+    //     },
+    //     beforeUpdate(){
+    //         console.log('beforeUpdate')
+    //     },
+    //     updated() {
+    //         console.log('updated')
+    //     },
+    //     beforeUnmount() {
+    //         console.log('beforeUnmount')
+    //     },
+    //     unmounted() {
+    //         console.log('unmounted')
+    //     }
+    // })
+
+    // // 当 mounted和 updated中的执行语句差不多时, 可以直接用下面的写法
+    app.directive('pos', (el, binding) => {
+        console.log(binding.arg, 'binding') // binding里的arg是的值就是:冒号后面"abc"这个字符串值, value=高度110
+        el.style[binding.arg] = (binding.value + 'px')
+    })
+
+    // app.directive('pos', {
+    //     // 当数据发生变化的时候, mounted并不会重新的执行(页面不会重新渲染)
+    //     mounted(el, binding) {
+    //         el.style.top = binding.value + 'px'
+    //     },
+    //     updated(el, binding) {
+    //         el.style.top = (binding.value + 'px')
+    //     }
+    // })
+
+    const vm = app.mount("#root")
+</script>
+
+</html>

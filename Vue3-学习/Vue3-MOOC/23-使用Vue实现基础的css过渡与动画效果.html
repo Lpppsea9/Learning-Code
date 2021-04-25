@@ -5,6 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>23-使用Vue实现基础的css过渡与动画效果</title>
+    <style>
+        /* 动画 */
+        /* @keyframes leftToRight {
+            0%{
+                transform: translate(-100px);
+            }
+            50%{
+                transform: translate(-50px);
+            }
+            0%{
+                transform: translate(0px);
+            }
+        }
+        .animation {
+            animation: leftToRight 3s;
+        } */
+
+        /* 过渡 */
+        .transition {
+            transition: 3s background-color ease;
+        }
+
+        /* .blue {
+            background: blue;
+        }
+
+        .green {
+            background: green;
+        } */
+    </style>
     <script src="https://unpkg.com/vue@next"></script>
 </head>
 <body>
@@ -12,15 +42,39 @@
 </body>
 <script>
     // 过渡, 动画
+    // 不用通过手动的去获取dom,而是去
     const app = Vue.createApp({
         data() {
             return {
-                
+                // animate: {
+                //     transition: true,
+                //     blue: true,
+                //     green: false
+                //     // animation: true
+                // }  
+                styleObj: {
+                    background: 'blue'
+                } 
+            }
+        },
+        methods: {
+            handleClick() {
+                // this.animate.animation = !this.animate.animation 
+                this.animate.blue = !this.animate.blue
+                this.animate.green = !this.animate.green
+            },
+            handleStyleClick() {
+                if(this.styleObj.background === 'blue') {
+                    this.styleObj.background = 'green'
+                } else {
+                    this.styleObj.background = 'blue'
+                }
             }
         },
         template: `
             <div>
-                <div>hello world</div>
+                <div class="transition" :style="styleObj">hello world</div>
+                <button @click="handleStyleClick">切换</button>
             </div>
         `
     })

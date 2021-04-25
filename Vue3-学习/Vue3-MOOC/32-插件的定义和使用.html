@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>32-插件的定义和使用</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="all"></div>
+</body>
+<script>
+    // plugin 插件, 也就是把通用性的功能封装起来
+    const myPlugin = {
+        // 文档:如果插件是一个对象，它必须暴露一个 install 方法。如果它本身是一个函数，它将被视为安装方法。
+        install(app,options){
+            app.provide('name', '刘'),
+            app.directive('focus', {
+                mounted(el) {
+                    el.focus()
+                }
+            }),
+            app.mixin({
+                mounted() {
+                    // 为什么会打印两次,因为app下的每一个组件都会打印出mixin(根组件和子组件)
+                    console.log('mixin')
+                }
+            })
+            // vue底层拓展sayhello
+            app.config.globalProperties.$sayHello = 'hello world'
+            // console.log(app,options)
+        }
+    }
+    const app = Vue.createApp({
+        template: `
+            <my-title />
+        `
+    })
+
+    app.component('my-title', {
+        inject: ['name'],
+        mounted() {
+            // 因为在底层拓展了$sayhello这个属性,通过$这个符号可以知道
+            console.log(this.$sayHello)
+        },
+        template:`
+            <div>{{name}} <input v-focus /></div>
+        `
+    })
+
+    app.use(myPlugin, {name: 'Lppp'})
+    const vm = app.mount("#root")
+</script>
+
+</html>

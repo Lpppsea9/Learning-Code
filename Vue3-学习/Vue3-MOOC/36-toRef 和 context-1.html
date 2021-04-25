@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 36</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // toRef
+    const app = Vue.createApp({
+        template: `
+            <div>{{age}}</div>
+        `,
+        setup(props, context) {
+            const { reactive, toRef } = Vue;
+            const data = reactive({name: 'Dell'})
+            // 意思就是: 我从data这个响应式对象里尝试取 age 这样一个响应式数据, 如果能取到就取到了, 如果取不到我就给他一个默认空的响应式数据
+            const  age  = toRef(data, 'age')
+            setTimeout(() => {
+                // data.name = "ppp",下面这个写法: 这个时候 name 被转换成一个ref
+                age.value = "ppp"
+            },1000)
+            return {age}
+        }
+            
+    })
+
+    const vm = app.mount("#root")
+    /* 总结:
+        如果你想应对这种可能出现的对象里面没有对应的一个属性值的时候, 又想让这个属性值一直具备这种响应式特性的时候，你就可以不用这个 toRefs , 而是使用 toRef 这样一个语法(这是 toRef 这个语法的意义和作用, 当然建议不要这么写,一般来说后面用到什么变量, 直接在前面 data里定义好)
+    */
+</script>
+
+</html>

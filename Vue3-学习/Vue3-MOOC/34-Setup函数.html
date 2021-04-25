@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 33</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="all"></div>
+</body>
+<script>
+
+    const app = Vue.createApp({
+        template: `
+            <div>name: {{name}}</div>
+        `,
+        methods: {
+            test() {
+                console.log(this.$options)
+            }
+        },
+        mounted() {
+            // 因为实例挂载的时间是比 setup 这个函数要晚的, 所以
+            console.log(this.$options.setup())
+        },
+        // created 实例被完全初始化之前
+        setup(props, context) {
+            // 为什么无法执行？因为setup这个函数是实例未初始化之前执行的函数,这个test方法还未挂载到this上面,不会用this的语法去代码了
+            // this.test();
+            return {
+                name: "Lpp",
+                handleClick: () => {
+                    alert(123)
+                }
+            }
+        }
+    })
+
+
+    const vm = app.mount("#root")
+</script>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24-单元素组件的过渡动画</title>
+    <style>
+        @keyframes shake {
+            0% {
+                transform: translateX(-100px);
+            }
+            50% {
+                transform: translateX(-50px);
+            }
+            100% {
+                transform: translateX(50px);
+            }
+        }
+        .hello {
+            transition: shake 3s;
+        }
+        .bye {
+            animation: shake 3s;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                show: false
+            }
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show
+            },
+            handleBeforeEnter(el) {
+                el.style.color = "red";
+            },
+            handleEnterActive(el, done) {
+                const animation = setInterval(() => {
+                    const color = el.style.color;
+                    if(color === 'red') {
+                        el.style.color = 'green'
+                    } else {
+                        el.style.color = 'red'
+                    }
+                }, 1000);
+                setTimeout(() => {
+                    clearInterval(animation)
+                    done()
+                },2000)
+            },
+            handleEnterEnd() {
+                alert(123)
+            },
+        },
+        template: `
+            <div>
+                <transition
+                    :css="false"
+                    @before-enter="handleBeforeEnter"
+                    @enter="handleEnterActive"
+                    @after-enter="handleEnterEnd"
+                    @before-leave= el 
+                    @leave= el, done
+                    @leave-after= el
+                >
+                    <div v-if="show">hello world</div>
+                </transition>
+                <button @click="handleClick">切换</button>
+            </div>
+        `
+    })
+
+
+    const vm = app.mount("#root")
+</script>
+
+</html>

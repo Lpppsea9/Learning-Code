@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25-组件和元素切换动画效果的实现</title>
+    <style>
+        .v-enter-from {
+            opacity: 0;
+        }
+        .v-enter-active {
+            transition: opacity 3s ease-in;
+        }
+        .v-enter-to {
+            opacity: 1;
+        }
+    </style>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // 多个单元素标签之间的切换
+    // 多个单组件之间的切换(v-if,v-show, component is)
+    /* 
+    mode="in-out" 先进入再退出
+    mode="out-in" 先退出再进入 
+    appear 进入的时候就出现动画,所以要
+    */
+
+    const ComponentA = {
+        template: '<div>hello world</div>'
+    }
+
+    const ComponentB = {
+        template: '<div>bye world</div>'
+    }
+
+    const app = Vue.createApp({
+        data() {
+            return { component: 'component-a' }
+        },
+        methods: {
+            handleClick() {
+                if(this.component === 'component-a') {
+                    this.component = 'component-b'
+                } else {
+                    thi.component = 'component-a'
+                }
+            }
+        },
+        components: {
+            'component-a': ComponentA,
+            'component-b': ComponentB
+        },
+        template: `
+            <div>
+                <transition mode="out-in" appear>
+                    <component :is="component" />
+                </transition>
+                <button @click="handleClick">切换</button>
+            </div>
+        `
+    })
+
+    
+
+    const vm = app.mount("#root")
+</script>
+
+</html>
