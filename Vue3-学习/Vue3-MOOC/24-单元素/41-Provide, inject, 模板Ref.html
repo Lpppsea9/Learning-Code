@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson 41</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script>
+    // provide, inject
+    // ref
+
+    // const app = Vue.createApp({
+    //     setup() {
+    //         const { provide, ref, readonly } = Vue;
+    //         const name = ref('Lppp')
+    //         // provide参数第一个是key值, 第二个是value值
+    //         /* 
+    //             子组件想修改父组件的数据也是可以的(不符合单向数据流),
+    //             但是如果不想它在子组件里修改的话，可以使用 readonly
+    //         */
+    //         provide('name', readonly(name))
+    //         provide('changeName', (value) => {
+    //             name.value = value;
+    //         })
+    //         return {}
+    //     },
+    //     template: `
+    //         <div>
+    //             <child />
+    //         </div>
+    //     `,
+    // })
+    
+    // app.component('child', {
+    //     setup() {
+    //         const { inject } = Vue;
+    //         // 如果 name 值拿不到的话, 那么默认值就是hello
+    //         const name = inject('name', 'hello')
+    //         const changeName = inject('changeName')
+    //         const handleClick = () => {
+    //             name.value = 'sea9' // 直接在子组件里修改
+    //             // changeName('sea9')
+    //         }
+    //         return {name, handleClick}
+    //     },
+
+    //     template: `
+    //         <div @click="handleClick">
+    //             {{name}}
+    //         </div>
+    //     `
+    // })
+
+    /* CompositionAPI 的语法下, 获取真实的 DOM 元素节点 */
+    const app = Vue.createApp({
+        setup() {
+            const {ref, onMounted} = Vue
+            // 创建一个空的 ref 响应式对象, 名字要与 div 的 ref 的值一样
+            const hello = ref(null);
+            onMounted(() => {
+                // 打印出 ref="hello" 这个dom节点
+                console.log(hello.value)
+            })
+            return{ hello }
+        },
+        template: `
+            <div>
+                <div ref="hello">hello world</div>
+            </div>
+        `
+    })
+        
+    const vm = app.mount("#root")
+    
+</script>
+
+</html>
