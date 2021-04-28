@@ -9,14 +9,10 @@
 // https://www.fastmock.site/mock/ae8e9031947a302fed5f92425995aa19/jd/api/user/register
 import { toRefs } from "vue";
 import { useStore } from "vuex"
-import axios from 'axios'
 export default ({
   name: 'Home',
   setup() {
-    axios.get('https://www.fastmock.site/mock/ae8e9031947a302fed5f92425995aa19/jd/api/user/register')
-      .then((response) => {
-        console.log(response)
-      })
+    
     const store = useStore();
     const {name} = toRefs(store.state)
     const handleClick = () => {
