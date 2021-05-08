@@ -80,8 +80,8 @@ export default {
   margin-bottom: .12rem;
   height: .32rem;
   line-height: .32rem;
-  background: #f5f5f5;
-  color: #B7B7B7;
+  background: $search-bgColor;
+  color: $search-fontColor;
   border-radius: .16rem;
   .iconfont {
     width: .16rem;
@@ -99,7 +99,7 @@ export default {
   input {
     flex: 1;
     // background: green ;
-    background: #f5f5f5;
+    background: $search-bgColor;
     border-radius: 0 .16rem .16rem 0;
     width: 100%;
     border: 0;

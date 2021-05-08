@@ -1,17 +1,24 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/home/Home'
+// import Home from '../views/home/Home'
 import Login from '../views/login/Login'
+import Shop from '../views/shop/Shop'
 import Register from '../views/register/Register'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    // component: Home
+    component: () => import(/* wepackChunkName: "home" */ '../views/home/Home')
+  }, {
+    // 进入shop页面之后必须跟一个数字,不满足这个条件是无法访问页面的
+    path: '/shop/:id',
+    name: 'Shop',
+    component: () => import( /* wepackChunkName: "shop" */ '../views/shop/Shop')
   }, {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: () => import( /* wepackChunkName: "shop" */ '../views/login/Login'),
     // 需求: 如果已经登录了(isLogin=true),再去访问Login页面,跳转到首页而不是登录页
     // beforeEnter 指的是只有你访问 Login 这个页面之前才会执行这个函数
     beforeEnter(to, from, next) {
@@ -29,7 +36,7 @@ const routes = [
   }, {
     path: '/register',
     name: 'Register',
-    component: Register,
+    component: () => import( /* wepackChunkName: "register" */ '../views/register/Register'),
     beforeEnter(to, from, next) {
       const { isLogin } = localStorage
       isLogin ? next({ name: 'Home' }) : next()
@@ -57,7 +64,7 @@ router.beforeEach((to, from, next) => {
   const { isLogin } = localStorage;
   const { name } = to;
   const isLoginOrRegister = (name === "Login" || name === "Register");
-  (isLogin || isLoginOrRegister) ? next(): next({ name: 'Login' })
+  (isLogin || isLoginOrRegister) ? next() : next({ name: 'Login' })
 })
 /*
   总结:

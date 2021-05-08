@@ -1,4 +1,5 @@
 dependencies:
+  axios: 0.21.1
   core-js: registry.nlark.com/core-js/3.11.0
   normalize.css: 8.0.1
   vue: 3.0.11
@@ -9,7 +10,7 @@ devDependencies:
   '@vue/cli-plugin-eslint': registry.nlark.com/@vue/cli-plugin-eslint/4.5.12_a4e2821700611585788803bb4b60ff1c
   '@vue/cli-plugin-router': registry.nlark.com/@vue/cli-plugin-router/4.5.12_@vue+cli-service@4.5.12
   '@vue/cli-plugin-vuex': registry.nlark.com/@vue/cli-plugin-vuex/4.5.12_@vue+cli-service@4.5.12
-  '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_@vue+compiler-sfc@3.0.11
+  '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_8884f0b93d182df30640241f72905ce2
   '@vue/compiler-sfc': 3.0.11_vue@3.0.11
   '@vue/eslint-config-standard': 5.1.2_bfc67a7f0bbb27fca9ee4ad8184e69ea
   babel-eslint: 10.1.0_eslint@6.8.0
@@ -1421,7 +1422,7 @@ packages:
       tarball: '@vue/component-compiler-utils/download/@vue/component-compiler-utils-3.2.0.tgz'
   /@vue/eslint-config-standard/5.1.2_bfc67a7f0bbb27fca9ee4ad8184e69ea:
     dependencies:
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_@vue+compiler-sfc@3.0.11
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_8884f0b93d182df30640241f72905ce2
       eslint: registry.nlark.com/eslint/6.8.0
       eslint-config-standard: 14.1.1_86016a687bb9a3fc2cd0de7a3b1aede7
       eslint-import-resolver-node: 0.3.4
@@ -1440,6 +1441,9 @@ packages:
       eslint-plugin-promise: '>= 4.2.1'
       eslint-plugin-standard: '>= 4.0.0'
       eslint-plugin-vue: '>= 6.1.2'
+    peerDependenciesMeta:
+      '@vue/cli-service':
+        optional: true
     resolution:
       integrity: sha1-xdVa+JSjriO2Wxr0pCV3esAXC0I=
       tarball: '@vue/eslint-config-standard/download/@vue/eslint-config-standard-5.1.2.tgz'
@@ -1978,6 +1982,13 @@ packages:
     resolution:
       integrity: sha1-1h9G2DslGSUOJ4Ta9bCUeai0HFk=
       tarball: aws4/download/aws4-1.11.0.tgz
+  /axios/0.21.1:
+    dependencies:
+      follow-redirects: registry.nlark.com/follow-redirects/1.14.0
+    dev: false
+    resolution:
+      integrity: sha1-IlY0gZYvTWvemnbVFu8OXTwJsrg=
+      tarball: axios/download/axios-0.21.1.tgz
   /babel-eslint/10.1.0_eslint@6.8.0:
     dependencies:
       '@babel/code-frame': 7.12.13
@@ -3245,6 +3256,25 @@ packages:
     dev: true
     engines:
       node: '>=6.0'
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    resolution:
+      integrity: sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=
+      tarball: debug/download/debug-4.3.1.tgz
+  /debug/4.3.1_supports-color@6.1.0:
+    dependencies:
+      supports-color: 6.1.0
+    dev: true
+    engines:
+      node: '>=6.0'
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     resolution:
       integrity: sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=
       tarball: debug/download/debug-4.3.1.tgz
@@ -8297,6 +8327,13 @@ packages:
       node-sass: ^4.0.0
       sass: ^1.3.0
       webpack: ^4.36.0 || ^5.0.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
     resolution:
       integrity: sha1-3r7NjDziQ8dkVPLoKQSCFQOACQ0=
       tarball: sass-loader/download/sass-loader-8.0.2.tgz
@@ -9470,6 +9507,9 @@ packages:
     peerDependencies:
       file-loader: '*'
       webpack: ^4.0.0
+    peerDependenciesMeta:
+      file-loader:
+        optional: true
     resolution:
       integrity: sha1-4OLvZY8APvuMpBsPP/v3a6uIZYs=
       tarball: url-loader/download/url-loader-2.3.0.tgz
@@ -9614,9 +9654,10 @@ packages:
     resolution:
       integrity: sha1-UylVzB6yCKPZkLOp+acFdGV+CPI=
       tarball: vue-hot-reload-api/download/vue-hot-reload-api-2.3.4.tgz
-  /vue-loader/15.9.6_css-loader@3.6.0+webpack@4.46.0:
+  /vue-loader/15.9.6_0aadd186e864c83cab1284bae568d6ae:
     dependencies:
       '@vue/component-compiler-utils': 3.2.0
+      cache-loader: 4.1.0_webpack@4.46.0
       css-loader: registry.nlark.com/css-loader/3.6.0_webpack@4.46.0
       hash-sum: 1.0.2
       loader-utils: 1.4.0
@@ -9625,8 +9666,15 @@ packages:
       webpack: registry.nlark.com/webpack/4.46.0
     dev: true
     peerDependencies:
+      cache-loader: '*'
       css-loader: '*'
+      vue-template-compiler: '*'
       webpack: ^3.0.0 || ^4.1.0 || ^5.0.0-0
+    peerDependenciesMeta:
+      cache-loader:
+        optional: true
+      vue-template-compiler:
+        optional: true
     resolution:
       integrity: sha1-9Lua4gw6g3CvPs8JuBJtOP/ba4s=
       tarball: vue-loader/download/vue-loader-15.9.6.tgz
@@ -9768,7 +9816,7 @@ packages:
       chokidar: 2.1.8
       compression: 1.7.4
       connect-history-api-fallback: 1.6.0
-      debug: 4.3.1
+      debug: 4.3.1_supports-color@6.1.0
       del: 4.1.1
       express: 4.17.1
       html-entities: 1.4.0
@@ -9803,6 +9851,10 @@ packages:
     hasBin: true
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
     resolution:
       integrity: sha1-aV687Xakkp8NXef9c/r+GF/jNwg=
       tarball: webpack-dev-server/download/webpack-dev-server-3.11.2.tgz
@@ -10193,6 +10245,11 @@ packages:
     name: '@vue/babel-preset-app'
     peerDependencies:
       vue: ^2 || ^3.0.0-0
+    peerDependenciesMeta:
+      core-js:
+        optional: true
+      vue:
+        optional: true
     resolution:
       integrity: sha1-w6I88z9uXqMFNvE8D5sfx+AoscE=
       registry: https://registry.npm.taobao.org/
@@ -10210,7 +10267,7 @@ packages:
     dependencies:
       '@babel/core': registry.nlark.com/@babel/core/7.13.16
       '@vue/babel-preset-app': registry.nlark.com/@vue/babel-preset-app/4.5.12_vue@3.0.11
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_@vue+compiler-sfc@3.0.11
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_8884f0b93d182df30640241f72905ce2
       '@vue/cli-shared-utils': registry.nlark.com/@vue/cli-shared-utils/4.5.12
       babel-loader: 8.2.2_0fc9aa51f8dda8b91e4c31310ffa16c5
       cache-loader: 4.1.0_webpack@4.46.0
@@ -10229,7 +10286,7 @@ packages:
     version: 4.5.12
   registry.nlark.com/@vue/cli-plugin-eslint/4.5.12_a4e2821700611585788803bb4b60ff1c:
     dependencies:
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_@vue+compiler-sfc@3.0.11
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_8884f0b93d182df30640241f72905ce2
       '@vue/cli-shared-utils': registry.nlark.com/@vue/cli-shared-utils/4.5.12
       eslint: registry.nlark.com/eslint/6.8.0
       eslint-loader: 2.2.1_eslint@6.8.0+webpack@4.46.0
@@ -10250,7 +10307,7 @@ packages:
     version: 4.5.12
   registry.nlark.com/@vue/cli-plugin-router/4.5.12_@vue+cli-service@4.5.12:
     dependencies:
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_@vue+compiler-sfc@3.0.11
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_8884f0b93d182df30640241f72905ce2
       '@vue/cli-shared-utils': registry.nlark.com/@vue/cli-shared-utils/4.5.12
     dev: true
     id: registry.nlark.com/@vue/cli-plugin-router/4.5.12
@@ -10264,7 +10321,7 @@ packages:
     version: 4.5.12
   registry.nlark.com/@vue/cli-plugin-vuex/4.5.12_@vue+cli-service@4.5.12:
     dependencies:
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_@vue+compiler-sfc@3.0.11
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.12_8884f0b93d182df30640241f72905ce2
     dev: true
     id: registry.nlark.com/@vue/cli-plugin-vuex/4.5.12
     name: '@vue/cli-plugin-vuex'
@@ -10275,7 +10332,7 @@ packages:
       registry: https://registry.npm.taobao.org/
       tarball: https://registry.nlark.com/@vue/cli-plugin-vuex/download/@vue/cli-plugin-vuex-4.5.12.tgz
     version: 4.5.12
-  registry.nlark.com/@vue/cli-service/4.5.12_@vue+compiler-sfc@3.0.11:
+  registry.nlark.com/@vue/cli-service/4.5.12_8884f0b93d182df30640241f72905ce2:
     dependencies:
       '@intervolga/optimize-cssnano-plugin': 1.0.6_webpack@4.46.0
       '@soda/friendly-errors-webpack-plugin': 1.8.0_webpack@4.46.0
@@ -10322,11 +10379,12 @@ packages:
       pnp-webpack-plugin: 1.6.4
       portfinder: 1.0.28
       postcss-loader: 3.0.0
+      sass-loader: 8.0.2_sass@1.32.11
       ssri: 7.1.0
       terser-webpack-plugin: 2.3.8_webpack@4.46.0
       thread-loader: 2.1.3_webpack@4.46.0
       url-loader: 2.3.0_file-loader@4.3.0+webpack@4.46.0
-      vue-loader: 15.9.6_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: 15.9.6_0aadd186e864c83cab1284bae568d6ae
       vue-style-loader: 4.1.3
       webpack: registry.nlark.com/webpack/4.46.0
       webpack-bundle-analyzer: 3.9.0
@@ -10343,7 +10401,27 @@ packages:
       vue-loader-v16: /vue-loader/16.2.0
     peerDependencies:
       '@vue/compiler-sfc': ^3.0.0-beta.14
+      less-loader: '*'
+      pug-plain-loader: '*'
+      raw-loader: '*'
+      sass-loader: '*'
+      stylus-loader: '*'
       vue-template-compiler: ^2.0.0
+    peerDependenciesMeta:
+      '@vue/compiler-sfc':
+        optional: true
+      less-loader:
+        optional: true
+      pug-plain-loader:
+        optional: true
+      raw-loader:
+        optional: true
+      sass-loader:
+        optional: true
+      stylus-loader:
+        optional: true
+      vue-template-compiler:
+        optional: true
     resolution:
       integrity: sha1-SDrvfcTip7ArfyJPCi73zqkQ4DM=
       registry: https://registry.npm.taobao.org/
@@ -10658,7 +10736,6 @@ packages:
       tarball: https://registry.nlark.com/filesize/download/filesize-3.6.1.tgz
     version: 3.6.1
   registry.nlark.com/follow-redirects/1.14.0:
-    dev: true
     engines:
       node: '>=4.0'
     name: follow-redirects
@@ -10891,6 +10968,14 @@ packages:
       node: '>=6.11.5'
     hasBin: true
     name: webpack
+    peerDependencies:
+      webpack-cli: '*'
+      webpack-command: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+      webpack-command:
+        optional: true
     resolution:
       integrity: sha1-v5tEBOogoHNgXgoBHRiNd8tq1UI=
       registry: https://registry.npm.taobao.org/
@@ -10949,6 +11034,7 @@ specifiers:
   '@vue/cli-service': ~4.5.0
   '@vue/compiler-sfc': ^3.0.0
   '@vue/eslint-config-standard': ^5.1.2
+  axios: ^0.21.1
   babel-eslint: ^10.1.0
   core-js: ^3.6.5
   eslint: ^6.7.2

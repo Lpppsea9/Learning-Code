@@ -2,35 +2,94 @@
   <div class="wrapper">
     <img class="wrapper__img" src="http://www.dell-lee.com/imgs/vue3/user.png">
     <div class="wrapper__input">
-      <input class="wrapper__input__content" placeholder="请输入手机号" />
+      <input
+        class="wrapper__input__content"
+        placeholder="请输入用户名"
+        v-model="username"
+      />
     </div>
     <div class="wrapper__input">
       <input
         class="wrapper__input__content"
         placeholder="请输入密码"
         type="password"
+        v-model="password"
+        autocomplete="new-password"
       />
     </div>
     <div class="wrapper__login-button" @click="handleLogin">登录</div>
-    <div class="wrapper__login-link" @click="handleRegister">立即注册</div>
+    <div class="wrapper__login-link" @click="handleRegisterClick">立即注册</div>
   </div>
+  <Toast v-if="show" :message="toastMessage" />
 </template>
 
 <script>
+import { reactive, toRefs } from 'vue'
+// 导入路由
 import { useRouter } from 'vue-router'
+import { post } from '../../utils/request'
+import Toast, { useToastEffect } from '../../components/Toast'
+
+const useLoginEffect = (showToast) => {
+  // 登录方法
+  const router = useRouter()
+  const data = reactive({ username: '', password: '' })
+
+  const handleLogin = async () => {
+    try {
+        const { username, password } = data;
+        if(username==="" || password==="") {
+          showToast('登录失败')
+          return
+        }
+        const result = await post('/api/user/login', {
+          username: data.username,
+          password: data.password
+      })
+      console.log(result)
+      if (result?.errno === 0){
+        localStorage.isLogin = true
+        router.push({ name: 'Home' })
+      } else {
+        showToast('登录失败')
+      }
+    } catch(e) {
+      showToast('请求失败')
+    }
+  }
+  // 通过 toRefs 做一个解构
+  const { username, password } = toRefs(data)
+  return { username, password, handleLogin }
+}
+
+// 所有注册相关的逻辑都放在这里
+const useRegisterEffect = () => {
+  const router = useRouter()
+  const handleRegisterClick = () => {
+      router.push({ name: 'Register' })
+  }
+  return { handleRegisterClick }
+}
+
 export default {
   name: 'Login',
+  components: {
+    Toast
+  },
+  // 职责就是告诉你, 代码执行的一个流程
   setup () {
     // 通过 useRouter 获取到路由这个实例,然后通过 router 这个实例上的 push 方法, 实现路由的跳转
     const router = useRouter()
-    const handleLogin = () => {
-      localStorage.isLogin = true
-      router.push({ name: 'Home' })
+
+    // showToast方法是从 useToastEffect 中解构出来的
+    const { show, toastMessage, showToast } = useToastEffect()
+    const { username, password, handleLogin } = useLoginEffect(showToast)
+    const { handleRegisterClick } = useRegisterEffect()
+
+    return {
+      username, password, show, toastMessage,
+      handleLogin, handleRegisterClick,
     }
-    const handleRegister = () => {
-      router.push({ name: 'Register' })
-    }
-    return { handleLogin, handleRegister }
   }
   // 传统的
   // methods: {
@@ -39,6 +98,13 @@ export default {
   //   }
   // }
 }
+/*
+  理解setup函数:
+    首先使用了路由
+    然后用了弹窗的逻辑(toast)，同时有一些登录的逻辑
+    职责就是告诉你代码执行的流程
+
+*/
 </script>
 
 <style lang="scss" scoped>
@@ -80,11 +146,11 @@ export default {
   &__login-button {
     margin: .32rem .4rem 0.16rem .4rem;
     line-height: .48rem;
-    background: #0091FF;
+    background: $btn-bgColor;
     box-shadow: 0 .04rem .08rem rgba(0,145,255,0.32);
     border-radius: .04rem;
     border-radius: .04rem;
-    color: #fff;
+    color: $bgColor;
     font-size: .16rem;
     text-align: center;
   }
