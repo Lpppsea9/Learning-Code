@@ -6,7 +6,7 @@
       v-for="(item, index) in dockerList"
       :key="item.icon"
     >
-      <div class="iconfont" v-html="item.icon" />
+      <div class="iconfont" v-html="item" />
       <div class="docker__title">{{item.text}}</div>
     </div>
   </div>
