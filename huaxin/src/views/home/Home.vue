@@ -8,7 +8,6 @@
     <Advertisement />
     <Invest />
     <router-view></router-view>
-
 </template>
 
 <script>

@@ -1,10 +1,12 @@
 <template>
-    <div class="nav">
-        <div class="nav__img"></div>
-        <div class="nav__options">
+    <div class="h-25 flex bg-white shadow-myshadow ">
+        <div class="ml-90 flex items-center cursor-pointer">
+            <img class="w-48 h-11" src="../assets/img/huaxin_logo.png" alt="logo">
+        </div>
+        <div class="flex h-25 flex-1 ml-72 mr-90 items-center">
             <div 
-                :class="{'nav__item': true, 'nav__item--active': currentTab === item.tab}"
                 v-for="item in tabItems"
+                :class="{'ml-12 mt-9 leading-6 font-bold pb-7 cursor-pointer whitespace-nowrap text-myfontcolor': true, 'nav_active': currentTab === item.tab}"
                 :key="item.id"
                 @click="() => handleTabClick(item.tab)"
             >
@@ -29,12 +31,8 @@ const tabItems = [
 // tab栏切换功能抽离
 const useTabEffect = () => {
     const currentTab = ref(tabItems[0].tab)
-    // const route = useRoute()
-    // const router = useRouter()
     const handleTabClick = (tab) => {
         currentTab.value = tab 
-        // console.log(currentTab)
-        // console.log(route.params.id)
     }
     return { currentTab, handleTabClick }
 }
@@ -43,73 +41,19 @@ export default {
     name: 'Header',
     setup() {
         const { currentTab, handleTabClick } = useTabEffect();
-
         return { tabItems, currentTab, handleTabClick }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.nav {
-    display: flex;
-    flex-direction: row;
-    height: 100px;
-    background: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.09);
-    &__img {
-        width: 190px;
-        height: 44px;
-        margin: 28px 0 28px 361px;
-        background: url('../assets/img/huaxin_logo.png');
-    }
-    &__options {
-        list-style: none;
-        display: flex;
-        flex: 1;
-        flex-wrap: nowrap;
-        margin: 37px 0 39px 292px;
-        height: 24px;
-    }
-    &__item {
-        margin-right: 50px;
-        height: 24px;
-        line-height: 24px;
-        font-family: MicrosoftYaHei;
-        font-size: 18px;
-        color: #333333;
-        letter-spacing: 0;
-        padding: 0 0 25px 0;
-        cursor: pointer;
-        &--active {
-            color: #F5A623;
-            font-weight: bold;
-            border-bottom: 4px solid #F5A623;
-            padding: 0 0 25px 0;
-            border-radius: 1px;
-        }
-    }
-    
-    &__link {
-        text-decoration: none;
-    }
-    
+.nav_active {
+    color: #F5A623;
+    font-weight: bold;
+    border-bottom: 4px solid #F5A623;
+    padding: 0 0 25px 0;
+    border-radius: 1px;
 }
-li {
-    // list-style: none;
-}
-
-// .home_navigation{
-//     list-style:none;
-//     cursor:pointer;
-//   }
-//   li:hover{
-//     color:#36A6FE;
-//     // border-bottom:4px solid #F5A623;
-//   }
-//   .activeTab{
-//     // color:#36A6FE;
-//     border-bottom:4px solid #F5A623;
-//   }
 
 
 </style>

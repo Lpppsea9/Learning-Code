@@ -1,30 +1,45 @@
 <template>
     <div class="wrap">
-        <div class="class__title">
-            <div class="class__title__item">
-                <div class="class__title__item--line"></div>
-                <div class="class__title__item--word">本周热销产品</div>
-                <div class="class__title__item--line"></div>
+        <ItemTitle :msg="titleClass" />
+        <div class="my-20 mb-24 flex justify-center">
+            <div 
+                class="w-97.5 h-112.5 mx-2"
+                v-for="(item, index) in classImgList"
+                :key="item.id"
+            >
+                <img class="w-full h-full" :src="item.imgUrl" />
             </div>
-            <div class="class__title__eng">PRODUCTS SELL LIKE HOT CAKES</div>
-        </div>
-        <div class="class__imgs">
-            <div class="class__div">
+            <!-- <div class="class__div">
                 <img src="../../assets/img/home/investClass.png" >
             </div>
             <div class="class__div">
                 <img src="../../assets/img/home/investClass.png" >
-            </div>
-            <div class="class__div">
-                <img src="../../assets/img/home/investClass.png" >
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
+import ItemTitle from '../../components/ItemTitle.vue'
+import { reactive } from 'vue'
+
+const titleClass = reactive({ 
+    cntitle: '投资课堂', 
+    engtitle: 'THE INVESTMENT CLASS'
+})
+
+const classImgList = [
+    { id: 1, imgUrl: '../../../static/investClass.png' },
+    { id: 2, imgUrl: '../../../static/investClass.png' },
+    { id: 3, imgUrl: '../../../static/investClass.png' }
+]
+    
 export default {
-    name: 'Invest'
+    name: 'Invest',
+    components: { ItemTitle },
+    setup() {
+        return { titleClass, classImgList }
+    }
 }
 </script>
 

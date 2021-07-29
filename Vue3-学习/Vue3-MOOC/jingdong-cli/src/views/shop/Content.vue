@@ -76,6 +76,7 @@ const useCurrentListEffect = (currentTab) => {
   }
 
   // watchEffect指的是当页面首次加载的时候以及他监听的一些数据发生变化的时候，他就会执行
+  // 这里是指 getContentData 中依赖currentTab所以 tab 一改变，就会重新发送请求
   watchEffect(() => { getContentData() })
 
   const { list } = toRefs(content)

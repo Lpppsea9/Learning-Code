@@ -1,56 +1,56 @@
 <template>
-    <div class="products">
-        <div class="products__title">
-            <div class="products__title__item">
-                <div class="products__title__item--line"></div>
-                <div class="products__title__item--word">本周热销产品</div>
-                <div class="products__title__item--line"></div>
-            </div>
-            <div class="products__title__eng">PRODUCTS SELL LIKE HOT CAKES</div>
-        </div>
-        <div class="products__content">
-            <div class="content__tab">
-                <div 
-                    :class="{'tab__item': true, 'tab__item--active': currentTab === item.name}"
-                    v-for="item in tabList"
-                    :key="item.id"
-                    @click="() => handleTabClick(item.name)"
-                >
-                    {{item.name}}
-                </div>
-            </div>
-            <div class="content__categories" >
-                <div 
-                    class="fundSame" 
-                    v-for="item in categoryList" 
-                    :key="item.id"
-                >
-                    {{item.name}}
-                </div>
-            </div>
-            <div class="content__list">
-                <div class="fund__line" v-for="item in fundList" :key="item.id">
-                    <div class="fund__base">{{item.name}}</div>
-                    <div class="fund__base">{{item.code}}</div>
-                    <div class="fund__base">{{item.date}}</div>
-                    <div class="fund__base">{{item.base}}</div>
-                    <div class=" fund__line__detailBtn">查看详情</div>
+    <div class="w-full">
+        <ItemTitle :msg="titleProduct" />
+        <div class="w-full flex justify-center">
+            <div class="mt-10 flex flex-col items-center w-300">
+                <div class="flex w-full h-18.5 bg-mypurple rounded">
                     <div 
-                        :class="{'fund__line__subBtn': true, 'fund__line__subBtn--active': currentBtnId === item.id}"
-                        @click="handleSubBtnClick"
+                        :class="{'relative ml-12.5 pt-5 pb-7.5 text-lg text-white tracking-normal cursor-pointer': true, 'tab__item--active': currentTab === item.name}"
+                        v-for="item in tabList"
+                        :key="item.id"
+                        @click="() => handleTabClick(item.name)"
                     >
-                        申购
+                        {{item.name}}
                     </div>
                 </div>
-                <div class="fund__bottom"></div>
+                <div class="flex relative w-300 h-17.5 bg-productwhite" >
+                    <div 
+                        id="fundSame"
+                        class="py-6 absolute text-mybusdesc tracking-normal" 
+                        v-for="item in categoryList" 
+                        :key="item.id"
+                    >
+                        {{item.name}}
+                    </div>
+                </div>
+                <div class="w-300 flex flex-col">
+                    <div 
+                        id="fund-line" 
+                        class="flex h-17.5 relative" 
+                        v-for="item in fundList" :key="item.id"
+                    >
+                        <div class="fund-base">{{item.name}}</div>
+                        <div class="fund-base">{{item.code}}</div>
+                        <div class="fund-base">{{item.date}}</div>
+                        <div class="fund-base">{{item.base}}</div>
+                        <div class="absolute top-1/2 -mt-5 right-48 w-24 h-9 leading-9 text-center border border-solid border-mypurple rounded text-mypurple cursor-pointer">查看详情</div>
+                        <div 
+                            :class="{'absolute top-1/2 -mt-5 right-12 w-24 h-9 leading-9 text-center border border-solid border-myorange rounded text-myorange cursor-pointer': true, 'subBtn--active': currentBtnId === item.id}"
+                            @click="handleSubBtnClick"
+                        >
+                            申购
+                        </div>
+                    </div>
+                    <div class="w-300 h-9.25 bg-white shadow-mybusitem"></div>
+                </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import ItemTitle from '../../components/ItemTitle.vue'
 const tabList = [
     { id: 1, name: '大集合', },
     { id: 2, name: '混合型' },
@@ -75,6 +75,8 @@ const fundList = [
     { id: 6, name: '这里是基金名称', code: '000485', date: '2021-03-25', base: '3.366' },
 ]
 
+const titleProduct = reactive({ cntitle: '本周热销产品', engtitle: 'PRODUCTS SELL LIKE HOT CAKES'})
+
 
 // 热销产品的标题切换
 const useTabEffect = () => {
@@ -94,210 +96,79 @@ const useSubBtnEffect = () => {
     return { currentBtnId, handleSubBtnClick}
 }
 
-
-
 export default {
     name: 'Products',
+    components: { ItemTitle },
     setup() {
         const {currentTab, handleTabClick} = useTabEffect()
         const {currentBtnId, handleSubBtnClick} = useSubBtnEffect()
-        return {tabList, currentTab, categoryList, fundList, currentBtnId, handleSubBtnClick, handleTabClick}
+        return {tabList, currentTab, categoryList, fundList, currentBtnId, titleProduct, handleSubBtnClick, handleTabClick}
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.products {
-    width: 100%;
-    &__title {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 71px;
-        margin-top: 80px;
-        &__item {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            height: 37px;
-            &--line {
-                width: 30px;
-                height: 4px;
-                background: #F5A623;
-                border-radius: 8px;
-                border-radius: 2px;
-                
-            }
-            &--word {
-                line-height: 37px;
-                margin: 0 10px 0 10px;
-                font-family: MicrosoftYaHei-Bold;
-                font-weight: bold;
-                font-size: 28px;
-                color: #533687;
-                letter-spacing: 0;
-            }
-        }
-        &__eng {
-            margin-top: 10px;
-            font-family: MicrosoftYaHei-Bold;
-            font-size: 18px;
-            color: #998DAE;
-            letter-spacing: 0;
-        }
-    }
-    &__content{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 40px;
-        .content__tab {
-            display: flex;
-            flex-direction: row;
-            width: 1200px;
-            height: 74px;
-            background: #533687;
-            border-radius: 4px;
-            border-radius: 4px;
-            .tab__item {
-                // height: 74px;
-                position: relative;
-                padding-top: 20px;
-                padding-bottom: 30px;
-                font-family: MicrosoftYaHei-Bold;
-                font-size: 18px;
-                color:  #FFFFFF;
-                letter-spacing: 0;
-                margin-left: 50px;
-                cursor: pointer;
-                &--active {
-                    color: #F5A623;
-                    font-weight: bold;
-                }
-                &--active:after {
-                    content: '';
-                    position: absolute;
-                    left: 50%;
-                    margin-left: -18px;
-                    bottom: 0;
-                    height: 4px;
-                    width: 36px;
-                    background-color: #F5A623;
-                }
-            }
-        }
-        .content__categories {
-            width: 1200px;
-            height: 70px;
-            background: #E8E8E8;
-            display: flex;
-            position: relative;
-            flex-direction: row;
-            .fundSame {
-                position: absolute;
-                padding: 25px 0 24px 0;
-                font-family: MicrosoftYaHei;
-                font-size: 16px;
-                color: #666666;
-                letter-spacing: 0;
-                // margin-left: 50px;
-            }
-            .fundSame:nth-child(1) {
-                left: 50px;
-            }
-            .fundSame:nth-child(2) {
-                left:244px;
-            }
-            .fundSame:nth-child(3) {
-                left:438px;
-            }
-            .fundSame:nth-child(4) {
-                left:632px;
-            }
-            .fundSame:last-child {
-                right: 50px;
-            }
-        }
-        .content__list {
-            width: 1200px;
-            display: flex;
-            flex-direction: column;
-            .fund__line {
-                height: 70px;
-                display: flex;
-                position: relative;
-                flex-direction: row;
-                
-                .fund__base {
-                    padding: 25px 0 24px 0;
-                    position: absolute;
-                    font-family: MicrosoftYaHei;
-                    font-size: 16px;
-                    color: #333333;
-                    letter-spacing: 0;
-                }
-                .fund__base:nth-child(1) {
-                    left: 50px;
-                }
-                .fund__base:nth-child(2) {
-                    left:244px;
-                }
-                .fund__base:nth-child(3) {
-                    left:438px;
-                }
-                .fund__base:nth-child(4) {
-                    left:632px;
-                }
-                &__detailBtn {
-                    position: absolute;
-                    width: 94px;
-                    height: 38px;
-                    line-height: 38px;
-                    text-align: center;
-                    top: 50%;
-                    margin-top: -19px;
-                    right: 194px;
-                    border: 1px solid #533687;
-                    border-radius: 4px;
-                    color: #533687;
-                    cursor: pointer;
-                }
-                &__subBtn {
-                    position: absolute;
-                    width: 94px;
-                    height: 38px;
-                    line-height: 38px;
-                    text-align: center;
-                    top: 50%;
-                    margin-top: -19px;
-                    right: 50px;
-                    border: 1px solid #F5A623;
-                    border-radius: 4px;
-                    color: #F5A623;
-                    cursor: pointer;
-                }
-                &__subBtn--active {
-                    color: #FFFFFF;
-                    background: #D8D8D8;
-                    border: 1px solid #D8D8D8;
-                }
-                
-            }
-            .fund__line:nth-child(odd) {
-                background: #FFFFFF;
-                box-shadow: 0 0 60px 0 rgba(0,0,0,0.10);
-            }
-            .fund__line:nth-child(even) {
-                background: #F8F8F8;
-            }
-            .fund__bottom {
-                width: 1200px;
-                height: 37px;
-                background: #FFFFFF;
-                box-shadow: 0 0 60px 0 rgba(0,0,0,0.10);
-            }
-        }
-    }
+.tab__item--active {
+    color: #F5A623;
+    font-weight: bold;
 }
+.tab__item--active:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    margin-left: -18px;
+    bottom: 0;
+    height: 4px;
+    width: 36px;
+    background-color: #F5A623;
+}
+#fundSame:nth-child(1) {
+    left: 50px;
+}
+#fundSame:nth-child(2) {
+    left:244px;
+}
+#fundSame:nth-child(3) {
+    left:438px;
+}
+#fundSame:nth-child(4) {
+    left:632px;
+}
+#fundSame:last-child {
+    right: 50px;
+}
+
+.fund-base {
+        padding: 25px 0 24px 0;
+        position: absolute;
+        font-family: MicrosoftYaHei;
+        font-size: 16px;
+        color: #333333;
+        letter-spacing: 0;
+}
+.fund-base:nth-child(1) {
+    left: 50px;
+}
+.fund-base:nth-child(2) {
+    left:244px;
+}
+.fund-base:nth-child(3) {
+    left:438px;
+}
+.fund-base:nth-child(4) {
+    left:632px;
+}
+.subBtn--active {
+    color: #FFFFFF;
+    background: #D8D8D8;
+    border: 1px solid #D8D8D8;
+}
+#fund-line:nth-child(odd) {
+    background: #FFFFFF;
+    box-shadow: 0 0 60px 0 rgba(0,0,0,0.10);
+}
+#fund-line:nth-child(even) {
+    background: #F8F8F8;
+}
+
 </style>

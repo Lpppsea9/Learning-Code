@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栅格流动处理机制</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        article {
+            margin: 0 auto;
+            width: 400px;
+            height: 100px;
+            display: grid;
+            border: 5px solid silver;
+            grid-template-columns: repeat(4, 100px);
+
+            /* justify-items align-items 默认是拉伸，如果元素设置了宽高则拉伸失效 */
+            justify-items: center; 
+            align-items: center;
+            /* justify-content: space-evenly; */
+            /* align-content: center; */
+        }
+
+        div {
+            background: blueviolet;
+            background-clip: content-box;
+            padding: 10px;
+            border: 1px solid blueviolet;
+            box-sizing: border-box;
+            color: white;
+            height: 50px;
+            width: 50px;
+            font-size: 25px;
+        }
+        div:first-child{
+            justify-self: end;
+            align-self: end;
+        }
+        div:nth-child(4) {
+            justify-self: start;
+            align-self: end;
+        }
+
+    </style>
+</head>
+
+<body>
+    <article>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </article>
+</body>
+
+</html>

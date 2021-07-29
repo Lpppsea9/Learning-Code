@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小米布局</title>
+</head>
+<!-- 
+    grid布局兼容性不是很好
+ -->
+<style>
+    article {
+        width: 300px;
+        height: 300px;
+        border: solid 5px silver;
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+    }    
+    div {
+        background: blueviolet;
+        background-clip: content-box;
+        border: solid 1px blueviolet;
+        padding: 10px;
+        box-sizing: border-box;
+        color: white;
+        font-size: 25px;
+    }
+    div:nth-child(1) {
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-row-end:3;
+        grid-column-end: 2;
+    }
+</style>
+<body>
+    后盾人
+    <article>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+    </article>
+
+</body>
+
+
+</html>

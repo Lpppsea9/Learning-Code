@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <Comp></Comp>
+
+        <Comp><span>这里是span标签</span></Comp>
+        <Comp><i>这里是i标签</i></Comp>
+        <Comp><button>自定义按钮</button></Comp>
+    </div>
+
+    <template id="Comp">
+        <div>
+            <h2>我是组件</h2>
+            <p>我是组件,哈哈哈</p>
+            <slot><button>我是默认值:按钮</button></slot>
+            
+        </div>
+    </template>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    message: '你好啊'
+                }
+            },
+            components: {
+                Comp: {
+                    template: '#Comp'
+                }
+            }
+        })
+        /* 
+            slot可以放默认值
+            Comp组件里放多少元素都会全部替换掉插槽里的内容
+        */
+    </script>
+</body>
+</html>

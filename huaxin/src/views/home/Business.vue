@@ -1,33 +1,25 @@
 <template>
-    <div class="business">
-        <div class="business__title">
-            <div class="business__title__item">
-                <div class="business__title__item--line"></div>
-                <div class="business__title__item--word">业务介绍</div>
-                <div class="business__title__item--line"></div>
-            </div>
-            <div class="business__title__eng">BUSINESS INTRODUCTION</div>
-        </div>
-        
-        <div class="business__content">
-            <div class="business__categories">
+    <div class="w-full">
+        <ItemTitle :msg="titleList" />
+        <div class="w-full flex justify-center">
+            <div class="mt-7.5 relative w-305 flex justify-between flex-wrap">
                 <div 
-                    class="business__categories__item"
+                    class="my-2.5 mx-2 h-65 flex flex-col flex-390 bg-white shadow-mybusitem rounded-4px"
                     v-for="(item, index) in businessList" :key="item.id"
                 >
-                    <img class="item__icon" :src="item.imgUrl" />
-                    <span class="item__title">{{item.title}}</span>
-                    <p class="item__desc">{{item.desc}}</p>
+                    <img class="ml-5 mt-7.5 w-10 h-10" :src="item.imgUrl" />
+                    <span class="ml-5 mt-5 h-6.5 leading-6.5 font-bold text-xl text-myfontcolor tracking-normal">{{item.title}}</span>
+                    <p class="ml-5 mt-5 w-87.5 leading-5.25 text-mybusdesc">{{item.desc}}</p>
                 </div>
-                <div class="business__sideBar">
+                <div class="absolute top-2.5 -right-20.5 w-20">
                     <div 
-                        class="sideBar__item" 
+                        class="flex flex-col items-center w-20 mb-2.5 bg-sideitembgc cursor-pointer rounded" 
                         v-for="item in sideBarList" 
                         :key="item.id"
                         @click="() => handleSideBarClick(item.pageName)"
                     >
-                        <img class="sideBar__item__icon" :src="item.imgUrl" />
-                        <div class="sideBar__item__desc">{{item.desc}}</div>
+                        <img class="mt-4 bg-no-repeat" :src="item.imgUrl" />
+                        <div class="my-3.5 text-sidedesc font-bold">{{item.desc}}</div>
                     </div>
                 </div>
             </div>
@@ -38,7 +30,9 @@
 </template>
 
 <script>
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
+import ItemTitle from '../../components/ItemTitle.vue';
 const businessList = [{ 
     id: 1, 
     imgUrl: '../../../static/yewu.png',
@@ -86,6 +80,8 @@ const sideBarList = [{
     desc: '返回顶部'
 }]
 
+const titleList = { cntitle: '业务介绍', engtitle: 'BUSINESS INTRODUCTION6'}
+
 const SideBarEffect = () => {
     const router = useRouter()
     const handleSideBarClick = (pageName) => {
@@ -98,9 +94,10 @@ const SideBarEffect = () => {
 
 export default {
     name: 'Business',
+    components: { ItemTitle },
     setup() {
         const {handleSideBarClick} = SideBarEffect()
-        return {businessList, sideBarList, handleSideBarClick}
+        return {businessList, sideBarList, titleList, handleSideBarClick}
     }
 }
 </script>
@@ -108,42 +105,6 @@ export default {
 <style lang="scss" scoped>
 .business {
     width: 100%;
-    &__title {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 71px;
-        margin-top: 80px;
-        &__item {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            height: 37px;
-            &--line {
-                width: 30px;
-                height: 4px;
-                background: #F5A623;
-                border-radius: 8px;
-                border-radius: 2px;
-            }
-            &--word {
-                line-height: 37px;
-                margin: 0 10px 0 10px;
-                font-family: MicrosoftYaHei-Bold;
-                font-weight: bold;
-                font-size: 28px;
-                color: #533687;
-                letter-spacing: 0;
-            }
-        }
-        &__eng {
-            margin-top: 10px;
-            font-family: MicrosoftYaHei-Bold;
-            font-size: 18px;
-            color: #998DAE;
-            letter-spacing: 0;
-        }
-    }
     .business__content {
         width: 100%;
         display: flex;

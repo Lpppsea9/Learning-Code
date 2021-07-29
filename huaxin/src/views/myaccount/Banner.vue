@@ -1,7 +1,5 @@
 <template>
-  <div class="banner">
-    
-    
+  <div class="flex w-full h-75 bg-account-banner bg-cover bg-no-repeat">
   </div>
 </template>
 

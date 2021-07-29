@@ -1,5 +1,5 @@
 {
-  "name": "vite-project",
+  "name": "myapp",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,6 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.2",
     "@vue/compiler-sfc": "^3.0.5",
-    "vite": "^2.2.3"
+    "vite": "^2.3.3"
   }
 }

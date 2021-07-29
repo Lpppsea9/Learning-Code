@@ -1,6 +1,6 @@
 <template>
-    <div class="wrap">
-        <div class="advertiseImg">
+    <div class="mt-20 w-full flex justify-center">
+        <div class="w-300 h-75 leading-75 text-center text-5xl font-bold text-white bg-home-adv tracking-normal">
             广告/新闻/咨询
         </div>
     </div>

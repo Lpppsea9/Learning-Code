@@ -16,8 +16,10 @@ export default {
     name: 'MyAccount',
     components: { Search, Header, Banner, Chart }
 }
+
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>
+

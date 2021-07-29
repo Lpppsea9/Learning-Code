@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05-命名简写</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    article {
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-rows: 60px 1fr 60px;
+        grid-template-columns: 60px 1fr;
+        /* 通过 grid-template-areas 来划分区域 */
+        /* grid-template-areas: "logo header"
+            "nav main"
+            "footer footer"; */
+
+        grid-template-areas: "header header"  /* 使用 "." 来占位 */
+            ". ."
+            "footer footer";
+    }
+
+    /* header-start header-start header-end header-end */
+    header,
+    nav,
+    main,
+    footer {
+        background: blueviolet;
+        background-clip:content-box;
+        padding: 10px;
+    }
+
+    header {
+        /* grid-area: logo-start/header-start/main-end/main-end; */
+        grid-area: header;
+        background: black;
+    }
+    nav {
+        grid-area: nav;
+    }
+    main {
+        grid-area: main;
+    }
+    footer {
+        grid-area: footer;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    footer div{
+        background: #ddd;
+        background-clip: content-box;
+        padding: 3px;
+    }
+</style>
+<body>
+    <article>
+        <header></header>
+        <div>nav</div>
+        <div>main</div>
+        <!-- <header></header> -->
+        <footer>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </footer>
+    </article>
+
+</body>
+
+
+</html>

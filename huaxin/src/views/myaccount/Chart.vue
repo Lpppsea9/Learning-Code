@@ -1,76 +1,76 @@
 <template>
-    <div class="wrap">
-        <div class="chart">
-            <div class="chart__tab">
-                <div 
-                    :class="{'tab__item': true, 'tab__item--active': currentTab === item.name}"
-                    v-for="item in tabList"
-                    :key="item.id"
-                    @click="() => handleTabClick(item.name)"
-                >
-                    {{item.name}}
+    <div class="flex justify-center w-full">
+        <div class="w-300 mt-10 mb-72.5">
+            <div class="flex w-300 h-16.5 bg-mypurple">
+                <div class="flex ml-5 w-full h-16.5">
+                    <div 
+                        :class="{'relative mr-15 pt-5 pb-7.5 text-lg text-white tracking-normal cursor-pointer': true, 'tab-active': currentTab === item.name}"
+                        v-for="item in tabList"
+                        :key="item.id"
+                        @click="() => handleTabClick(item.name)"
+                    >
+                        {{item.name}}
+                    </div>
                 </div>
             </div>
-            <div class="chart__content">
-                <div class="user">
-                    <div class="user__avatar">
+            <div class="w-full h-162.5 bg-white shadow-mybusitem rounded">
+                <div class="w-full h-41.25 flex border-solid border-b-2 border-mynoticebgc">
+                    <div class="relative mt-7.5 mr-10 mb-8.75 ml-5">
                         <img src="../../assets/img/myAccount/avatar.png" alt="用户">
-                        <div class="user__avatar__type">积极型</div>
+                        <div class="absolute left-12.5 bottom-18.75 w-19 h-7.5 leading-7.5 bg-positive border border-solid border-white rounded-15px text-sm text-center text-white tracking-normal">积极型</div>
                     </div>
-                    <div class="user__desc">
-                        <div class="desc__firstLine">
-                            <div class="desc__firstLine__welcome">欢迎您，吴晓岚</div>
-                            <div class="desc__firstLine__recognize">（合格投资者认定：<span>未认定</span>）</div>
+                    <div class="desc">
+                        <div class="flex">
+                            <div class="mt-13.5 h-6 leading-6 text-lg text-myfontcolor font-bold tracking-normal">欢迎您，吴晓岚</div>
+                            <div class="ml-2.5 mt-14.5 h-4.75 leading-4.75  text-14px text-myfontcolor tracking-normal">（ 合格投资者认定：<span class="text-myorange">未认定</span> ）</div>
                         </div>
-                        <div class="desc__secondLine">
-                            <div class="desc__secondLine__investType">投资者：普通</div>
-                            <div class="desc__secondLine__lastDate">上次登录：2021-03-23 14:30：55</div>
+                        <div class="flex mt-2.5 h-4.75 leading-4.75">
+                            <div class="text-14px text-myfontcolor tracking-normal">投资者：普通</div>
+                            <div class="ml-5 text-14px text-lastdate tracking-normal">上次登录：2021-03-23 14:30：55</div>
                         </div>
                     </div>
-                    <div class="user__preInfo">预留信息</div>
+                    <div class="mt-14 mr-5 mb-20 ml-auto w-21.5 h-7.5 leading-7.5 bg-preinfo rounded-2xl text-sm text-white text-center tracking-normal">预留信息</div>
                 </div>
-                <div class="allAssets">
-                    <div class="titleLine">
-                        <div class="titleLine__bar"></div>
-                        <div class="titleLine__title">我的总资产（元）</div>
-                        <div><img src="../../assets/img/myAccount/eye.png" alt="eyeIcon"></div>
-                        <div class="titleLine__updateDate">更新时间：2021-03-23</div>
+                <div class="relative h-38.75">
+                    <div class="mt-7.5 mr-0 mb-0 ml-5 flex">
+                        <div class="w-2 h-5 bg-mypurple rounded-sm"></div>
+                        <div class="my-0 mx-2.5 h-5 leading-5 text-base text-myfontcolor font-bold tracking-normal">我的总资产（元）</div>
+                        <div class="flex items-center"><img src="../../assets/img/myAccount/eye.png" alt="eyeIcon"></div>
+                        <div class="ml-5 h-5 leading-5 text-sm text-lastdate tracking-normal">更新时间：2021-03-23</div>
                     </div>
-                    <div class="assetData">
-                        <div class="assetTransit">
-                            <div class="assetNumber">100000.00</div>
-                            <div class="assetDesc">在途资产 <span>0.00</span> 元</div>
+                    <div class="flex mt-10 ml-9">
+                        <div>
+                            <div class="assetNumber text-40px text-myorange tracking-normal">100000.00</div>
+                            <div class="mt-1 text-sm text-lastdate tracking-normal">在途资产 <span class="text-myorange">0.00</span> 元</div>
                         </div>
-                        <div class="assetTransit">
-                            <div class="assetNumber">100000.00</div>
-                            <div class="assetDesc">累计收益（元）</div>
+                        <div class="ml-50">
+                            <div class="assetNumber text-40px text-myorange tracking-normal">100000.00</div>
+                            <div class="mt-1 text-sm text-lastdate tracking-normal">累计收益（元）</div>
                         </div>
                     </div>
                     <!-- 扇形图 -->
-                    <div class="assetEchart">
-                        <div id="myEcharts" :style="{ width: '650px', height: '200px' }"></div>
-                    </div>
+                    <div id="myEcharts" class="absolute left-162.5" :style="{ width: '650px', height: '180px' }"></div>
                 </div>
-                <div class="myPosition">
-                    <div class="titleLine">
-                        <div class="titleLine__bar"></div>
-                        <div class="titleLine__title">我的持仓</div>
+                <div>
+                    <div class="flex mt-12 mr-0 mb-0 ml-5">
+                        <div class="w-2 h-5 bg-mypurple rounded-sm"></div>
+                        <div class="my-0 mx-2.5 h-5 leading-5 text-base text-myfontcolor font-bold tracking-normal">我的持仓</div>
                     </div>
-                    <div class="myPosition__content">
+                    <div class="flex justify-center mt-7.5 pb-24">
                         <div 
-                            class="myPosition__content__item"
+                            class="relative my-0 mx-1 w-95 h-36 bg-white shadow-myposition rounded-sm"
                             v-for="(item, index) in myPositionData" :key="index"
                         >
-                            <div class="itemName">{{item.name}}</div>
-                            <div class="holdDetail">持有明细</div>
-                            <div class="itemData">
-                                <div class="col">
-                                    <div class="assetNumber">{{item.growthRate}}</div>
-                                    <div class="itemDesc">成立以来净值增长率</div>
+                            <div class="mt-5 mr-0 mb-0 ml-5 text-base text-myfontcolor font-bold tracking-normal">{{item.name}}</div>
+                            <div class="absolute top-5 right-2.5 w-17 h-7 leading-7 text-sm text-myorange text-center border border-solid border-myorange rounded-xl">持有明细</div>
+                            <div class="flex mt-2 mr-0 mb-0 ml-5">
+                                <div class="flex flex-col">
+                                    <div class="assetNumber text-40px text-myorange tracking-normal">{{item.growthRate}}</div>
+                                    <div class="mt-0.5 text-xs text-lastdate tracking-normal">成立以来净值增长率</div>
                                 </div>
-                                <div class="col">
-                                    <div class="assetNumber">{{item.income}}</div>
-                                    <div class="itemDesc">累计收益（元）</div>
+                                <div class="flex flex-col ml-30">
+                                    <div class="assetNumber text-40px text-myorange tracking-normal">{{item.income}}</div>
+                                    <div class="mt-0.5 text-xs text-lastdate tracking-normal">累计收益（元）</div>
                                 </div>
                             </div>
                         </div>
@@ -124,60 +124,67 @@ export default {
 
         // 基础配置一下Echarts
         function initChart() {
-        let chart = echart.init(document.getElementById("myEcharts"));
-        // 把配置和数据放这里
-        var option = {
-	        title: {
-                // text: '某站点用户访问来源',
-                // subtext: '纯属虚构',
-                // left: 'center'
-            },
-            tooltip: {
-                show: false,
-                trigger: 'item'
-            },
-            legend: {
-                // show:false,
-                orient: 'vertical',
-                right: '340px',
-                top:'50px',
-                icon: 'circle',
-            },
-            series: [
-                {
-                    name: '访问来源',
-                    type: 'pie',
-                    width: 'auto',
-                    height: '100%',
-                    right:'400px',
-                    top: '0px',
-                    radius: '50%',
-                    label: {
-                        show:false
-                    },
-                    data: [
-                        {value: 1048, name: '固收类'},
-                        {value: 735, name: '权益类'},
-                        {value: 580, name: '混合类'},
-                        {value: 484, name: 'FOF类'},
-                        // {value: 300, name: '视频广告'}
-                    ],
-                    emphasis: {
+            let chart = echart.init(document.getElementById("myEcharts"));
+            // 把配置和数据放这里
+            var option = {
+                color:[ '#F2734E','#7DCAA6','#7878FA', '#68C7EB' ],
+                tooltip: {
+                    show: false,
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    height: '160px',
+                    itemGap: 15,
+                    itemWidth:15,
+                    itemHeight:15,
+                    right: '370px',
+                    top:'25px',
+                    icon: 'circle',
+                    itemStyle: {
+                    }
+                },
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        width: 'auto',
+                        height: '100%',
+                        right:'400px',
+                        top: '-10px',
+                        radius: '80%',
                         itemStyle: {
-                            // shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            borderWidth:2,
+                            borderColor: '#fff'
+                        },
+                        label: {
+                            show:false
+                        },
+                        data: [
+                            {value: 25, name: '固收类'},
+                            {value: 12, name: '权益类'},
+                            {value: 25, name: '混合类'},
+                            {value: 28, name: 'FOF类'},
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)',
+                                borderColor: '#fff'
+                            }
                         }
                     }
-                }
-            ]
-	    }
-        chart.setOption(option)
+                ]
+	        }
+            chart.setOption(option)
+            // window.onresize = myChart.resize;
             window.onresize = function() {
                 //自适应大小
                 chart.resize();
+                
             };
         }
+        
 
         const { currentTab, handleTabClick } = useTabEffect();
         return { tabList, currentTab, myPositionData, handleTabClick, 
@@ -187,306 +194,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#myEcharts {
-    top:0
+.tab-active {
+    color: #F5A623;
+    font-weight: bold;
 }
-.wrap {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.tab-active:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    margin-left: -22px;
+    bottom: 0;
+    height: 4px;
+    width: 44px;
+    background-color: #F5A623;
 }
-.chart{
-    width: 1200px;
-    margin:40px 0 290px 0;
-    &__tab {
-        display: flex;
-        flex-direction: row;
-        width: 1200px;
-        height: 66px;
-        background: #533687;
-        .tab__item {
-            // height: 74px;
-            position: relative;
-            padding-top: 20px;
-            padding-bottom: 30px;
-            font-family: MicrosoftYaHei-Bold;
-            font-size: 18px;
-            color:  #FFFFFF;
-            letter-spacing: 0;
-            margin-left: 60px;
-            cursor: pointer;
-            &--active {
-                color: #F5A623;
-                font-weight: bold;
-            }
-            &--active:after {
-                content: '';
-                position: absolute;
-                left: 50%;
-                margin-left: -22px;
-                bottom: 0;
-                height: 4px;
-                width: 44px;
-                background-color: #F5A623;
-            }
-        }
-        .tab__item:first-child {
-            margin-left: 20px;
-        }
-    }
-    &__content {
-        background: #FFFFFF;
-        box-shadow: 0 0 60px 0 rgba(0,0,0,0.10);
-        border-radius: 4px;
-        border-radius: 4px;
-        .user {
-            display: flex;
-            flex-direction: row;
-            border-bottom: solid #F8F8F8 2px;
-            &__avatar {
-                position: relative;
-                margin: 30px 40px 35px 20px;
-                &__type {
-                    width: 76px;
-                    height: 30px;
-                    line-height: 30px;
-                    text-align: center;
-                    position: absolute;
-                    left: 50px;
-                    bottom: 75px;
-                    background: #EA9E21;
-                    border: 1px solid #FFFFFF;
-                    border-radius: 15px;
-                    font-family: MicrosoftYaHei;
-                    font-size: 14px;
-                    color: #FFFFFF;
-                    letter-spacing: 0;
-                }
-            }
-            &__desc {
-                // margin-top: auto;
-                // margin-bottom: 58px;
-                .desc__firstLine {
-                    display: flex;
-                    flex-direction: row;
-                    &__welcome {
-                        height: 24px;
-                        line-height: 24px;
-                        margin-top: 54px;
-                        font-family: MicrosoftYaHei-Bold;
-                        font-size: 18px;
-                        color: #333333;
-                        letter-spacing: 0;
-                        font-weight: bold;
-                    }
-                    &__recognize {
-                        height: 19px;
-                        line-height: 19px;
-                        margin-left: 10px;
-                        margin-top: 48px;
-                        padding-top: 10px;
-                        font-family: MicrosoftYaHei;
-                        font-size: 14px;
-                        color: #333333;
-                        letter-spacing: 0;
-                        span {
-                            color: rgb(233, 158, 33);
-                        }
-                    }
-                }
-                .desc__secondLine {
-                    height: 19px;
-                    line-height: 19px;
-                    margin-top: 10px;
-                    display: flex;
-                    flex-direction: row;
-                    &__investType {
-                        font-family: MicrosoftYaHei;
-                        font-size: 14px;
-                        color: #333333;
-                        letter-spacing: 0;
-                    }
-                    &__lastDate {
-                        margin-left: 20px;
-                        font-family: MicrosoftYaHei;
-                        font-size: 14px;
-                        color: #999999;
-                        letter-spacing: 0;
-                    }
-                }
-            }
-            &__preInfo {
-                width: 86px;
-                height: 30px;
-                line-height: 30px;
-                background: #EA9E21;
-                border-radius: 15px;
-                font-family: MicrosoftYaHei;
-                font-size: 14px;
-                color: #FFFFFF;
-                letter-spacing: 0;
-                text-align: center;
-                margin: 55px 20px 80px auto;
-                
-            }
-        }
-
-    }
-}
-.allAssets {
-    position: relative;
-    .titleLine {
-        margin: 30px 0 0 20px;
-        display: flex;
-        flex-direction: row;
-        &__bar {
-            width: 7px;
-            height: 19px;
-            background: #503483;
-            border-radius: 2px;
-            border-radius: 2px;
-        }
-        &__title {
-            height: 21px;
-            line-height: 21px;
-            margin:0 10px;
-            font-weight: bold;
-            font-family: MicrosoftYaHei-Bold;
-            font-size: 16px;
-            color: #333333;
-            letter-spacing: 0;
-        }
-        &__updateDate {
-            height: 19px;
-            line-height: 19px;
-            margin-left: 20px;
-            font-family: MicrosoftYaHei;
-            font-size: 14px;
-            color: #999999;
-            letter-spacing: 0;
-        }
-    }
-    .assetData {
-        display: flex;
-        flex-direction: row;
-        margin-top: 40px;
-        margin-left: 37px;
-        .assetTransit {
-            // .assetNumber {
-            //     font-family: "DINCond-Bold";
-            //     font-size: 40px;
-            //     color: #F5A623;
-            //     letter-spacing: 0;
-            // }
-            .assetDesc {
-                font-family: MicrosoftYaHei;
-                font-size: 14px;
-                color: #999999;
-                letter-spacing: 0;
-                margin-top: 5px;
-                span {
-                    color: rgb(233, 158, 33);
-                }
-            }
-        }
-        .assetTransit:nth-child(2) {
-            margin-left: 200px;
-        }
-    }
-    // 扇形图
-    .assetEchart {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-}
-// 数字公用样式类型
 .assetNumber {
     font-family: "DINCond-Bold";
-    font-size: 40px;
-    color: #F5A623;
-    letter-spacing: 0;
 }
-.myPosition {
-    .titleLine {
-        margin: 50px 0 0 20px;
-        display: flex;
-        flex-direction: row;
-        &__bar {
-            width: 7px;
-            height: 19px;
-            background: #503483;
-            border-radius: 2px;
-            border-radius: 2px;
-        }
-        &__title {
-            height: 21px;
-            line-height: 21px;
-            margin:0 10px;
-            font-weight: bold;
-            font-family: MicrosoftYaHei-Bold;
-            font-size: 16px;
-            color: #333333;
-            letter-spacing: 0;
-        }
-    }
-    &__content {
-        display: flex;
-        flex-direction: row;
-        margin-top: 30px;
-        padding-bottom: 89px;
-        justify-content: center;
-        &__item {
-            position: relative;
-            width: 380px;
-            height: 138px;
-            margin: 0 5px;
-            background: #FFFFFF;
-            box-shadow: 0 2px 10px 0 rgba(0,0,0,0.08);
-            border-radius: 2px;
-            .itemName {
-                margin: 20px 0 0 20px;
-                font-family: MicrosoftYaHei-Bold;
-                font-size: 16px;
-                font-weight: bolder;
-                color: #333333;
-                letter-spacing: 0;
-            }
-            .holdDetail {
-                position: absolute;
-                width: 68px;
-                height: 28px;
-                line-height: 28px;
-                font-size: 14px;
-                border: 1px solid #F5A623;
-                border-radius: 14px;
-                color: #F5A623;
-                text-align: center;
-                top: 20px;
-                right: 10px;
-            }
-            .itemData {
-                margin: 20px 0 0 20px;
-                display: flex;
-                flex-direction: row;
-                .col {
-                    display: flex;
-                    flex-direction: column;
-                    .itemDesc {
-                        margin-top: 2px;
-                        font-family: MicrosoftYaHei;
-                        font-size: 12px;
-                        color: #999999;
-                        letter-spacing: 0;
-                    }
-                }
-                .col:nth-child(2) {
-                    margin-left: 120px;
-                }
-            }
-            
-        }
-    }
+.assetEchart {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#myEcharts {
+    top:0
 }
 </style>

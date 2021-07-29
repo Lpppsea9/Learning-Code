@@ -1,24 +1,20 @@
 <template>
-  <div class="banner">
-    <div class="banner__dots">
+  <div class="relative flex justify-center w-full h-112.5 bg-home-banner bg-no-repeat ">
+    <div class="w-34 h-5 absolute bottom-5 flex items-center justify-center  bg-mydotsbgc rounded-10px">
       <div 
         v-for="(item, index) in dotsList" :key="index"
         :class="{
-          'banner__dots__item': true,
-          'banner__dots__item--active': currentIndex === item.index
+          'mx-2 w-2 h-2 bg-white rounded-50% hover:bg-myorange cursor-pointer': true,
+          'dots--active': currentIndex === item.index
         }"
       >
-
       </div>
-      <!-- <div class="banner__dots__item"></div>
-      <div class="banner__dots__item"></div>
-      <div class="banner__dots__item"></div> -->
     </div>
-    <div class="banner__scan">
-      <div class="banner__scan__login">我要登录</div>
-      <div class="banner__scan__open">我要开户</div>
-      <div class="banner__scan__img"></div>
-      <div class="banner__scan__desc">扫一扫关注微信公众号</div>
+    <div class="absolute flex flex-col items-center top-7.5 right-90 bottom-7.5 left-auto w-75 h-95 rounded-lg bg-myscanbgc">
+      <div class="mt-7.5 w-65 h-12.5 leading-12.5 font-bold text-lg text-center text-white rounded-lg bg-myorange ">我要登录</div>
+      <div class="mt-5 w-65 h-12.5 leading-12.5 font-bold text-lg text-center text-white rounded-lg bg-myorange ">我要开户</div>
+      <div class="mt-5 w-40 h-40 bg-home-scan bg-contain bg-no-repeat "></div>
+      <div class="mt-2.5 tracking-normal text-mypurple">扫一扫关注微信公众号</div>
     </div>
   </div>
 </template>
@@ -35,92 +31,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.banner {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    height: 450px;
-    background: url('../../assets/img/banner.png') no-repeat center;
-    background-size: 100% 450px;
-    &__dots {
-      position: absolute;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 136px;
-      height: 20px;
-      background: rgba(255,255,255,0.54);
-      border-radius: 10px;
-      border-radius: 10px;
-      bottom: 20px;
-      &__item {
-        margin-left: 7px;
-        margin-right: 7px;
-        width: 9px;
-        height: 9px;
-        background: #FFFFFF;
-        border-radius: 50%;
-        &--active {
-          background: #F08200;
-        }
-      }
-      &__item:hover {
-        cursor: pointer;
-        background: #F08200;
-      }
-      
-    }
-    &__scan {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      left: 1260px;
-      right: 360px;
-      top:30px;
-      bottom: 40px;
-      width: 300px;
-      height: 380px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 8px;
-      &__login, &__open {
-        width: 260px;
-        height: 50px;
-        line-height: 50px;
-        margin-top: 30px;
-        background: #F5A623;
-        text-align: center;
-        font-family: MicrosoftYaHei-Bold;
-        font-size: 18px;
-        font-weight: bold;
-        color: #FFFFFF;
-        letter-spacing: 0;
-        border-radius: 8px;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-      &__open {
-        margin-top: 20px;
-      }
-      &__img {
-        width: 160px;
-        height: 160px;
-        background: url('../../assets/img/home/scanImg.png') no-repeat ;
-        background-size: 100% 100%;
-        margin-top: 20px;
-      }
-      &__desc {
-        margin-top: 10px;
-        font-family: MicrosoftYaHei;
-        font-size: 16px;
-        color: #533687;
-        letter-spacing: 0;
-      }
-    }
-
-}
-
 </style>

@@ -17,6 +17,7 @@
     </div>
     <ShopInfo :item="item" :hideBorder="true" v-if="item.imgUrl" />
     <Content />
+    <Csart />
   </div>
 </template>
 
@@ -26,6 +27,8 @@ import { useRouter, useRoute } from 'vue-router'
 import { get } from '../../utils/request'
 import ShopInfo from '../../components/ShopInfo'
 import Content from './Content'
+import Cart from './Cart'
+import Cart from './Cart.vue'
 
 // 获取当前商铺信息
 const useShopInfoEffect = () => {
@@ -59,7 +62,7 @@ const useBackRouterEffect = () => {
 
 export default {
   name: 'Shop',
-  components: { ShopInfo, Content },
+  components: { ShopInfo, Content, CartCart },
   setup() {
     // Router 是指当前整个大的路由的一些信息
     // route 指的是当前你访问路径的一些信息
