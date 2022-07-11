@@ -52,9 +52,12 @@ Iterator 接口
 */
 
 let testList = [1, 2, 3]
-console.log(testList.constructor === Array);
+// console.log(testList.constructor === Array);
 function Foo() {
   console.log("我是Foo");
 }
 
-let Na = new Foo()
+// let Na = new Foo()
+
+const aFunc = new Function()
+console.log(aFunc);
