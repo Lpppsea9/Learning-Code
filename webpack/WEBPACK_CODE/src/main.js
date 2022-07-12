@@ -8,8 +8,15 @@ import "./sass/index.sass";
 import "./sass/index.scss";
 import "./stylus/index.styl";
 
-console.log(count(2, 1));
+const result = count(9, 1);
+console.log(result);
 console.log(sum(1, 2, 3, 4));
+
+if (module.hot) {
+	// 判断是否支持热模块更新
+	module.hot.accept("./js/count");
+	module.hot.accept("./js/sum");
+}
 
 /* 
   entry 入口
