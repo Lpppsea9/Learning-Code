@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body></body>
+	<script>
+		const a = { name: "lppp", age: 24, frend: [1, 2, 3] };
+		const b = deepClone(a);
+		b.name = "ooo";
+		function deepClone(obj = {}) {
+			if (typeof obj !== "object" || obj == null) {
+				return obj;
+			}
+
+			// 初始化返回结果
+			let result;
+			if (obj instanceof Array) {
+				result = [];
+			} else {
+				result = {};
+			}
+
+			for (let key in obj) {
+				// 保证不是原型的属性
+				if (obj.hasOwnProperty(key)) {
+					// 递归调用
+					result[key] = deepClone(obj[key]);
+				}
+			}
+
+			return result;
+		}
+	</script>
+</html>
