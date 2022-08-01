@@ -14,36 +14,11 @@
 		<div class="box4"></div>
 		<div class="box5"></div>
 		<span class="iconfont icon-save"></span>
-
+    <button id="btn">计算</button>
 		<!-- 手动引入的js不需要了, 通过插件自动引入 -->
 		<!-- <script src="../dist/static/js/main.js"></script> -->
 
-    不用<input type="text" id ="root"></input>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    使用<input type="text1" id ="root1"></input>
-
-		<script>
-    const text = document.getElementById('root')
-    text.addEventListener('input',function(e) {
-      console.log(e.target.value)
-    })
-
-    function debounce(){
-      let time = null
-      return function(){
-        let cc = this, args =arguments
-        if(time){
-          clearTimeout(time)
-        }
-        time = setTimeout(function(){
-          
-        },delay)
-        
-      }
-    }
+   
     </script>
 	</body>
 </html>

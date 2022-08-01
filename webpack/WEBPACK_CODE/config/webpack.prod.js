@@ -1,7 +1,14 @@
+const os = require("os");
 const path = require("path"); // nodejs核心模块, 专门用来处理路径问题
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin");
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
+
+const threads = os.cpus().length; //cpu核数
 
 module.exports = {
 	// 入口
@@ -12,7 +19,11 @@ module.exports = {
 		// __distname nodejs的变量, 代表当前文件的文件夹目录
 		path: path.resolve(__dirname, "../dist"), // 绝对路径
 		// 入口文件打包输出文件名
-		filename: "static/js/main.js",
+		filename: "static/js/[name].[contenthash:8].js",
+		// 给打包输出的其他文件命名
+		chunkFilename: "static/js/[name].[contenthash:8].chunk.js",
+		// 图片、字体等通过type: asset处理资源命名方式
+		assetModuleFilename: "static/media/[hash:10][ext][query]",
 		// 自动清空上次打包的内容
 		// 原理：在打包前，将path整个目录内容清空，再进行打包
 		clean: true,
@@ -68,33 +79,42 @@ module.exports = {
 								maxSize: 10 * 1024, // 10kb
 							},
 						},
-						generator: {
-							// 输出图片名称
-							// [hash:10] hash值取前10位
-							filename: "static/images/[hash:10][ext][query]",
-						},
+						// generator: {
+						// 	// 输出图片名称
+						// 	// [hash:10] hash值取前10位
+						// 	filename: "static/images/[hash:10][ext][query]",
+						// },
 					},
 					{
 						test: /\.(ttf|woff2?|mp3|mp4|avi)$/,
 						type: "asset/resource", // 原封不动的输出
-						generator: {
-							// 输出名称
-							// [hash:10] hash值取前10位
-							filename: "static/media/[hash:10][ext][query]",
-						},
+						// generator: {
+						// 	// 输出名称
+						// 	// [hash:10] hash值取前10位
+						// 	filename: "static/media/[hash:10][ext][query]",
+						// },
 					},
 					{
 						test: /\.m?js$/,
 						// exclude: /node_modules/, // 排除node_modules中的js文件(这些文件不处理)
 						include: path.resolve(__dirname, "../src"), //只处理src下的文件, 其他文件不处理
-						use: {
-							loader: "babel-loader",
-							options: {
-								// 	presets: ["@babel/preset-env"], // 智能预设
-								cacheDirectory: true, // 开启babel缓存
-								cacheCompression: false, // 关闭缓存文件压缩
+						use: [
+							{
+								loader: "thread-loader", //开启多进程
+								options: {
+									workers: threads,
+								},
 							},
-						},
+							{
+								loader: "babel-loader",
+								options: {
+									// 	presets: ["@babel/preset-env"], // 智能预设
+									cacheDirectory: true, // 开启babel缓存
+									cacheCompression: false, // 关闭缓存文件压缩
+									plugins: ["@babel/plugin-transform-runtime"], //减少代码体积
+								},
+							},
+						],
 					},
 				],
 			},
@@ -112,6 +132,7 @@ module.exports = {
 				__dirname,
 				"../node_modules/.cache/eslintcache"
 			),
+			threads, //开启多进程和设置进程数量
 		}),
 		// 模板：以public/index.html文件创建新的html文件
 		// 新的html文件特点：1.结构和原来一致 2.自动引入打包输出的资源
@@ -119,9 +140,64 @@ module.exports = {
 			template: path.resolve(__dirname, "../public/index.html"),
 		}),
 		new MiniCssExtractPlugin({
-			filename: "static/css/main.css",
+			filename: "static/css/[name].[contenthash:10].css",
+			chunkFilename: "static/css/[name].[contenthash:10].chunk.css",
+		}),
+
+		new PreloadWebpackPlugin({
+			// rel: "preload",
+			// as: "script",
+			rel: "prefetch",
 		}),
 	],
-	mode: "development",
+	optimization: {
+		// 压缩的操作
+		minimizer: [
+			// 压缩css
+			new CssMinimizerPlugin(),
+			// 压缩js
+			new TerserWebpackPlugin({
+				parallel: threads,
+			}),
+			new ImageMinimizerPlugin({
+				minimizer: {
+					implementation: ImageMinimizerPlugin.imageminGenerate,
+					options: {
+						plugins: [
+							["gifsicle", { interlaced: true }],
+							["jpegtran", { progressive: true }],
+							["optipng", { optimizationLevel: 5 }],
+							[
+								"svgo",
+								{
+									plugins: [
+										"preset-default",
+										"prefixIds",
+										{
+											name: "sortAttrs",
+											params: {
+												xmlnsOrder: "alphabetical",
+											},
+										},
+									],
+								},
+							],
+						],
+					},
+				},
+			}),
+		],
+
+		// 代码分割配置
+		splitChunks: {
+			chunks: "all",
+			// 其他都用默认值
+		},
+
+		runtimeChunk: {
+			name: (entrypoint) => `runtime${entrypoint.name}.js`,
+		},
+	},
+	mode: "production",
 	devtool: "source-map",
 };

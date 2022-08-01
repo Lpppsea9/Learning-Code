@@ -1,6 +1,9 @@
+const os = require("os");
 const path = require("path"); // nodejs核心模块, 专门用来处理路径问题
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const threads = os.cpus().length; //cpu核数
 
 module.exports = {
 	// 入口
@@ -11,13 +14,17 @@ module.exports = {
 		// 开发模式没有输出
 		path: undefined, // 绝对路径
 		// 入口文件打包输出文件名
-		filename: "static/js/main.js",
+		filename: "static/js/[name].js",
+		// 给打包输出的其他文件命名
+		chunkFilename: "static/js/[name].chunk.js",
+		// 图片、字体等通过type: asset处理资源命名方式
+		assetModuleFilename: "static/media/[hash:10][ext][query]",
 	},
 	// 加载器
 	module: {
 		rules: [
 			{
-				// 每个文件只能被其中一个loader处理
+				// 每个文件只能被其中一个loader配置处理
 				oneOf: [
 					// loader的配置
 					{
@@ -64,33 +71,42 @@ module.exports = {
 								maxSize: 10 * 1024, // 10kb
 							},
 						},
-						generator: {
-							// 输出图片名称
-							// [hash:10] hash值取前10位
-							filename: "static/images/[hash:10][ext][query]",
-						},
+						// generator: {
+						// 	// 输出图片名称
+						// 	// [hash:10] hash值取前10位
+						// 	filename: "static/images/[hash:10][ext][query]",
+						// },
 					},
 					{
 						test: /\.(ttf|woff2?|mp3|mp4|avi)$/,
 						type: "asset/resource", // 原封不动的输出
-						generator: {
-							// 输出名称
-							// [hash:10] hash值取前10位
-							filename: "static/media/[hash:10][ext][query]",
-						},
+						// generator: {
+						// 	// 输出名称
+						// 	// [hash:10] hash值取前10位
+						// 	filename: "static/media/[hash:10][ext][query]",
+						// },
 					},
 					{
 						test: /\.m?js$/,
 						// exclude: /node_modules/, // 排除node_modules中的js文件(这些文件不处理)
 						include: path.resolve(__dirname, "../src"), //只处理src下的文件，其他文件不处理
-						use: {
-							loader: "babel-loader",
-							options: {
-								// 	presets: ["@babel/preset-env"], // 智能预设
-								cacheDirectory: true, // 开启babel缓存
-								cacheCompression: false, // 关闭缓存文件压缩
+						use: [
+							{
+								loader: "thread-loader", //开启多进程
+								options: {
+									workers: threads,
+								},
 							},
-						},
+							{
+								loader: "babel-loader",
+								options: {
+									// 	presets: ["@babel/preset-env"], // 智能预设
+									cacheDirectory: true, // 开启babel缓存
+									cacheCompression: false, // 关闭缓存文件压缩
+									plugins: ["@babel/plugin-transform-runtime"], //减少代码体积
+								},
+							},
+						],
 					},
 				],
 			},
@@ -103,10 +119,16 @@ module.exports = {
 			// 检测哪些文件
 			context: path.resolve(__dirname, "../src"),
 			exclude: "node_modules", // 默认值
+			cache: true,
+			cacheLocation: path.resolve(
+				__dirname,
+				"../node_modules/.cache/eslintcache"
+			),
+			threads, //开启多进程和设置进程数量
 		}),
-		// 模板：以public/index.html文件创建新的html文件
-		// 新的html文件特点：1.结构和原来一致 2.自动引入打包输出的资源
 		new HtmlWebpackPlugin({
+			// 模板：以public/index.html文件创建新的html文件
+			// 新的html文件特点：1.结构和原来一致 2.自动引入打包输出的资源
 			template: path.resolve(__dirname, "../public/index.html"),
 		}),
 	],
@@ -115,7 +137,7 @@ module.exports = {
 		host: "localhost", //启动服务器域名
 		port: "3000", // 启动服务器端口号
 		open: true, // 是否打开浏览器
-		hot: true, // hmr
+		hot: true, // hmr热模块替换 style-loader默认实现了热模块替换 vue-loader自动实现热模块替换
 	},
 	// 模式
 	mode: "development",
