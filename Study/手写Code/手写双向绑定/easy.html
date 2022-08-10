@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div>
+			<span id="span"></span>
+			<hr />
+			<input id="input" type="text" />
+		</div>
+
+		<script>
+			const data = {
+				text: "default",
+			};
+			const mySpan = document.getElementById("span");
+			const myInput = document.getElementById("input");
+
+			Object.defineProperty(data, "text", {
+				get() {},
+				set(newVal) {
+					myInput.value = newVal;
+					mySpan.innerHTML = newVal;
+				},
+			});
+
+			myInput.addEventListener("keyup", (e) => {
+				data.text = e.target.value;
+			});
+		</script>
+	</body>
+</html>
