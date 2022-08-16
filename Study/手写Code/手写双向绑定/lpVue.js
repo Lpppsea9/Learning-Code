@@ -14,7 +14,6 @@ class Vue {
 
 		// 劫持并且监听所有属性
 		this.observer();
-
 	}
 	proxy() {
 		for (let key in this.$data) {
@@ -99,7 +98,7 @@ class Vue {
 //
 class Watcher {
 	constructor(obj, vmKey, dom, str) {
-		// obj:是new Vue这个大对象
+		// obj: 是new Vue这个大对象
 		// vmKey，就是视图中{{}}这些内容
 		// dom：就是文本节点，最后更新的也是他
 		// str：字符串，为死的textContent

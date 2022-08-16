@@ -31,14 +31,14 @@ class Vue {
 		for (let key in this.$data) {
 			let value = this.$data[key];
 			let self = this;
-			console.log(this);
+			console.log("外部", this);
 			Object.defineProperty(this.$data, key, {
 				get() {
 					return value;
 				},
 				set(val) {
 					value = val;
-					console.log(self);
+					console.log("内部", this);
 					if (self.$watchClient[key]) {
 						self.$watchClient[key].forEach((item) => {
 							item.update();

@@ -20,12 +20,24 @@ import Products from './Products.vue'
 import Advertisement from './Advertisement.vue'
 import Invest from './Invest.vue'
 
+import { onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue'
 export default {
-    name: 'Home',
-    components: { Search, Header, Banner, Notice, Business, Products, Advertisement, Invest }
+  name: 'Home',
+  components: { Search, Header, Banner, Notice, Business, Products, Advertisement, Invest },
+  // 等于 beforeCeate created（setup整合了这两个）
+  setup() {
+    onBeforeMount(() => {
+      console.log("Home onBeforeMount");
+    })
+     
+    onMounted(() => {
+        console.log("Home onMounted");
+      })
+  }
+    
+    // onBeforeUpdate(() =>{})
 }
 </script>
 
 <style>
-
 </style>

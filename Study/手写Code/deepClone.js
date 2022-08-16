@@ -9,7 +9,7 @@ let data1 = {
 
 const data2 = deepClone(data1);
 data2.user.name = "liupneg";
-console.log(data1.user.name);
+console.log(data2);
 
 function deepClone(obj) {
 	if (typeof obj !== "object" || typeof obj == null) {
@@ -17,7 +17,7 @@ function deepClone(obj) {
 	}
 	let result;
 	//判断 result的 类型
-	if (typeof result == Array) {
+	if (obj instanceof Array) {
 		result = [];
 	} else {
 		result = {};

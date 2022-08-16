@@ -42,10 +42,18 @@
                         </div>
                     </div>
                     <div class="w-300 h-9.25 bg-white shadow-mybusitem"></div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 测试 -->
+    <p>
+      ref demo 
+      {{ageRef}}
+      {{state.name}}
+    </p>
 </template>
 
 <script>
@@ -82,16 +90,18 @@ const titleProduct = reactive({ cntitle: '本周热销产品', engtitle: 'PRODUC
 const useTabEffect = () => {
     const currentTab = ref(tabList[0].name)
     const handleTabClick = (tab) => {
-        currentTab.value = tab
+      currentTab.value = tab
+        console.log(currentTab.value );
     }
     return { currentTab, handleTabClick }
 }
 
 // 申购按钮的切换
 const useSubBtnEffect = () => {
-    const currentBtnId = ref(fundList[5].id)
-    const handleSubBtnClick = () => {
-        
+    const currentBtnId = ref(fundList[4].id)
+    const handleSubBtnClick = (tab) => {
+      // currentBtnId.value = tab
+        console.log(currentBtnId,tab);
     }
     return { currentBtnId, handleSubBtnClick}
 }
@@ -102,73 +112,85 @@ export default {
     setup() {
         const {currentTab, handleTabClick} = useTabEffect()
         const {currentBtnId, handleSubBtnClick} = useSubBtnEffect()
-        return {tabList, currentTab, categoryList, fundList, currentBtnId, titleProduct, handleSubBtnClick, handleTabClick}
+        /* 测试 */
+        const ageRef = ref(12) //值类型 响应式
+        const nameRef = ref("双越")
+
+      const state = reactive({
+          name: nameRef
+        })
+
+      setTimeout(() => {
+        ageRef.value = 15
+        nameRef.value ="llll"
+      },2000)
+
+        return {tabList, currentTab, categoryList, fundList, currentBtnId, titleProduct,ageRef,state, handleSubBtnClick, handleTabClick}
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .tab__item--active {
-    color: #F5A623;
-    font-weight: bold;
+  color: #f5a623;
+  font-weight: bold;
 }
 .tab__item--active:after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    margin-left: -18px;
-    bottom: 0;
-    height: 4px;
-    width: 36px;
-    background-color: #F5A623;
+  content: "";
+  position: absolute;
+  left: 50%;
+  margin-left: -18px;
+  bottom: 0;
+  height: 4px;
+  width: 36px;
+  background-color: #f5a623;
 }
 #fundSame:nth-child(1) {
-    left: 50px;
+  left: 50px;
 }
 #fundSame:nth-child(2) {
-    left:244px;
+  left: 244px;
 }
 #fundSame:nth-child(3) {
-    left:438px;
+  left: 438px;
 }
 #fundSame:nth-child(4) {
-    left:632px;
+  left: 632px;
 }
 #fundSame:last-child {
-    right: 50px;
+  right: 50px;
 }
 
 .fund-base {
-        padding: 25px 0 24px 0;
-        position: absolute;
-        font-family: MicrosoftYaHei;
-        font-size: 16px;
-        color: #333333;
-        letter-spacing: 0;
+  padding: 25px 0 24px 0;
+  position: absolute;
+  font-family: MicrosoftYaHei;
+  font-size: 16px;
+  color: #333333;
+  letter-spacing: 0;
 }
 .fund-base:nth-child(1) {
-    left: 50px;
+  left: 50px;
 }
 .fund-base:nth-child(2) {
-    left:244px;
+  left: 244px;
 }
 .fund-base:nth-child(3) {
-    left:438px;
+  left: 438px;
 }
 .fund-base:nth-child(4) {
-    left:632px;
+  left: 632px;
 }
 .subBtn--active {
-    color: #FFFFFF;
-    background: #D8D8D8;
-    border: 1px solid #D8D8D8;
+  color: #ffffff;
+  background: #d8d8d8;
+  border: 1px solid #d8d8d8;
 }
 #fund-line:nth-child(odd) {
-    background: #FFFFFF;
-    box-shadow: 0 0 60px 0 rgba(0,0,0,0.10);
+  background: #ffffff;
+  box-shadow: 0 0 60px 0 rgba(0, 0, 0, 0.1);
 }
 #fund-line:nth-child(even) {
-    background: #F8F8F8;
+  background: #f8f8f8;
 }
-
 </style>

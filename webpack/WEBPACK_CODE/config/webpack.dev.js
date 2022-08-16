@@ -2,10 +2,12 @@ const os = require("os");
 const path = require("path"); // nodejs核心模块, 专门用来处理路径问题
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpackCommonConf = require("./webpack.common");
+const { merge } = require("webpack-merge");
 
 const threads = os.cpus().length; //cpu核数
 
-module.exports = {
+module.exports = merge(webpackCommonConf, {
 	// 入口
 	entry: "./src/main.js", // 相对路径
 	// 输出
@@ -142,4 +144,4 @@ module.exports = {
 	// 模式
 	mode: "development",
 	devtool: "cheap-module-source-map",
-};
+});

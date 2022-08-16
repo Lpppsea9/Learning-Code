@@ -8,9 +8,6 @@ import "./sass/index.sass";
 import "./sass/index.scss";
 import "./stylus/index.styl";
 
-// 引入第三方模块
-import _ from "lodash";
-console.log(_.each);
 const result = count(9, 1);
 console.log(result);
 console.log(sum(1, 2, 3, 4));
@@ -35,10 +32,4 @@ new Promise((resolve) => {
 	});
 }, 1000);
 
-/* 
-  entry 入口
-  output 输出
-  loader 加载器
-  plugins 插件
-  mode 模式
-*/
+/* 多入口打包 */

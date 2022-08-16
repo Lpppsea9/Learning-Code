@@ -7,19 +7,22 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin");
+const webpackCommonConf = require("./webpack.common");
+const { merge } = require("webpack-merge");
+const { webpack } = require("webpack");
 
 const threads = os.cpus().length; //cpu核数
 
-module.exports = {
+module.exports = merge(webpackCommonConf, {
 	// 入口
-	entry: "./src/main.js", // 相对路径
+	// entry: "./src/main.js", // 相对路径
 	// 输出
 	output: {
 		// 所有文件的输出路径
 		// __distname nodejs的变量, 代表当前文件的文件夹目录
 		path: path.resolve(__dirname, "../dist"), // 绝对路径
 		// 入口文件打包输出文件名
-		filename: "static/js/[name].[contenthash:8].js",
+		// filename: "static/js/[name].[contenthash:8].js",
 		// 给打包输出的其他文件命名
 		chunkFilename: "static/js/[name].[contenthash:8].chunk.js",
 		// 图片、字体等通过type: asset处理资源命名方式
@@ -99,12 +102,12 @@ module.exports = {
 						// exclude: /node_modules/, // 排除node_modules中的js文件(这些文件不处理)
 						include: path.resolve(__dirname, "../src"), //只处理src下的文件, 其他文件不处理
 						use: [
-							{
-								loader: "thread-loader", //开启多进程
-								options: {
-									workers: threads,
-								},
-							},
+							// {
+							// 	loader: "thread-loader", //开启多进程
+							// 	options: {
+							// 		workers: threads,
+							// 	},
+							// },
 							{
 								loader: "babel-loader",
 								options: {
@@ -138,7 +141,18 @@ module.exports = {
 		// 新的html文件特点：1.结构和原来一致 2.自动引入打包输出的资源
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, "../public/index.html"),
+			filename: "index.html",
+			// chunks 表示该页面需要引用哪些 chunk
+			chunks: ["main", "vendor", "common"], //要考虑代码分割
 		}),
+		// 多入口需要两个
+		new HtmlWebpackPlugin({
+			template: path.resolve(__dirname, "../public/other.html"),
+			filename: "other.html",
+			chunks: ["other", "common"], //要考虑代码分割
+		}),
+
+		// 抽离 css 文件
 		new MiniCssExtractPlugin({
 			filename: "static/css/[name].[contenthash:10].css",
 			chunkFilename: "static/css/[name].[contenthash:10].chunk.css",
@@ -157,7 +171,7 @@ module.exports = {
 			new CssMinimizerPlugin(),
 			// 压缩js
 			new TerserWebpackPlugin({
-				parallel: threads,
+				// parallel: threads,
 			}),
 			new ImageMinimizerPlugin({
 				minimizer: {
@@ -186,12 +200,38 @@ module.exports = {
 					},
 				},
 			}),
+
+			new webpack.IgnorePlugin({}),
 		],
 
 		// 代码分割配置
 		splitChunks: {
 			chunks: "all",
-			// 其他都用默认值
+			/* 
+        initial 入口 chunk，对于异步导入的文件不处理
+        async 异步 chunk，只对异步导入的文处理
+        all 全部 chunk
+      */
+
+			// 缓存分组
+			cacheGroups: {
+				// 第三方模块
+				vendor: {
+					name: "vendor", // chunk 名称
+					priority: 1, // 权限更高，优先抽离， 重要！
+					test: /node_modules/,
+					minSize: 0, //大小限制
+					minChunks: 1, //最少复用过几次
+				},
+
+				// 公共的模块
+				common: {
+					name: "common", //chunk 名称
+					priority: 0,
+					minSize: 0, //大小限制
+					minChunks: 1, //最少复用过几次
+				},
+			},
 		},
 
 		runtimeChunk: {
@@ -200,4 +240,4 @@ module.exports = {
 	},
 	mode: "production",
 	devtool: "source-map",
-};
+});
