@@ -14,6 +14,7 @@ const { webpack } = require("webpack");
 const threads = os.cpus().length; //cpu核数
 
 module.exports = merge(webpackCommonConf, {
+	mode: "production",
 	// 入口
 	// entry: "./src/main.js", // 相对路径
 	// 输出
@@ -238,6 +239,6 @@ module.exports = merge(webpackCommonConf, {
 			name: (entrypoint) => `runtime${entrypoint.name}.js`,
 		},
 	},
-	mode: "production",
+
 	devtool: "source-map",
 });

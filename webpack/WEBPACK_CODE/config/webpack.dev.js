@@ -8,6 +8,8 @@ const { merge } = require("webpack-merge");
 const threads = os.cpus().length; //cpu核数
 
 module.exports = merge(webpackCommonConf, {
+	// 模式
+	mode: "development",
 	// 入口
 	entry: "./src/main.js", // 相对路径
 	// 输出
@@ -141,7 +143,6 @@ module.exports = merge(webpackCommonConf, {
 		open: true, // 是否打开浏览器
 		hot: true, // hmr热模块替换 style-loader默认实现了热模块替换 vue-loader自动实现热模块替换
 	},
-	// 模式
-	mode: "development",
+
 	devtool: "cheap-module-source-map",
 });

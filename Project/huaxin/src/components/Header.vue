@@ -12,6 +12,7 @@
             >
                 {{item.name}}
             </div>
+
         </div>
     </div>
 </template>
@@ -48,12 +49,10 @@ export default {
 
 <style lang="scss" scoped>
 .nav_active {
-    color: #F5A623;
-    font-weight: bold;
-    border-bottom: 4px solid #F5A623;
-    padding: 0 0 25px 0;
-    border-radius: 1px;
+  color: #f5a623;
+  font-weight: bold;
+  border-bottom: 4px solid #f5a623;
+  padding: 0 0 25px 0;
+  border-radius: 1px;
 }
-
-
 </style>

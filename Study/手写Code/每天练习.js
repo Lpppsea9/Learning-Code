@@ -1,21 +1,52 @@
-Function.prototype.myCall = function (context) {
-	if (typeof this !== "function") {
-		throw new Error();
-	}
-	const args = [...arguments].slice(1);
-	const key = Symbol("key");
-	context[key] = this;
-	let res = context[key](...args);
-	delete context[key];
-	return res;
-};
+var p = new Promise((res, rej) => {
+	res("hello_6");
+	console.log("1");
+});
 
-Function.prototype.myApply = function (context) {
-	const args = [...arguments].slice(1);
-	const key = Symbol();
-	context[key] = this;
-	let result = context[key](args);
-	delete context[key];
+function hello() {
+	console.log("hello_begins_2");
+	return p;
+}
 
-	return result;
-};
+hello()
+	.then((res) => {
+		console.log(res);
+		console.log("hello_7");
+		return "hello_10";
+	})
+	.then((res) => {
+		console.log(res);
+		console.log("hello_11");
+		return "hello_13";
+	})
+	.then((res) => {
+		console.log(res);
+		console.log("hello_14");
+	});
+
+function test1() {
+	console.log("test1_5");
+}
+
+async function asy() {
+	console.log("asy_begins_3");
+	await console.log("asy_4");
+
+	console.log("async_8");
+	await console.log("asy_9");
+
+	console.log("asy_ends_12");
+}
+
+asy();
+
+test1();
+/* 
+1
+hello_begins_2
+
+
+
+
+
+*/
